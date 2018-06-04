@@ -1,8 +1,15 @@
-import dialogflow
+# [START import_libraries]
+import argparse
+import uuid
 
+import dialogflow
+# [END import_libraries]
+
+
+
+# [START dialogflow_detect_intent_text]
 def detect_intent_texts(project_id, session_id, texts, language_code):
     """Returns the result of detect intent with texts as inputs.
-
     Using the same `session_id` between requests allows continuation
     of the conversaion."""
     session_client = dialogflow.SessionsClient()
@@ -26,3 +33,33 @@ def detect_intent_texts(project_id, session_id, texts, language_code):
             response.query_result.intent_detection_confidence))
         print('Fulfillment text: {}\n'.format(
             response.query_result.fulfillment_text))
+# [END dialogflow_detect_intent_text]
+
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(
+        description=__doc__,
+        formatter_class=argparse.RawDescriptionHelpFormatter)
+    parser.add_argument(
+        '--project-id',
+        help='Project/agent id.  Required.',
+        required=True)
+    parser.add_argument(
+        '--session-id',
+        help='Identifier of the DetectIntent session. '
+        'Defaults to a random UUID.',
+        default=str(uuid.uuid4()))
+    parser.add_argument(
+        '--language-code',
+        help='Language code of the query. Defaults to "en-US".',
+        default='en-US')
+    parser.add_argument(
+        'texts',
+        nargs='+',
+        type=str,
+        help='Text inputs.')
+
+    args = parser.parse_args()
+
+    detect_intent_texts(
+        args.project_id, args.session_id, args.texts, args.language_code)
