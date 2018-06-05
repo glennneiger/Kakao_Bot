@@ -5,6 +5,7 @@ import json
 import os.path
 import sys
 import random
+
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
@@ -20,6 +21,7 @@ except ImportError:
 
 CLIENT_ACCESS_TOKEN = '72906773549e43b2b2fe92dcdd24abe7'
 session_id = random.randint(100000,999999)
+check = False
 
 def keyboard(request):
 
@@ -50,17 +52,20 @@ def message(request):
     incom = str(data['result']['actionIncomplete'])
     res = str(data['result']['fulfillment']['speech'])
 
-    if incom == "True":
+
+    if incom == "False":
         return JsonResponse({
-            'message': {'text': "!!!\n\n" + "잘못된접근" + "\n\n!!!"},
+         'message': {'text': "!!!\n\n" + res + "\n\n!!!"},
+       })
+
+    elif incom == "True":
+        return JsonResponse({
+            'message': {'text': "!!!\n\n" + res + "\n\n!!!"},
             'keyboard': {'type': 'text'}
         })
 
 
-    return JsonResponse({
-        'message': {'text': "!!!\n\n" + res + "\n\n!!!"},
-        'keyboard': {'type': 'text'}
-    })
+
 
 
 
