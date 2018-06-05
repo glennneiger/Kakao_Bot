@@ -55,12 +55,12 @@ def message(request):
 
     if incom == "False":
         return JsonResponse({
-         'message': {'text': "!!!\n\n" + str(session_id) + "\n"+ res + "\n\n!!!"},
+         'message': {'text': "!!!\n"+incom+"\n" +start+"\n"+end+"\n"+ str(session_id) + "\n"+ res + "\n\n!!!"},
        })
 
     elif incom == "True":
         return JsonResponse({
-            'message': {'text': "!!!\n\n" +str(session_id) +"\n"+ res + "\n\n!!!"},
+            'message': {'text': "!!!\n"+incom+"\n" +start+"\n"+end+"\n"+ str(session_id) + "\n"+ res + "\n\n!!!"},
             'keyboard': {'type': 'text'}
         })
 

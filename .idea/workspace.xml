@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="174480ed-52f4-4019-8805-679c82b731fd" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/env/chatbot/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/env/chatbot/views.py" afterDir="false" />
-    </list>
+    <list default="true" id="174480ed-52f4-4019-8805-679c82b731fd" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -29,7 +27,7 @@
         <entry file="file://$PROJECT_DIR$/env/chatbot/views.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="492">
-              <caret line="62" column="58" selection-start-line="62" selection-start-column="58" selection-end-line="62" selection-end-column="58" />
+              <caret line="62" column="112" selection-start-line="62" selection-start-column="112" selection-end-line="62" selection-end-column="112" />
               <folding>
                 <element signature="e#27#63#0" expanded="true" />
               </folding>
@@ -231,7 +229,7 @@
     <entry file="file://$PROJECT_DIR$/env/chatbot/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="492">
-          <caret line="62" column="58" selection-start-line="62" selection-start-column="58" selection-end-line="62" selection-end-column="58" />
+          <caret line="62" column="112" selection-start-line="62" selection-start-column="112" selection-end-line="62" selection-end-column="112" />
           <folding>
             <element signature="e#27#63#0" expanded="true" />
           </folding>
