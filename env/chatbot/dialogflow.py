@@ -1,14 +1,7 @@
-
-# Create your views here.
-from django.http import JsonResponse
-import json
 import os.path
 import sys
 import random
-from django.shortcuts import render
-from django.http import HttpResponse
-from django.views.decorators.csrf import csrf_exempt
-
+import json
 
 try:
     import apiai
@@ -19,26 +12,17 @@ except ImportError:
     import apiai
 
 CLIENT_ACCESS_TOKEN = '72906773549e43b2b2fe92dcdd24abe7'
-session_id = random.randint(100000,999999)
 
-def keyboard(request):
-
-    return JsonResponse({
-        'type' : 'text',
-    })
-
-@csrf_exempt
-def message(request):
-    message = ((request.body).decode('utf-8'))
-
-    msg = json.loads(message)
-    msg_str = msg['content']
+def dialogflow(text):
 
     ai = apiai.ApiAI(CLIENT_ACCESS_TOKEN)
     dialogflow_request = ai.text_request()
 
     dialogflow_request.lang = 'ko'
-    dialogflow_request.query = msg_str
+    session_id = random.randint(100000,999999)
+    dialogflow_request.session_id = session_id
+
+    dialogflow_request.query = text
     response = dialogflow_request.getresponse()
 
     data = json.loads(response.read().decode('utf-8'))
@@ -50,13 +34,18 @@ def message(request):
     incom = str(data['result']['actionIncomplete'])
     res = str(data['result']['fulfillment']['speech'])
 
-    return JsonResponse({
-        'message': {'text': "!!!\n\n" + res + "\n\n!!!"},
-        'keyboard': {'type': 'text'}
-    })
+    print(res)
 
+    while incom == "True":
+        dialogflow_request = ai.text_request()
+        dialogflow_request.lang = 'ko'
+        dialogflow_request.session_id = session_id
+        dialogflow_request.query = input()
+        response = dialogflow_request.getresponse()
 
+        data = json.loads(response.read().decode('utf-8'))
+        res = str(data['result']['fulfillment']['speech'])
+        incom = str(data['result']['actionIncomplete'])
+        print(res)
 
-
-
-
+    return data
