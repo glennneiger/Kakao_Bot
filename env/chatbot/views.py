@@ -53,9 +53,6 @@ def message(request):
     incom = str(data['result']['actionIncomplete'])
     res = str(data['result']['fulfillment']['speech'])
 
-    print("message processing")
-
-
     if incom == "False":
         return JsonResponse({
          'message': {'text': "!!!\n"+incom+"\n" +start+"\n"+end+"\n"+ str(session_id) + "\n"+ res + "\n\n!!!"},
