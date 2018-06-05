@@ -50,6 +50,12 @@ def message(request):
     incom = str(data['result']['actionIncomplete'])
     res = str(data['result']['fulfillment']['speech'])
 
+    if incom == "True":
+        return JsonResponse({
+            'message': {'text': "!!!\n\n" + "잘못된접근" + "\n\n!!!"},
+            'keyboard': {'type': 'text'}
+        })
+
 
     return JsonResponse({
         'message': {'text': "!!!\n\n" + res + "\n\n!!!"},
