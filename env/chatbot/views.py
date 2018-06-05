@@ -51,13 +51,6 @@ def message(request):
     res = str(data['result']['fulfillment']['speech'])
 
 
-    if incom == "True":
-        return JsonResponse({
-            'message': {res},
-            'keyboard': {'type': 'text'}
-        })
-
-
     return JsonResponse({
         'message': {'text': "!!!\n\n" + res + "\n\n!!!"},
         'keyboard': {'type': 'text'}
