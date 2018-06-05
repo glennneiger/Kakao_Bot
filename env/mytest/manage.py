@@ -64,6 +64,7 @@ def dialogflow():
 if __name__ == "__main__":
 
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "mytest.settings")
+    print("serverworks!")
     dialogflow()
 
 
