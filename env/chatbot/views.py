@@ -59,9 +59,9 @@ def message(request):
        })
 
     elif incom == "True":
+        check = True
         return JsonResponse({
             'message': {'text': "!!!\n"+incom+"\n" +start+"\n"+end+"\n"+ str(session_id) + "\n"+ res + "\n\n!!!"},
-            'keyboard': {'type': 'text'}
         })
 
 
