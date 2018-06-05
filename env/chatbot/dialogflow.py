@@ -34,6 +34,19 @@ def dialogflow(text):
     incom = str(data['result']['actionIncomplete'])
     res = str(data['result']['fulfillment']['speech'])
 
+
+    while incom == "True":
+        dialogflow_request = ai.text_request()
+        dialogflow_request.lang = 'ko'
+        dialogflow_request.session_id = session_id
+        dialogflow_request.query = input()
+        response = dialogflow_request.getresponse()
+
+        data = json.loads(response.read().decode('utf-8'))
+        res = str(data['result']['fulfillment']['speech'])
+        incom = str(data['result']['actionIncomplete'])
+        print(res)
+
     print(res)
 
     while incom == "True":
