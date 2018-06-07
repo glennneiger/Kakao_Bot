@@ -6,7 +6,7 @@ import os.path
 import sys
 import random
 
-import pathPrint
+from . import pathPrint
 import expresspathPrint
 
 from django.shortcuts import render
