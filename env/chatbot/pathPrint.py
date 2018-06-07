@@ -25,7 +25,7 @@ def bus(busPath):
 	return bText
 
 
-def main(start, end):
+def resultPrint(start, end):
 
     geoUrl = "https://maps.googleapis.com/maps/api/geocode/json?&sensor=false&language=ko&address="
 

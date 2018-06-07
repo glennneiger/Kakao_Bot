@@ -6,7 +6,8 @@ import os.path
 import sys
 import random
 
-import path_print
+import pathPrint
+import expresspathPrint
 
 from django.shortcuts import render
 from django.http import HttpResponse
@@ -60,7 +61,7 @@ def message(request):
         txt = ""
 
         if(intent_name == "pathfind"):#지하철,버스
-            txt = path_print.main(start, end)
+            txt = pathPrint.resultPrint(start, end)
         elif(intent_name == "expresspath"):#고속버스
             tsType = str(data['result']['parameters']['TRANSPORTATION_TYPE'])
             end_length = len(end)
@@ -72,7 +73,7 @@ def message(request):
                 end = str(data['result']['parameters']['any'][0])
             elif(start=='' and end!=''):
                 start = str(data['result']['parameters']['any'][0])
-            txt = express_path_print.main(start, end, tsType)
+            txt = expresspathPrint.resultPrint(start, end, tsType)
 
         return JsonResponse({
          'message': {'text': "!!!\n"+txt+"\n\n!!!"},
