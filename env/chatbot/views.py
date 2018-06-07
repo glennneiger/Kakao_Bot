@@ -62,6 +62,7 @@ def message(request):
 
         if(intent_name == "pathfind"):#지하철,버스
             txt = pathPrint.resultPrint(start, end)
+            txt += "결과결과"
         elif(intent_name == "expresspath"):#고속버스
             tsType = str(data['result']['parameters']['TRANSPORTATION_TYPE'])
             end_length = len(end)
