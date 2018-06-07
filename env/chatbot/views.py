@@ -60,7 +60,7 @@ def message(request):
 
         txt = ""
 
-        if(intent_name == "pathfind"):#지하철,버스
+        if(intent_name == "PathFind"):#지하철,버스
             txt = pathPrint.resultPrint(start, end)
             txt += "결과결과"
         elif(intent_name == "expresspath"):#고속버스
