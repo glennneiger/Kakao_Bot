@@ -47,13 +47,9 @@ def resultPrint(start, end):
 	sy = str(s_json['results'][0]['geometry']['location']['lat'])
 	ex = str(e_json['results'][0]['geometry']['location']['lng'])
 	ey = str(e_json['results'][0]['geometry']['location']['lat'])
-<<<<<<< HEAD
-	
-    SPT = "&SearchPathType=0"
-=======
 
-	SPT = "&SearchPathType=0"
->>>>>>> da33b1f9df45f5381ccf03f90e55ed04b3078ea2
+
+    SPT = "&SearchPathType=0"
 
 	my = "n+1iCTjka3qgrhco9Xl3e05Depf0hpct6SJUYUEH38E"
 	encMy = urllib.parse.quote_plus(my)
