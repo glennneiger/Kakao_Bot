@@ -6,6 +6,8 @@ import os.path
 import sys
 import random
 
+import path_print
+
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
@@ -54,20 +56,29 @@ def message(request):
     res = str(data['result']['fulfillment']['speech'])
 
     if incom == "False":
+
+        txt = ""
+
+        if(intent_name == "pathfind"):#지하철,버스
+            txt = path_print.main(start, end)
+        elif(intent_name == "expresspath"):#고속버스
+            tsType = str(data['result']['parameters']['TRANSPORTATION_TYPE'])
+            end_length = len(end)
+            end = end[2:end_length-2]
+            if(start== '' and end==''):
+                start = str(data['result']['parameters']['any'][0])
+                end = str(data['result']['parameters']['any'][1])
+            elif(start!='' and end==''):
+                end = str(data['result']['parameters']['any'][0])
+            elif(start=='' and end!=''):
+                start = str(data['result']['parameters']['any'][0])
+            txt = express_path_print.main(start, end, tsType)
+
         return JsonResponse({
-         'message': {'text': "!!!\n"+incom+"\n" +start+"\n"+end+"\n"+ str(session_id) + "\n"+ res + "\n\n!!!"},
+         'message': {'text': "!!!\n"+txt+"\n\n!!!"},
        })
 
     elif incom == "True":
         return JsonResponse({
             'message': {'text': "!!!\n"+incom+"\n" +start+"\n"+end+"\n"+ str(session_id) + "\n"+ res + "\n\n!!!"},
         })
-
-
-
-
-
-
-
-
-
