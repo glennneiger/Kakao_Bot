@@ -6,8 +6,8 @@ def subway(swPath):
     sText = ""
 
     sText += swPath['startName']+"역에서\n"
-	sText += swPath['passStopList']['stations'][1]['stationName']+"방면으로 "
-	sText += swPath['lane'][0]['name']+"탑승\n"
+	sText += swPath['passStopList']['stations'][1]['stationName']+"방면으로"
+	sText += " "+swPath['lane'][0]['name']+"탑승\n"
 	sText += str(swPath['stationCount'])+"개 정류장 이동\n"
 	sText += swPath['endName']+"역에서 하차\n"
 
@@ -47,7 +47,6 @@ def resultPrint(start, end):
 	sy = str(s_json['results'][0]['geometry']['location']['lat'])
 	ex = str(e_json['results'][0]['geometry']['location']['lng'])
 	ey = str(e_json['results'][0]['geometry']['location']['lat'])
-
 
     SPT = "&SearchPathType=0"
 

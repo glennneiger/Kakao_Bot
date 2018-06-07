@@ -7,7 +7,7 @@ import sys
 import random
 
 from . import pathPrint
-import expresspathPrint
+from . import expresspathPrint
 
 from django.shortcuts import render
 from django.http import HttpResponse
