@@ -47,7 +47,7 @@ def resultPrint(start, end):
 	sy = str(s_json['results'][0]['geometry']['location']['lat'])
 	ex = str(e_json['results'][0]['geometry']['location']['lng'])
 	ey = str(e_json['results'][0]['geometry']['location']['lat'])
-
+	
     SPT = "&SearchPathType=0"
 
 	my = "n+1iCTjka3qgrhco9Xl3e05Depf0hpct6SJUYUEH38E"
