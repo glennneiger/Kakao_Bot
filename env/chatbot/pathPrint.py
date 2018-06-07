@@ -1,11 +1,11 @@
-import json
+﻿import json
 import urllib.request
 import urllib.parse
 
 def subway(swPath):
-    sText = ""
+	sText = ""
 
-    sText += swPath['startName']+"역에서\n"
+	sText += swPath['startName']+"역에서\n"
 	sText += swPath['passStopList']['stations'][1]['stationName']+"방면으로"
 	sText += " "+swPath['lane'][0]['name']+"탑승\n"
 	sText += str(swPath['stationCount'])+"개 정류장 이동\n"
@@ -27,7 +27,7 @@ def bus(busPath):
 
 def resultPrint(start, end):
 
-    geoUrl = "https://maps.googleapis.com/maps/api/geocode/json?&sensor=false&language=ko&address="
+	geoUrl = "https://maps.googleapis.com/maps/api/geocode/json?&sensor=false&language=ko&address="
 
 	sUrl = geoUrl+urllib.parse.quote_plus(start)
 	eUrl = geoUrl+urllib.parse.quote_plus(end)
@@ -48,7 +48,7 @@ def resultPrint(start, end):
 	ex = str(e_json['results'][0]['geometry']['location']['lng'])
 	ey = str(e_json['results'][0]['geometry']['location']['lat'])
 
-    SPT = "&SearchPathType=0"
+	SPT = "&SearchPathType=0"
 
 	my = "n+1iCTjka3qgrhco9Xl3e05Depf0hpct6SJUYUEH38E"
 	encMy = urllib.parse.quote_plus(my)
@@ -89,4 +89,4 @@ def resultPrint(start, end):
 				txt += "\n[버스로 이동]\n"
 				txt += bus(subPath[i])
 
-    return txt
+	return txt
