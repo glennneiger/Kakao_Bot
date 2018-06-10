@@ -7,7 +7,7 @@ import sys
 import random
 
 from . import pathPrint
-from . import expresspathPrint
+from . import anotherPathPrint
 
 from django.shortcuts import render
 from django.http import HttpResponse
@@ -61,12 +61,6 @@ def message(request):
         txt = ""
 
         if(intent_name == "PathFind"):#지하철,버스
-            txt = pathPrint.resultPrint(start, end)
-            txt += "결과결과"
-        elif(intent_name == "expresspath"):#고속버스
-            tsType = str(data['result']['parameters']['TRANSPORTATION_TYPE'])
-            end_length = len(end)
-            end = end[2:end_length-2]
             if(start== '' and end==''):
                 start = str(data['result']['parameters']['any'][0])
                 end = str(data['result']['parameters']['any'][1])
@@ -74,7 +68,17 @@ def message(request):
                 end = str(data['result']['parameters']['any'][0])
             elif(start=='' and end!=''):
                 start = str(data['result']['parameters']['any'][0])
-            txt = expresspathPrint.resultPrint(start, end, tsType)
+
+            tsType = str(data['result']['parameters']['TRANSPORTATION_TYPE'])
+
+            if(tsType == null):
+                txt = pathPrint.resultPrint(start, end, tsType)
+                txt += "\n\n결과"
+            elif(tsType != null):
+                end_length = len(end)
+                end = end[2:end_length-2]
+                txt = anotherPathPrint.resultPrint(start, end, tsType)
+                txt += "\n\n다른 결과"
 
         return JsonResponse({
          'message': {'text': "!!!\n"+txt+"\n\n!!!"},

@@ -23,7 +23,7 @@ def bus(busPath):
 
 def getNormalPath(sx, sy, ex, ey):
 
-    myKey = "sfUWUSpyZPCTdcli/St2gPbb1Se3TCP2dL6LZQzhsEE"
+    myKey = "f/WM8od4VAXdGg4Q5ZaWSlJ8tIbSpw+nJ4WQ4AFRpsM"
     encKey = urllib.parse.quote_plus(myKey)
     #encSX = urllib.parse.quote_plus(sx)
     #encSY = urllib.parse.quote_plus(sy)
@@ -115,7 +115,7 @@ def resultPrint(start, end, tsType):
         ex = str(e_json['results'][0]['geometry']['location']['lng'])
         ey = str(e_json['results'][0]['geometry']['location']['lat'])
 
-        myKey = "sfUWUSpyZPCTdcli/St2gPbb1Se3TCP2dL6LZQzhsEE"
+        myKey = "f/WM8od4VAXdGg4Q5ZaWSlJ8tIbSpw+nJ4WQ4AFRpsM"
         encKey = urllib.parse.quote_plus(myKey)
 
         odUrl = "https://api.odsay.com/v1/api/searchPubTransPath?SX="+sx+"&SY="+sy+"&EX="+ex+"&EY="+ey+"&apiKey="+encKey
@@ -131,7 +131,7 @@ def resultPrint(start, end, tsType):
         #도시간 이동
         if searchType == 1:
             #print(transportationType)
-            if transportationType == "고속버스":
+            if tsType == "고속버스":
                 startSTN = str(data['result']['exBusRequest']['OBJ'][0]['startSTN'])
                 startSTN_sx = str(data['result']['exBusRequest']['OBJ'][0]['SX'])
                 startSTN_sy = str(data['result']['exBusRequest']['OBJ'][0]['SY'])
@@ -140,14 +140,26 @@ def resultPrint(start, end, tsType):
                 endSTN_ey = str(data['result']['exBusRequest']['OBJ'][0]['EY'])
                 time = data['result']['exBusRequest']['OBJ'][0]['time']
                 payment = data['result']['exBusRequest']['OBJ'][0]['payment']
-                #출발지와 startSTN사이의 대중교통 길찾기
                 txt=getNormalPath(sx, sy, startSTN_sx, startSTN_sy)
-                #startSTN과 endSTN사이의 정보
                 txt += "\n[고속버스로 이동]\n"
                 txt += startSTN+"에서 "+endSTN+"까지 \n소요시간 : "+str(int(time)//60)+"시간 "+str(int(time)%60)+"분\n"
                 txt += "비용 : "+str(payment)+"원\n"
-                #도착지와 endSTN사이의 대중교통 길찾기
                 txt+=getNormalPath(endSTN_ex, endSTN_ey, ex, ey)
+                
+            elif tsType == "시외버스":
+                startSTN = str(data['result']['outBusRequest']['OBJ'][0]['startSTN'])
+                startSTN_sx = str(data['result']['outBusRequest']['OBJ'][0]['SX'])
+                startSTN_sy = str(data['result']['outBusRequest']['OBJ'][0]['SY'])
+                endSTN = str(data['result']['outBusRequest']['OBJ'][0]['endSTN'])
+                endSTN_ex = str(data['result']['outBusRequest']['OBJ'][0]['EX'])
+                endSTN_ey = str(data['result']['outBusRequest']['OBJ'][0]['EY'])
+                time = data['result']['outBusRequest']['OBJ'][0]['time']
+                payment = data['result']['outBusRequest']['OBJ'][0]['payment']
+                txt=getNormalPath(sx, sy, startSTN_sx, startSTN_sy)
+                txt += "\n[시외버스로 이동]\n"
+                txt += startSTN+"에서 "+endSTN+"까지 \n소요시간 : "+str(int(time)//60)+"시간 "+str(int(time)%60)+"분\n"
+                txt += "비용 : "+str(payment)+"원\n"
+
         elif searchType == 0:
             pType = data['result']['path'][0]['pathType']
             subPath = data['result']['path'][0]['subPath']
