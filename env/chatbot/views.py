@@ -72,7 +72,7 @@ def message(request):
             tsType = str(data['result']['parameters']['transportation'])
 
             if(tsType == ''):
-                txt = pathPrint.resultPrint(start, end, tsType)
+                txt = pathPrint.resultPrint(start, end)
                 txt += "\n\n결과"
             elif(tsType != null):
                 end_length = len(end)
