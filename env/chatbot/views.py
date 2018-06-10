@@ -71,7 +71,7 @@ def message(request):
 
             tsType = str(data['result']['parameters']['transportation'])
 
-            if(tsType == null):
+            if(tsType == ''):
                 txt = pathPrint.resultPrint(start, end, tsType)
                 txt += "\n\n결과"
             elif(tsType != null):
