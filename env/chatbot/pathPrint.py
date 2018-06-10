@@ -1,11 +1,11 @@
-import json
+﻿import json
 import urllib.request
 import urllib.parse
 
 def subway(swPath):
-    sText = ""
-
-    sText += swPath['startName']+"역에서\n"
+	sText = ""
+	
+	sText += swPath['startName']+"역에서\n"
 	sText += swPath['passStopList']['stations'][1]['stationName']+"방면으로 "
 	sText += swPath['lane'][0]['name']+"탑승\n"
 	sText += str(swPath['stationCount'])+"개 정류장 이동\n"
@@ -27,7 +27,7 @@ def bus(busPath):
 
 def resultPrint(start, end):
 
-    geoUrl = "https://maps.googleapis.com/maps/api/geocode/json?&sensor=false&language=ko&address="
+	geoUrl = "https://maps.googleapis.com/maps/api/geocode/json?&sensor=false&language=ko&address="
 
 	sUrl = geoUrl+urllib.parse.quote_plus(start)
 	eUrl = geoUrl+urllib.parse.quote_plus(end)
@@ -43,12 +43,11 @@ def resultPrint(start, end):
 
 	s_status = str(s_json['status'])
 	if s_status == "OK" :
-        #print("OK")
-        #(x, 경도, longtitude) , (y, 위도, latitude)
-        sx = str(s_json['results'][0]['geometry']['location']['lng'])
-        sy = str(s_json['results'][0]['geometry']['location']['lat'])
-        ex = str(e_json['results'][0]['geometry']['location']['lng'])
-        ey = str(e_json['results'][0]['geometry']['location']['lat'])
+		#(x, 경도, longtitude) , (y, 위도, latitude)
+		sx = str(s_json['results'][0]['geometry']['location']['lng'])
+		sy = str(s_json['results'][0]['geometry']['location']['lat'])
+		ex = str(e_json['results'][0]['geometry']['location']['lng'])
+		ey = str(e_json['results'][0]['geometry']['location']['lat'])
 
 		SPT = "&SearchPathType=0"
 
@@ -92,14 +91,14 @@ def resultPrint(start, end):
 					txt += bus(subPath[i])
 
 	elif s_status == "ZERO_RESULTS" :
-        txt = "존재하지 않는 주소입니다"
-    elif s_status == "OVER_QUERY_LIMIT" :
-        txt = "할당량 초과"
-    elif s_status == "REQUEST_DENIED":
-        txt = "요청거부"
-    elif s_status == "INVALID_REQUEST":
-        txt = "출발지 정보 누락"
-    elif s_status =="UNKNOWN_ERROR":
-        txt = "서버오류"
-		
-    return txt
+		txt = "존재하지 않는 주소입니다"
+	elif s_status == "OVER_QUERY_LIMIT" :
+		txt = "할당량 초과"
+	elif s_status == "REQUEST_DENIED":
+		txt = "요청거부"
+	elif s_status == "INVALID_REQUEST":
+		txt = "출발지 정보 누락"
+	elif s_status =="UNKNOWN_ERROR":
+		txt = "서버오류"
+
+	return txt
