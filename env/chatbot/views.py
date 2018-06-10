@@ -69,7 +69,7 @@ def message(request):
             elif(start=='' and end!=''):
                 start = str(data['result']['parameters']['any'][0])
 
-            tsType = str(data['result']['parameters']['TRANSPORTATION_TYPE'])
+            tsType = str(data['result']['parameters']['transportaion'])
 
             if(tsType == null):
                 txt = pathPrint.resultPrint(start, end, tsType)
