@@ -145,7 +145,7 @@ def resultPrint(start, end, tsType):
                 txt += startSTN+"에서 "+endSTN+"까지 \n소요시간 : "+str(int(time)//60)+"시간 "+str(int(time)%60)+"분\n"
                 txt += "비용 : "+str(payment)+"원\n"
                 txt+=getNormalPath(endSTN_ex, endSTN_ey, ex, ey)
-                
+
             elif tsType == "시외버스":
                 startSTN = str(data['result']['outBusRequest']['OBJ'][0]['startSTN'])
                 startSTN_sx = str(data['result']['outBusRequest']['OBJ'][0]['SX'])
@@ -159,6 +159,7 @@ def resultPrint(start, end, tsType):
                 txt += "\n[시외버스로 이동]\n"
                 txt += startSTN+"에서 "+endSTN+"까지 \n소요시간 : "+str(int(time)//60)+"시간 "+str(int(time)%60)+"분\n"
                 txt += "비용 : "+str(payment)+"원\n"
+                txt+=getNormalPath(endSTN_ex, endSTN_ey, ex, ey)
 
         elif searchType == 0:
             pType = data['result']['path'][0]['pathType']
