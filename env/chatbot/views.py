@@ -5,6 +5,8 @@ import json
 import os.path
 import sys
 import random
+import urllib.request
+import urllib.parse
 
 from . import pathPrint
 from . import anotherPathPrint
@@ -31,7 +33,7 @@ subwayID = [[1001, "수도권 1호선"],[1002, "수도권 2호선"],[1003, "수�
 ,[1075,"수도권 분당선"],[1063,"경의중앙선"],[1067,"수도권 경춘선"],[1077,"수도권 신분당선"],[1077,"수도권 신분당선"]]
 
 def getStationInfo(myStationName):
-    myKey = "sfUWUSpyZPCTdcli/St2gPbb1Se3TCP2dL6LZQzhsEE"
+    myKey = "f/WM8od4VAXdGg4Q5ZaWSlJ8tIbSpw+nJ4WQ4AFRpsM"
     encKey = urllib.parse.quote_plus(myKey)
     encStationname = urllib.parse.quote_plus(myStationName)
     odUrl = "https://api.odsay.com/v1/api/searchStation?lang=0&stationName="+encStationname+"&stationClass=2&apiKey="+encKey
@@ -43,7 +45,7 @@ def getStationInfo(myStationName):
     return data
 
 def getStationName(stationID):
-    myKey = "sfUWUSpyZPCTdcli/St2gPbb1Se3TCP2dL6LZQzhsEE"
+    myKey = "f/WM8od4VAXdGg4Q5ZaWSlJ8tIbSpw+nJ4WQ4AFRpsM"
     encKey = urllib.parse.quote_plus(myKey)
     encStationID = urllib.parse.quote_plus(str(stationID))
     odUrl = "https://api.odsay.com/v1/api/subwayStationInfo?lang=0&stationID="+encStationID+"&apiKey="+encKey
@@ -123,7 +125,7 @@ def getStationResult(cID, stationID, stationName, idx, current_laneName,directio
         return "error"
 
 def getExpressInfo(my_Exstart, my_Exend):
-    myKey = "sfUWUSpyZPCTdcli/St2gPbb1Se3TCP2dL6LZQzhsEE"
+    myKey = "f/WM8od4VAXdGg4Q5ZaWSlJ8tIbSpw+nJ4WQ4AFRpsM"
     encKey = urllib.parse.quote_plus(myKey)
     encExstart = urllib.parse.quote_plus(my_Exstart)
     encExend = urllib.parse.quote_plus(my_Exend)
