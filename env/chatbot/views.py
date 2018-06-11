@@ -178,8 +178,8 @@ def message(request):
     data = json.loads(response.read().decode('utf-8'))
 
 
-    start = str(data['result']['parameters']['from'])
-    end = str(data['result']['parameters']['to'])
+    #start = str(data['result']['parameters']['from'])
+    #end = str(data['result']['parameters']['to'])
     intent_name = str(data['result']['metadata']['intentName'])
     incom = str(data['result']['actionIncomplete'])
     res = str(data['result']['fulfillment']['speech'])
@@ -189,6 +189,9 @@ def message(request):
         txt = ""
 
         if(intent_name == "PathFind"):#지하철,버스
+            start = str(data['result']['parameters']['from'])
+            end = str(data['result']['parameters']['to'])
+
             if(start== '' and end==''):
                 start = str(data['result']['parameters']['any'][0])
                 end = str(data['result']['parameters']['any'][1])
@@ -208,6 +211,7 @@ def message(request):
                 txt = anotherPathPrint.resultPrint(start, end, tsType)
                 txt += "\n\n다른 결과"
         elif intent_name == "TimeSchedule":
+            transportation = str(data['result']['parameters']['transportation'])
             if transportation == "지하철":
                 stationName = str(data['result']['parameters']['from'])
                 line_number = str(data['result']['parameters']['line_number'])
