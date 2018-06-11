@@ -7,7 +7,7 @@ import sys
 import random
 import urllib.request
 import urllib.parse
-
+import re
 from . import pathPrint
 from . import anotherPathPrint
 
