@@ -5,6 +5,8 @@ import json
 import os.path
 import sys
 import random
+import urllib.request
+import urllib.parse
 
 from . import pathPrint
 from . import anotherPathPrint
