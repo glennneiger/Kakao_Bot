@@ -250,7 +250,7 @@ def message(request):
                     num = getStationResult(current_stationID,get_stationID,new_stationName, idx*2,current_laneName,direction,line_number)
 
                     if num == "error":
-                        chat_message="현재 이용 불가 10초 뒤에 다시 이용해주세요"
+                        txt="현재 이용 불가 10초 뒤에 다시 이용해주세요"
                         canUse = False
                         break
                     elif num == "none":
@@ -278,26 +278,26 @@ def message(request):
                         elif direction == "상행":
                             StationExistNameList.append(getStationName(current_stationID-n+6))
                     #print(StationExistNameList)
-                    chat_message="==="+stationName+" 시간표 정보\n"
+                    txt="==="+stationName+" 시간표 정보\n"
                     for total in StationNameList:
                         exist = False
                         for element in StationExistNameList:
                             #print("element="+element)
                             #print("total = "+total)
                             if element == total:
-                                chat_message=chat_message+total+"(별)\n"
+                                txt=txt+total+"(별)\n"
                                 exist = True
                         if exist==False:
-                            chat_message=chat_message+total+"\n"
+                            txt=txt+total+"\n"
             #print(getStationExistNameList)
             elif transportation == "고속버스":
                 Exstart = str(data['result']['parameters']['any'][0])
                 Exend = str(data['result']['parameters']['any'][1])
                 schedule = getExpressInfo(Exstart,Exend)
-                chat_message = "==="+Exstart+"터미널에서 "+Exend+"까지 시간표 정보\n"
-                chat_message+=schedule
+                txt = "==="+Exstart+"터미널에서 "+Exend+"까지 시간표 정보\n"
+                txt+=schedule
         elif intent_name == "Default Fallback Intent":
-            chat_message = str(data['result']['fulfillment']['messages'][0]['speech'])
+            txt = str(data['result']['fulfillment']['messages'][0]['speech'])
         return JsonResponse({
          'message': {'text': "!!!\n"+txt+"\n\n!!!"},
        })
