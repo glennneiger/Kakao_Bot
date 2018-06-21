@@ -23,7 +23,7 @@ def search(searchList):
 	response = urllib.request.urlopen(request)
 
 	json_rt = response.read().decode('utf-8')
-	data = json_rt.loads(json_rt)
+	data = json.loads(json_rt)
 
 	stInfo = data['result']['station'][0]
 
