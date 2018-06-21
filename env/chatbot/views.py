@@ -185,9 +185,9 @@ def incomFalse(intent_name, data):
         elif transportation == "고속버스":
             Exstart = str(data['result']['parameters']['any'][0])
             Exend = str(data['result']['parameters']['any'][1])
-            schedule = schedule.getExpressInfo(Exstart,Exend)
+            schedule1 = schedule.getExpressInfo(Exstart,Exend)
             text = "==="+Exstart+"터미널에서 "+Exend+"까지 시간표 정보\n"
-            text+=schedule
+            text+=schedule1
     elif intent_name == "Default Fallback Intent":
         text = str(data['result']['fulfillment']['messages'][0]['speech'])
 
