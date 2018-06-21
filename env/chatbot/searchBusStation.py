@@ -96,8 +96,12 @@ def search(searchList):
                 print(busList[bus_key])
                 arrival_first = "msg1_c"+str(i)
                 arrival_second = "msg2_c"+str(i)
+
+                print(arrival_first)
                 if eq(arrival_first,"곧 도착") != True:
                     arrival_busstation.append(arrival_first[7])
+                    
+                print(arrival_second)
                 if eq(arrival_second,"곧 도착") != True:
                     arrival_busstation.append(arrival_second[7])
 
