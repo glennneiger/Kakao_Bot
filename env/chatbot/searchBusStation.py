@@ -54,7 +54,7 @@ def search(searchList):
         bcnt = bcnt+1
 
     print("bcnt " + str(bcnt))
-    text = text += "💌["+st_name+"정류장에 대한 정보]💌\n"
+    text = "💌["+st_name+"정류장에 대한 정보]💌\n"
     for i in range(0, bcnt):
         bus_msg1 = "msg1_c"+str(i)
         bus_msg2 = "msg2_c"+str(i)
