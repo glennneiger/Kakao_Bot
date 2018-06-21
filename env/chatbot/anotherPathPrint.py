@@ -90,7 +90,8 @@ def resultPrint(start, end, tsType):
         #start = str(data['result']['parameters']['any'][0])
         #print("출발지 : "+start+"\n")
     #####
-
+    print("###start==>"+start)
+    print("###end==>"+end)
     geoUrl = "https://maps.googleapis.com/maps/api/geocode/json?&sensor=false&language=ko&address="
     sUrl = geoUrl+urllib.parse.quote_plus(start)
     eUrl = geoUrl+urllib.parse.quote_plus(end)
