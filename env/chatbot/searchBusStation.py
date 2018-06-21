@@ -31,7 +31,7 @@ def search(searchList):
 	st_ars = str(stInfo['arsID'])
 
 	st_ars = st_ars.replace("-","")
-	enArs = urllib.parse.quote_plus(st_ars)
+	encArs = urllib.parse.quote_plus(st_ars)
 
 	ACCESS = "rxJqZMHh6oQDUSfc7Kh42uCXZuHEhmj7dY7VWber2ryr9L5t2CFRy3z834JMR7RygMzaVby7ZQ3sW%2ByCZZn0Ig%3D%3D"
 
