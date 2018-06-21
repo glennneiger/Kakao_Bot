@@ -53,6 +53,7 @@ def search(searchList):
         busList[busNo] =  bus.find("rtNm").text
         bcnt = bcnt+1
 
+    print("bcnt " + str(bcnt))
     text = st_name
     for i in range(0, bcnt):
         bus_msg1 = "msg1_c"+str(i)
