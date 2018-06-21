@@ -4,6 +4,7 @@ import json
 import xml.etree.ElementTree as ET
 
 def search(searchList):
+    print(searchList)
 	searchST = searchList[0]
 
 	text = ""
@@ -93,7 +94,7 @@ def search(searchList):
 			else :
 				cnt+=1
 
-		
+
 		if direction == "+":
 			for i in range(1,4):
 				text += res[cnt+i]
