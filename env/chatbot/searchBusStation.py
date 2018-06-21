@@ -58,6 +58,7 @@ def search(searchList):
     if len(searchList) != 1:
         bus_number = searchList[1]
         bus_station = st_name
+        print(st_name)
         Bus_Info_URL = "https://api.odsay.com/v1/api/searchBusLane?lang=0&busNo="+bus_number+"&apiKey="+encMy
 
         bus_info_request = urllib.request.Request(Bus_Info_URL)
