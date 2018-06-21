@@ -128,6 +128,7 @@ def search(searchList):
         for i in range(0,len(path_res)):
             print("path_res " + path_res[i])
 
+        text += "💌["+bus_number+"번 버스에 대한 정보입니다.]💌\n\n"
         if direction == "+":
             for i in range(5,-1,-1):
                 checked = False
@@ -140,12 +141,12 @@ def search(searchList):
                 if checked == False:
                     text += "💛"+res[current+i]+"\n"
                     print(res[current+i])
-                text += "   ↓↓↓   \n"
+                if i != 0 :
+                    text += "       ↓↓↓   \n"
+
+        text += "\n"
+        text+= "👉🏿 " + arrival_busstation[0]
                 
-
-
-
-
 
     return text
 
