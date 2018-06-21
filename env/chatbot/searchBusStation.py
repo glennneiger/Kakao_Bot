@@ -57,7 +57,6 @@ def search(searchList):
     ###버스 정보
     if len(searchList) != 1:
         bus_number = searchList[1]
-        print(bus_number)
         bus_station = st_name
         Bus_Info_URL = "https://api.odsay.com/v1/api/searchBusLane?lang=0&busNo="+bus_number+"&apiKey="+encMy+"&CID=1000"
 
@@ -86,6 +85,14 @@ def search(searchList):
         for i in data['result']['station']:
             idx_station_res[i['idx']] = i['stationName']
             res.append(i['stationName'])
+
+        arr = []
+        for i in range(0, bcnt):
+            bus_key = "busNo_c"+str(i)
+            if(busList[bus_key] == bus_number):
+                arr[0] = busList["msg1_c"+str(i)]
+                arr[1] = busList["msg2_c"+str(i)]
+                print(arr[0])
 
         counter = 0
         current = 0
