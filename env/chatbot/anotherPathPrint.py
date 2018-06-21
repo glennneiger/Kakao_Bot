@@ -187,6 +187,6 @@ def resultPrint(start, end, tsType):
     elif s_status =="UNKNOWN_ERROR":
         txt = "서버오류"
 
-    txt ="💌["+start+"에서 "+end+"까지 고속버스 경로 정보 입니다]💌\n"
+    txt ="💌["+start+"에서 "+end+"까지 고속버스 경로 정보 입니다]💌\n"+txt
 
     return txt
