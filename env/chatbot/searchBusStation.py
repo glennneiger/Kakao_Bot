@@ -1,4 +1,4 @@
-import urllib.request
+﻿import urllib.request
 import urllib.parse
 import json
 import xml.etree.ElementTree as ET
@@ -52,52 +52,51 @@ def search(searchList):
         busList[busNo] =  bus.find("rtNm").text
 		bcnt = bcnt+1
 
-    text = ""
+	text = ""
 
-    ###버스 정보
+	###버스 정보
 	if len(searchList) != 1:
 		bus_number = searchList[1]
-        bus_station = searchList[0]
-        Bus_Info_URL = "https://api.odsay.com/v1/api/searchBusLane?lang=0&busNo="+bus_number+"&apiKey="+encMy
+		bus_station = searchList[0]
+		Bus_Info_URL = "https://api.odsay.com/v1/api/searchBusLane?lang=0&busNo="+bus_number+"&apiKey="+encMy
 
-        bus_info_request = urllib.request.Request(Bus_Info_URL)
-        bus_info_res = urllib.request.urlopen(bus_info_request)
+		bus_info_request = urllib.request.Request(Bus_Info_URL)
+		bus_info_res = urllib.request.urlopen(bus_info_request)
 
-        json_data = json.loads(bus_info_res.read().decode('utf-8'))
+		json_data = json.loads(bus_info_res.read().decode('utf-8'))
 
-        busID = json_data['result']['lane'][0]['busID']
-        direction = "+"
-        Line_URL = "https://api.odsay.com/v1/api/busLaneDetail?lang=0&busID="+str(busID)+"&apiKey="+encMy
+		busID = json_data['result']['lane'][0]['busID']
+		direction = "+"
+		Line_URL = "https://api.odsay.com/v1/api/busLaneDetail?lang=0&busID="+str(busID)+"&apiKey="+encMy
 
-        request = urllib.request.Request(Line_URL)
-        response = urllib.request.urlopen(request)
+		request = urllib.request.Request(Line_URL)
+		response = urllib.request.urlopen(request)
 
-        json_rt = response.read().decode('utf-8')
-        data = json.loads(json_rt)
+		json_rt = response.read().decode('utf-8')
+		data = json.loads(json_rt)
 
-        startStation = data['result']['busStartPoint']
-        endStation = data['result']['busEndPoint']
+		startStation = data['result']['busStartPoint']
+		endStation = data['result']['busEndPoint']
 
-        station_idx_res = {}
-        idx_station_res = {}
-        res = []
+		station_idx_res = {}
+		idx_station_res = {}
+		res = []
 
-        for i in data['result']['station']:
-            idx_station_res[i['idx']] = i['stationName']
-            res.append(i['stationName'])
-        cnt = 0
-        for i in res:
-            if i  == bus_station:
-                current = cnt
-                break;
-            else :
-                cnt+=1
+		for i in data['result']['station']:
+			idx_station_res[i['idx']] = i['stationName']
+			res.append(i['stationName'])
+		cnt = 0
+		for i in res:
+			if i  == bus_station:
+				current = cnt
+				break;
+			else :
+				cnt+=1
 
-        print("====================")
-        print(res[cnt])
-        if direction == "+":
-            for i in range(1,4):
-                text += res[cnt+i]
+		
+		if direction == "+":
+			for i in range(1,4):
+			text += res[cnt+i]
 
 
 
