@@ -79,8 +79,8 @@ def getStationResult(cID, stationID, stationName, idx, current_laneName,directio
                 elif "(" in list['arvlMsg2']:
                     #print("시간정보")
                     my_str = list['arvlMsg2'].split()
-                    for i in my_str:
-                        print("my_str = "+i)
+                    # for i in my_str:
+                    #     print("my_str = "+i)
                     my_str2 = my_str[3]
                     my_str2 = my_str2[1:len(my_str2)-1]
                     #my_str = my_str[3].replace(' ','')
