@@ -70,7 +70,7 @@ def message(request):
         text = incomFalse(intent_name, data)
 
         return JsonResponse({
-         'message': {'text': "!!!\n"+text+"\n\n!!!"},
+         'message': {'text': text},
        })
 
     elif incom == "True":
