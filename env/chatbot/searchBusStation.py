@@ -1,4 +1,4 @@
-﻿import urllib.request
+import urllib.request
 import urllib.parse
 import json
 import xml.etree.ElementTree as ET
@@ -128,7 +128,7 @@ def search(searchList):
         for i in range(0,len(path_res)):
             print("path_res " + path_res[i])
 
-        text += "💌["+bus_number+"번 버스에 대한 정보입니다.]💌\n\n"
+        text += "💌["+bus_number+"번 버스에 대한 정보]💌\n"
         if direction == "+":
             for i in range(5,-1,-1):
                 checked = False
@@ -145,8 +145,7 @@ def search(searchList):
                     text += "       ↓↓↓   \n"
 
         text += "\n"
-        text+= "👉🏿 " + arrival_busstation[0]
-                
+        text+= "👉🏿 " + arrival_first                
 
     return text
 
