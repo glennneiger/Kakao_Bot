@@ -107,7 +107,7 @@ def search(searchList):
         print("currnet : " + res[current])
 
         if direction == "+":
-            for i in range(5,0,-1):
+            for i in range(5,-1,-1):
                 print(res[current+i])
 
 
