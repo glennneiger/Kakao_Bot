@@ -117,7 +117,7 @@ def incomFalse(intent_name, data):
             #print("지하철역 명"+stationName)
             #print("stationName="+stationName+" line_number="+line_number+" direction="+direction)
 
-            data = schedule.getStationInfo(stationName)
+            data = getStationInfo(stationName)
             station_info = data['result']['station']
             #print("station Info : "+str(station_info))
             #print("사용자가 입력한 호선 명 : "+line_number)
