@@ -40,17 +40,17 @@ def search(searchList):
 	mbody = root.find("msgBody")
 
 	busList = {}
-	cnt = 0
+	bcnt = 0
 	for bus in mbody.iter("itemList"):
-        msg1 = "msg1_c"+str(cnt)
-        msg2 = "msg2_c"+str(cnt)
-        adr = "adr_c"+str(cnt)
-        busNo = "busNo_c"+str(cnt)
+        msg1 = "msg1_c"+str(bcnt)
+        msg2 = "msg2_c"+str(bcnt)
+        adr = "adr_c"+str(bcnt)
+        busNo = "busNo_c"+str(bcnt)
         busList[msg1] =  bus.find("arrmsg1").text
         busList[msg2] =  bus.find("arrmsg2").text
         busList[adr] =  bus.find("adirection").text
         busList[busNo] =  bus.find("rtNm").text
-		cnt = cnt+1
+		bcnt = bcnt+1
 
     text = ""
 
@@ -99,7 +99,7 @@ def search(searchList):
             for i in range(1,4):
                 text += res[cnt+i]
 
-    
+
 
 
 
