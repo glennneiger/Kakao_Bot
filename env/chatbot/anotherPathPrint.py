@@ -125,7 +125,7 @@ def resultPrint(start, end, tsType):
 
         json_rt = response.read().decode('utf-8')
         data = json.loads(json_rt)
-
+        print(json.dumps(data,indent=1))
         searchType = data['result']['searchType']
 
         #도시간 이동
