@@ -96,8 +96,8 @@ def incomFalse(intent_name, data):
             start = str(data['result']['parameters']['any'][0])
 
         tsType = str(data['result']['parameters']['transportation'])
-        print("start==>"+start)
-        print("end==>"+end)
+        #print("start==>"+start)
+        #print("end==>"+end)
         if(tsType == ''):
             text = pathPrint.resultPrint(start, end)
             #text += "\n\n결과"
