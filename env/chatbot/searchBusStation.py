@@ -132,7 +132,7 @@ def search(searchList):
                 for j in range(0,len(path_res)):
                     if eq(path_res[j],res[current+i]) :
                         print(res[current+i] + "***")
-                    else 
+                    else :
                         print(res[current+i])
 
 
