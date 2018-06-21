@@ -3,7 +3,12 @@ import urllib.parse
 import json
 import xml.etree.ElementTree as ET
 
-def serch(serchST):
+def serch(searchList):
+    searchST = searchList[0]
+    searchBus = ""
+    if searchST.length != 1:
+        searchBus = searchList[1]
+
     text = ""
 
     ACCESS = "rxJqZMHh6oQDUSfc7Kh42uCXZuHEhmj7dY7VWber2ryr9L5t2CFRy3z834JMR7RygMzaVby7ZQ3sW%2ByCZZn0Ig%3D%3D"
@@ -40,17 +45,18 @@ def serch(serchST):
     busList = {}
     cnt = 0
     for bus in mbody.iter("itemList"):
-        msg1 = "msg1_c"+str(cnt)
-        msg2 = "msg2_c"+str(cnt)
-        adr = "adr_c"+str(cnt)
-        busNo = "busNo_c"+str(cnt)
-        busList[msg1] =  bus.find("arrmsg1").text
-        busList[msg2] =  bus.find("arrmsg1").text
-        busList[adr] =  bus.find("adirection").text
-        busList[busNo] =  bus.find("rtNm").text
+        text = "######"+ bus.find("arrmsg1").text+"\n"+bus.find("arrmsg1").text+"\n"+bus.find("adirection").text+"\n"+bus.find("rtNm").text+"######"
+        # msg1 = "msg1_c"+str(cnt)
+        # msg2 = "msg2_c"+str(cnt)
+        # adr = "adr_c"+str(cnt)
+        # busNo = "busNo_c"+str(cnt)
+        # busList[msg1] =  bus.find("arrmsg1").text
+        # busList[msg2] =  bus.find("arrmsg1").text
+        # busList[adr] =  bus.find("adirection").text
+        # busList[busNo] =  bus.find("rtNm").text
         cnt = cnt+1
 
-    ###버스 정보
+
 
 
     return text
