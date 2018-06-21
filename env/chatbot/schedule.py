@@ -5,6 +5,9 @@ import random
 import urllib.request
 import urllib.parse
 import re
+from . import pathPrint
+from . import anotherPathPrint
+from . import schedule
 
 CLIENT_ACCESS_TOKEN = '72906773549e43b2b2fe92dcdd24abe7'
 session_id = random.randint(100000,999999)
@@ -15,7 +18,7 @@ subwayID = [[1001, "수도권 1호선"],[1002, "수도권 2호선"],[1003, "수�
 ,[1075,"수도권 분당선"],[1063,"경의중앙선"],[1067,"수도권 경춘선"],[1077,"수도권 신분당선"],[1077,"수도권 신분당선"]]
 
 def getStationInfo(myStationName):
-    myKey = "f/WM8od4VAXdGg4Q5ZaWSlJ8tIbSpw+nJ4WQ4AFRpsM"
+    myKey = "sfUWUSpyZPCTdcli/St2gPbb1Se3TCP2dL6LZQzhsEE"
     encKey = urllib.parse.quote_plus(myKey)
     encStationname = urllib.parse.quote_plus(myStationName)
     odUrl = "https://api.odsay.com/v1/api/searchStation?lang=0&stationName="+encStationname+"&stationClass=2&apiKey="+encKey
@@ -27,7 +30,7 @@ def getStationInfo(myStationName):
     return data
 
 def getStationName(stationID):
-    myKey = "f/WM8od4VAXdGg4Q5ZaWSlJ8tIbSpw+nJ4WQ4AFRpsM"
+    myKey = "sfUWUSpyZPCTdcli/St2gPbb1Se3TCP2dL6LZQzhsEE"
     encKey = urllib.parse.quote_plus(myKey)
     encStationID = urllib.parse.quote_plus(str(stationID))
     odUrl = "https://api.odsay.com/v1/api/subwayStationInfo?lang=0&stationID="+encStationID+"&apiKey="+encKey
@@ -52,7 +55,7 @@ def getStationResult(cID, stationID, stationName, idx, current_laneName,directio
     #'역'글자 빼기
     #stationName = stationName.replace("(역)$","")
     stationName = re.sub("[역]$","", stationName)
-    #print("==="+stationName)
+    print("==="+stationName)
     encStationname = urllib.parse.quote_plus(stationName)
     open_data_url = "http://swopenapi.seoul.go.kr/api/subway/"+enckey+"/json/realtimeStationArrival/0/5/"+encStationname
     try:
@@ -74,13 +77,31 @@ def getStationResult(cID, stationID, stationName, idx, current_laneName,directio
                 #if list['arvlMsg2'].find("도착"):
                     #print(stationName+"역 정보 : "+list['arvlMsg2'])
                 if list['arvlMsg2'] == "전역 도착" or list['arvlMsg2'] == "전역 출발":
-                    #print("전역도착")
+                    #print("$$$$$$$$$$$$$$$전역도착")
                     return idx+1
-                elif "(" in list['arvlMsg2']:
-                    #print("시간정보")
+                elif "[" in list['arvlMsg2']:#[5]번째 전역 (화전)
+                    #print("$$$$$$$$$몇정거장 전")
+                    info_str = list['arvlMsg2'].split()
+                    #for i in info_str:
+                        #print("info_str = "+i)
+                    info_str2 = info_str[2]
+                    info_str2 = info_str2[1:len(info_str2)-1]
+                    #print("**info_str = "+info_str2)
+                    new_data = getStationInfo(info_str2)
+                    new_station_info = new_data['result']['station']
+                    for idx, info in enumerate(new_station_info):
+                        if line_number in info['laneName']:
+                            new_stationID = int(new_data['result']['station'][idx]['stationID'])
+                    #print("new_stationID = " +str(new_stationID))
+                    if direction == "상행" or "외선":
+                        return 6-(new_stationID-cID)
+                    elif direction == "하행" or "내선":
+                        return cID-new_stationID
+                elif "(" in list['arvlMsg2']:#3분 58초 후 (삼각지)
+                    #print("$$$$$$$$$$시간정보")
                     my_str = list['arvlMsg2'].split()
-                    # for i in my_str:
-                    #     print("my_str = "+i)
+                    #for i in my_str:
+                    #    print("my_str = "+i)
                     my_str2 = my_str[3]
                     my_str2 = my_str2[1:len(my_str2)-1]
                     #my_str = my_str[3].replace(' ','')
@@ -91,9 +112,9 @@ def getStationResult(cID, stationID, stationName, idx, current_laneName,directio
                         if line_number in info['laneName']:
                             new_stationID = int(new_data['result']['station'][idx]['stationID'])
                     #print("new_stationID = " +str(new_stationID))
-                    if direction == "상행":
+                    if direction == "상행" or "외선":
                         return 6-(new_stationID-cID)
-                    elif direction == "하행":
+                    elif direction == "하행" or "내선":
                         return cID-new_stationID
                 else:
                     #print("해당역 도착")
@@ -107,7 +128,7 @@ def getStationResult(cID, stationID, stationName, idx, current_laneName,directio
         return "error"
 
 def getExpressInfo(my_Exstart, my_Exend):
-    myKey = "f/WM8od4VAXdGg4Q5ZaWSlJ8tIbSpw+nJ4WQ4AFRpsM"
+    myKey = "sfUWUSpyZPCTdcli/St2gPbb1Se3TCP2dL6LZQzhsEE"
     encKey = urllib.parse.quote_plus(myKey)
     encExstart = urllib.parse.quote_plus(my_Exstart)
     encExend = urllib.parse.quote_plus(my_Exend)
