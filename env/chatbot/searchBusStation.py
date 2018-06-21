@@ -101,13 +101,13 @@ def search(searchList):
         if eq(arrival_first,"곧 도착") != True:
             for i in range(0,len(arrival_first)):
                 if eq(arrival_first[i],"분"):
-                    res.append(arrival_first[i+6])
+                    arrival_busstation.append(arrival_first[i+6])
 
         print(arrival_second)
         if eq(arrival_second,"곧 도착") != True:
             for i in range(0,len(arrival_second)):
                 if eq(arrival_second[i],"분"):
-                    res.append(arrival_second[i+6])
+                    arrival_busstation.append(arrival_second[i+6])
 
         print(arrival_busstation)
         counter = 0
