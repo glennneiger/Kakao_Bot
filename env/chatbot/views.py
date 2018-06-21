@@ -196,6 +196,7 @@ def incomFalse(intent_name, data):
             text = "==="+Exstart+"터미널에서 "+Exend+"까지 시간표 정보\n"
             text+=schedule1
     elif intent_name == "Bus_Info":
+        print("AAAAAAAAA")
         searchList = data['result']['parameters']['bus_info']
         text = searchBusStation(searchList)
     elif intent_name == "Default Fallback Intent":
