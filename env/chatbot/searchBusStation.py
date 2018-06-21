@@ -59,7 +59,6 @@ def search(searchList):
         bus_number = searchList[1]
         print(bus_number)
         bus_station = st_name
-        print(st_name)
         Bus_Info_URL = "https://api.odsay.com/v1/api/searchBusLane?lang=0&busNo="+bus_number+"&apiKey="+encMy+"&CID=1000"
 
         bus_info_request = urllib.request.Request(Bus_Info_URL)
@@ -98,7 +97,7 @@ def search(searchList):
                 counter += 1
 
         if direction == "+":
-            for i in range(1,5):
+            for i in range(1,6,-1):
                 print(res[current+i])
 
 
