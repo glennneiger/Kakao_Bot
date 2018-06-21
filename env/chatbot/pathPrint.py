@@ -4,12 +4,14 @@ import urllib.parse
 
 def subway(swPath):
 	sText = ""
-	
-	sText += swPath['startName']+"역에서\n"
+
+	sText += "💙"+swPath['startName']+"역에서\n"
 	sText += swPath['passStopList']['stations'][1]['stationName']+"방면으로 "
-	sText += swPath['lane'][0]['name']+"탑승\n"
-	sText += str(swPath['stationCount'])+"개 정류장 이동\n"
-	sText += swPath['endName']+"역에서 하차\n"
+	sText += swPath['lane'][0]['name']+"을 탑승합니다\n"
+	sText += "💚"+str(swPath['stationCount'])+"개 정류장을 이동합니다\n"
+	sText += "💜"+swPath['endName']+"역에서 하차합니다\n"
+	sText += "💛"+"버스로 이동 끝!\n"
+
 
 	return sText
 
@@ -17,10 +19,11 @@ def subway(swPath):
 def bus(busPath):
 	bText = ""
 
-	bText += busPath['startName']+"정류장에서\n"
-	bText += busPath['lane'][0]['busNo']+"번 버스 탑승\n"
-	bText += str(busPath['stationCount'])+"개 정류장 이동\n"
-	bText += busPath['endName']+"정류장에서 하차\n"
+	bText += "💙"+busPath['startName']+"정류장에서\n"
+	bText += busPath['lane'][0]['busNo']+"번 버스를 탑승합니다\n"
+	bText += "💚"+str(busPath['stationCount'])+"개 정류장을 이동합니다\n"
+	bText += "💜"+busPath['endName']+"정류장에서 하차합니다\n"
+	bText += "💛"+"지하철로 이동 끝!\n"
 
 	return bText
 
@@ -68,26 +71,26 @@ def resultPrint(start, end):
 		count = len(subPath)
 
 		if pType == 1:
-			txt = "[지하철로 이동]\n"
+			txt = "[지하철로 이동 🚋🚋]\n"
 			for i in range(0, count):
 				tType = subPath[i]['trafficType']
 				if tType == 1:
 					txt += subway(subPath[i])
 		elif pType == 2:
-			txt = "[버스로 이동]\n"
+			txt = "[버스로 이동 🚌🚌]\n"
 			for i in range(0, count):
 				tType = subPath[i]['trafficType']
 				if tType == 2:
 					txt += bus(subPath[i])
 		else:
-			txt = "[지하철+버스로 이동]\n"
+			txt = "💌[지하철+버스로 이동하세요]💌\n"
 			for i in range(0, count):
 				tType = subPath[i]['trafficType']
 				if tType == 1 :
-					txt += "\n[지하철로 이동]\n"
+					txt += "\n[지하철로 이동 🚋🚋]\n"
 					txt += subway(subPath[i])
 				elif tType == 2:
-					txt += "\n[버스로 이동]\n"
+					txt += "\n[버스로 이동 🚌🚌]\n"
 					txt += bus(subPath[i])
 
 	elif s_status == "ZERO_RESULTS" :
