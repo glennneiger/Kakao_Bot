@@ -114,11 +114,12 @@ def search(searchList):
             print("00000")
             arrival_busstation.append("0")
 
-        print(arrival_second)
-        if eq(arrival_second,"곧 도착") != True:
-            for i in range(0,len(arrival_second)):
-                if eq(arrival_second[i],"["):
-                    arrival_busstation.append(arrival_second[i+1])
+#        print(arrival_second)
+#        if eq(arrival_second,"곧 도착") != True:
+#            for i in range(0,len(arrival_second)):
+#                if eq(arrival_second[i],"["):
+#                    arrival_busstation.append(arrival_second[i+1])
+#                    if(int(arrival_busstation[i+2]))
 
         print(arrival_busstation)
         counter = 0
@@ -156,7 +157,8 @@ def search(searchList):
                     text += "       ↓↓↓   \n"
 
         text += "\n"
-        text+= "👉🏿 " + arrival_first         
+        text+= "👉🏿 " + arrival_first
+        text+= "👉🏿 " + arrival_second         
 
     return text
 
