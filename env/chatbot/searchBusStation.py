@@ -52,10 +52,11 @@ def search(searchList):
         busList[busNo] =  bus.find("rtNm").text
         bcnt = bcnt+1
 
-    text = ""
+    
 
     ###버스 정보
     if len(searchList) != 1:
+        text = ""
         bus_number = searchList[1]
         bus_station = st_name
         Bus_Info_URL = "https://api.odsay.com/v1/api/searchBusLane?lang=0&busNo="+bus_number+"&apiKey="+encMy+"&CID=1000"
@@ -102,6 +103,7 @@ def search(searchList):
                 break
             else :
                 counter += 1
+
 
         if direction == "+":
             for i in range(5,1,-1):
