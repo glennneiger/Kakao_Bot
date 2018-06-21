@@ -42,7 +42,7 @@ def search(searchList):
 	busList = {}
 	bcnt = 0
 	for bus in mbody.iter("itemList"):
-	        msg1 = "msg1_c"+str(bcnt)
+		msg1 = "msg1_c"+str(bcnt)
 		msg2 = "msg2_c"+str(bcnt)
 		adr = "adr_c"+str(bcnt)
 		busNo = "busNo_c"+str(bcnt)
