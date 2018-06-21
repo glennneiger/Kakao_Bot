@@ -96,7 +96,7 @@ def search(searchList):
 		
 		if direction == "+":
 			for i in range(1,4):
-			text += res[cnt+i]
+				text += res[cnt+i]
 
 
 
