@@ -104,6 +104,7 @@ def incomFalse(intent_name, data):
             text = anotherPathPrint.resultPrint(start, end, tsType)
             text += "\n\n다른 결과"
     elif intent_name == "TimeSchedule":
+        text=""
         transportation = str(data['result']['parameters']['transportation'])
         if transportation == "지하철":
             stationName = str(data['result']['parameters']['from'])

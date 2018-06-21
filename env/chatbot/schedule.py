@@ -55,7 +55,7 @@ def getStationResult(cID, stationID, stationName, idx, current_laneName,directio
     #'역'글자 빼기
     #stationName = stationName.replace("(역)$","")
     stationName = re.sub("[역]$","", stationName)
-    print("==="+stationName)
+    #print("==="+stationName)
     encStationname = urllib.parse.quote_plus(stationName)
     open_data_url = "http://swopenapi.seoul.go.kr/api/subway/"+enckey+"/json/realtimeStationArrival/0/5/"+encStationname
     try:
