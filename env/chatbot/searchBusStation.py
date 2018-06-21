@@ -121,9 +121,43 @@ def search(searchList):
 
         print("current : " + res[current])
 
+        path_res = []
+        for i in range(0,len(arrival_busstation)):
+            path_res.append(res[current+int(arrival_busstation[i])])
+
+        print("path_res" + path_res)
+
         if direction == "+":
             for i in range(5,-1,-1):
+                path_res.append(res(current+i))
                 print(res[current+i])
 
 
+
+
+
     return text
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
