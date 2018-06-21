@@ -95,7 +95,7 @@ def search(searchList):
             else :
                 counter += 1
 
-
+        print(current)
         if direction == "+":
             for i in range(1,4):
                 print(res[current+1])
