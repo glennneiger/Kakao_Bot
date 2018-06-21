@@ -100,7 +100,7 @@ def incomFalse(intent_name, data):
         if(tsType == ''):
             text = pathPrint.resultPrint(start, end)
             #text += "\n\n결과"
-        elif(tsType != null):
+        elif(tsType is not None):
             end_length = len(end)
             end = end[2:end_length-2]
             text = anotherPathPrint.resultPrint(start, end, tsType)
