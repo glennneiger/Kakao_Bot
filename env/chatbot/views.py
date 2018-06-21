@@ -121,8 +121,6 @@ def incomFalse(intent_name, data):
                 if line_number in info['laneName']:
                     current_stationID = int(data['result']['station'][idx]['stationID'])
                     current_laneName = data['result']['station'][idx]['laneName'] #예:수도권 1호선
-            if current_stationID == 0:
-                continue
             if eq(direction,"상행") or eq(direction,"내선"):
                 stationID = [current_stationID+4,current_stationID+2, current_stationID]
             if eq(direction,"하행") or eq(direction,"외선"):
