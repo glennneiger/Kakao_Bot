@@ -75,19 +75,19 @@ def resultPrint(start, end, tsType):
     end = end[2:end_length-2]
 
     ####
-    if(start== '' and end==''):
+    #if(start== '' and end==''):
         #print("둘다 없음")
-        start = str(data['result']['parameters']['any'][0])
-        end = str(data['result']['parameters']['any'][1])
+        #start = str(data['result']['parameters']['any'][0])
+        #end = str(data['result']['parameters']['any'][1])
         #print("출발지 : "+start)
         #print("도착지 : "+end)
-    elif(start!='' and end==''):
+    #elif(start!='' and end==''):
         #print("도착지 없음")
-        end = str(data['result']['parameters']['any'][0])
+        #end = str(data['result']['parameters']['any'][0])
         #print("도착지 : "+end)
-    elif(start=='' and end!=''):
+    #elif(start=='' and end!=''):
         #print("출발지 없음")
-        start = str(data['result']['parameters']['any'][0])
+        #start = str(data['result']['parameters']['any'][0])
         #print("출발지 : "+start+"\n")
     #####
 
