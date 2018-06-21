@@ -96,8 +96,8 @@ def incomFalse(intent_name, data):
             start = str(data['result']['parameters']['any'][0])
 
         tsType = str(data['result']['parameters']['transportation'])
-        #print("start==>"+start)
-        #print("end==>"+end)
+        print("start==>"+start)
+        print("end==>"+end)
         if(tsType == ''):
             text = pathPrint.resultPrint(start, end)
             #text += "\n\n결과"
@@ -189,7 +189,7 @@ def incomFalse(intent_name, data):
             Exstart = str(data['result']['parameters']['any'][0])
             Exend = str(data['result']['parameters']['any'][1])
             schedule1 = schedule.getExpressInfo(Exstart,Exend)
-            text = "==="+Exstart+"터미널에서 "+Exend+"까지 시간표 정보\n"
+            text = "💌["+Exstart+"터미널에서 "+Exend+"까지 시간표 정보입니다💌\n"
             text+=schedule1
 
     elif intent_name == "Bus_Info":
