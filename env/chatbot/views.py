@@ -102,8 +102,8 @@ def incomFalse(intent_name, data):
             text = pathPrint.resultPrint(start, end)
             #text += "\n\n결과"
         elif(tsType is not None):
-            end_length = len(end)
-            end = end[2:end_length-2]
+            #end_length = len(end)
+            #end = end[2:end_length-2]
             text = anotherPathPrint.resultPrint(start, end, tsType)
             #text += "\n\n다른 결과"
     elif intent_name == "TimeSchedule":
