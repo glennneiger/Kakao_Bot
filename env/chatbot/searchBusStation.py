@@ -97,16 +97,8 @@ def search(searchList):
                 arrival_second = "msg2_c"+str(i)
 
         print(arrival_first)
-        if eq(arrival_first,"곧 도착") != True:
-            print(arrival_first[7])
-            arrival_busstation.append(arrival_first[7])
-
         print(arrival_second)
-        if eq(arrival_second,"곧 도착") != True:
-            print(arrival_second[7])
-            arrival_busstation.append(arrival_second[7])
-
-        print(arrival_busstation)
+        
         counter = 0
         current = 0
         for i in res:
