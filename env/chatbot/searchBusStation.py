@@ -6,7 +6,7 @@ import xml.etree.ElementTree as ET
 def search(searchList):
 	searchST = searchList[0]
 	searchBus = ""
-	if searchST.length != 1:
+	if len(searchList) != 1:
 		searchBus = searchList[1]
 
 	text = ""
