@@ -53,7 +53,13 @@ def search(searchList):
         busList[busNo] =  bus.find("rtNm").text
         bcnt = bcnt+1
 
-    
+    text = st_name
+    for i in range(0, bcnt):
+        bus_msg1 = "msg1_c"+str(bcnt)
+        bus_msg2 = "msg2_c"+str(bcnt)
+        bus_adr = "adr_c"+str(bcnt)
+        bus_No = "busNo_c"+str(bcnt)
+        text += "버스 번호 :" + busList[bus_No] + "\n "+busList[bus_msg1]+"\n" 
 
     ###버스 정보
     if len(searchList) != 1:
