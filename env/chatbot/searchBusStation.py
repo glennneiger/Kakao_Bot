@@ -157,7 +157,7 @@ def search(searchList):
                     text += "       ↓↓↓   \n"
 
         text += "\n"
-        text+= "👉🏿 " + arrival_first
+        text+= "👉🏿 " + arrival_first + "\n"
         text+= "👉🏿 " + arrival_second         
 
     return text
