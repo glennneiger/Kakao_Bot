@@ -90,8 +90,10 @@ def search(searchList):
         for i in range(0, bcnt):
             bus_key = "busNo_c"+str(i)
             if(busList[bus_key] == bus_number):
-                arr[0] = busList["msg1_c"+str(i)]
-                arr[1] = busList["msg2_c"+str(i)]
+                kk = "msg1_c"+str(i)
+                kkkkk = "msg2_c"+str(i)
+                arr[0] = busList[kk]
+                arr[1] = busList[kkkkk]
                 print(arr[0])
 
         counter = 0
