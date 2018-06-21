@@ -94,7 +94,9 @@ def search(searchList):
             if(busList[bus_key] == bus_number):
                 print(busList[bus_key])
                 kk = "msg1_c"+str(i)
-                print(kk)
+                kkk = "msg2_c"+str(i)
+                print(busList[kk])
+                print(busList[kkk])
 
         counter = 0
         current = 0
