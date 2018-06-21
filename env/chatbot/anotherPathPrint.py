@@ -71,8 +71,8 @@ def getNormalPath(sx, sy, ex, ey):
 
 def resultPrint(start, end, tsType):
 
-    end_length = len(end)
-    end = end[2:end_length-2]
+    #end_length = len(end)
+    #end = end[2:end_length-2]
 
     ####
     #if(start== '' and end==''):
