@@ -83,8 +83,8 @@ def search(searchList):
         res = []
 
         for i in data['result']['station']:
-		    idx_station_res[i['idx']] = i['stationName']
-		    res.append(i['stationName'])
+            idx_station_res[i['idx']] = i['stationName']
+            res.append(i['stationName'])
 
         counter = 0
         current = 0
@@ -96,9 +96,9 @@ def search(searchList):
                 counter += 1
 
 
-		if direction == "+":
-			for i in range(1,4):
-				print(res[current+1])
+        if direction == "+":
+            for i in range(1,4):
+                print(res[current+1])
 
 
-	return text
+    return text
