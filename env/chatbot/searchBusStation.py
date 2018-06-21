@@ -6,7 +6,6 @@ import xml.etree.ElementTree as ET
 def search(searchList):
 	print(searchList)
 	searchST = searchList[0]
-
 	text = ""
 
 	ACCESS = "rxJqZMHh6oQDUSfc7Kh42uCXZuHEhmj7dY7VWber2ryr9L5t2CFRy3z834JMR7RygMzaVby7ZQ3sW%2ByCZZn0Ig%3D%3D"
@@ -97,10 +96,7 @@ def search(searchList):
 
 		if direction == "+":
 			for i in range(1,4):
-				text += res[cnt+i]
-
-
-
+				print(res[current+1])
 
 
 	return text
