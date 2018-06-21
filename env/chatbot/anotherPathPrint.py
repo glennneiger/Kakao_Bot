@@ -114,7 +114,10 @@ def resultPrint(start, end, tsType):
         sy = str(s_json['results'][0]['geometry']['location']['lat'])
         ex = str(e_json['results'][0]['geometry']['location']['lng'])
         ey = str(e_json['results'][0]['geometry']['location']['lat'])
-
+        print("sx = "+sx)
+        print("sy = "+sy)
+        print("ex = "+ex)
+        print("ey = "+ey)
         myKey = "f/WM8od4VAXdGg4Q5ZaWSlJ8tIbSpw+nJ4WQ4AFRpsM"
         encKey = urllib.parse.quote_plus(myKey)
 
