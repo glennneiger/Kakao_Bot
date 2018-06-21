@@ -93,12 +93,19 @@ def search(searchList):
         for i in range(0, bcnt):
             bus_key = "busNo_c"+str(i)
             if(busList[bus_key] == bus_number):
-                arrival_first = "msg1_c"+str(i)
-                arrival_second = "msg2_c"+str(i)
+                arrival_first = busList["msg1_c"+str(i)]
+                arrival_second = busList["msg2_c"+str(i)]
+
 
         print(arrival_first)
+        if eq(arrival_first,"곧 도착") != True:
+            arrival_busstation.append(arrival_first[7])
+
         print(arrival_second)
-        
+        if eq(arrival_second,"곧 도착") != True:
+            arrival_busstation.append(arrival_second[7])
+
+        print(arrival_busstation)
         counter = 0
         current = 0
         for i in res:
