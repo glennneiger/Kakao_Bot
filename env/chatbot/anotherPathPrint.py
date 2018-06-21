@@ -63,7 +63,7 @@ def getNormalPath(sx, sy, ex, ey):
             if tType == 2:
                 txt += bus(subPath[i])
     else:
-        txt = "[지하철+버스로 이동하세요🚋🚌]"
+        txt = "\n[지하철+버스로 이동하세요🚋🚌]\n\n"
         for i in range(0, count):
             tType = subPath[i]['trafficType']
             if tType == 1:
@@ -168,7 +168,7 @@ def resultPrint(start, end, tsType):
                 txt=getNormalPath(sx, sy, startSTN_sx, startSTN_sy)
                 txt += "\n[시외버스로 이동]\n"
                 txt += startSTN+"에서 "+endSTN+"까지 \n소요시간 : "+str(int(time)//60)+"시간 "+str(int(time)%60)+"분\n"
-                txt += "비용 : "+str(payment)+"원\n"
+                txt += "비용 : "+str(payment)+"원\n\n"
                 txt+=getNormalPath(endSTN_ex, endSTN_ey, ex, ey)
 
         elif searchType == 0:
