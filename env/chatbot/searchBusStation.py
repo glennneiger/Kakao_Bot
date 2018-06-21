@@ -87,12 +87,12 @@ def search(searchList):
             res.append(i['stationName'])
 
         arr = []
+        kk = ""
         for i in range(0, bcnt):
             bus_key = "busNo_c"+str(i)
             if(busList[bus_key] == bus_number):
                 print(busList[bus_key])
                 kk = "msg1_c"+str(i)
-                print(busList[kk])
 
         counter = 0
         current = 0
