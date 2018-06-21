@@ -129,7 +129,7 @@ def search(searchList):
 
         if direction == "+":
             for i in range(5,-1,-1):
-                for j in range(0,path_res):
+                for j in range(0,len(path_res)):
                     if eq(path_res[j],res[current+i]) :
                         print(res[current+i] + "***")
 
