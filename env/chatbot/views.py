@@ -198,7 +198,8 @@ def incomFalse(intent_name, data):
     elif intent_name == "Bus_Info":
         print("AAAAAAAAA")
         searchList = data['result']['parameters']['bus_info']
-        print(searchList)
+        print(type(searchList))
+        
         text = searchBusStation(searchList)
     elif intent_name == "Default Fallback Intent":
         text = str(data['result']['fulfillment']['messages'][0]['speech'])
