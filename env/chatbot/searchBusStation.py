@@ -111,6 +111,7 @@ def search(searchList):
                 if eq(arrival_first[i],"["):
                     arrival_busstation.append(arrival_first[i+1])
         else :
+            print("00000")
             arrival_busstation.append("0")
 
         print(arrival_second)
