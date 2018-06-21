@@ -125,14 +125,6 @@ def search(searchList):
         for i in range(0,len(arrival_busstation)):
             path_res.append(res[current+int(arrival_busstation[i])])
 
-
-        bText += "💛"+busPath['startName']+"정류장에서\n"
-        bText += busPath['lane'][0]['busNo']+"번 버스를 탑승합니다\n"
-        bText += "💛"+str(busPath['stationCount'])+"개 정류장을 이동합니다\n"
-        bText += "💛"+busPath['endName']+"정류장에서 하차합니다\n"
-        bText += "💛"+"지하철로 이동 끝!\n"
-
-
         if direction == "+":
             for i in range(5,-1,-1):
                 checked = False
