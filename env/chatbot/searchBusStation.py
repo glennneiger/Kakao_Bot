@@ -2,6 +2,7 @@
 import urllib.parse
 import json
 import xml.etree.ElementTree as ET
+from operator import eq
 
 def search(searchList):
     print(searchList)
@@ -87,17 +88,21 @@ def search(searchList):
             idx_station_res[i['idx']] = i['stationName']
             res.append(i['stationName'])
 
-        arr = []
+        arrival_busstation = []
         kk = ""
         for i in range(0, bcnt):
             bus_key = "busNo_c"+str(i)
             if(busList[bus_key] == bus_number):
                 print(busList[bus_key])
-                kk = "msg1_c"+str(i)
-                kkk = "msg2_c"+str(i)
-                print(busList[kk])
-                print(busList[kkk])
+                arrival_first = "msg1_c"+str(i)
+                arrival_second = "msg2_c"+str(i)
+                if eq(arrival_first,"곧 도착") != True:
+                    arrival_busstation.append(arrival_first[7])
+                if eq(arrival_second,"곧 도착") != True:
+                    arrival_busstation.append(arrival_second[7])
 
+
+        print(arrival_busstation)
         counter = 0
         current = 0
         for i in res:
@@ -107,7 +112,7 @@ def search(searchList):
             else :
                 counter += 1
 
-        print("currnet : " + res[current])
+        print("current : " + res[current])
 
         if direction == "+":
             for i in range(5,-1,-1):
