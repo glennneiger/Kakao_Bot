@@ -3,7 +3,7 @@ import urllib.parse
 import json
 import xml.etree.ElementTree as ET
 
-def serch(searchList):
+def search(searchList):
 	searchST = searchList[0]
 	searchBus = ""
 	if searchST.length != 1:
