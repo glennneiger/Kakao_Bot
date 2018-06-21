@@ -5,12 +5,12 @@ import urllib.parse
 def subway(swPath):
 	sText = ""
 
-	sText += "💙"+swPath['startName']+"역에서\n"
+	sText += "💜"+swPath['startName']+"역에서\n"
 	sText += swPath['passStopList']['stations'][1]['stationName']+"방면으로 "
 	sText += swPath['lane'][0]['name']+"을 탑승합니다\n"
-	sText += "💚"+str(swPath['stationCount'])+"개 정류장을 이동합니다\n"
+	sText += "💜"+str(swPath['stationCount'])+"개 정류장을 이동합니다\n"
 	sText += "💜"+swPath['endName']+"역에서 하차합니다\n"
-	sText += "💛"+"버스로 이동 끝!\n"
+	sText += "💜"+"버스로 이동 끝!\n"
 
 
 	return sText
@@ -19,10 +19,10 @@ def subway(swPath):
 def bus(busPath):
 	bText = ""
 
-	bText += "💙"+busPath['startName']+"정류장에서\n"
+	bText += "💛"+busPath['startName']+"정류장에서\n"
 	bText += busPath['lane'][0]['busNo']+"번 버스를 탑승합니다\n"
-	bText += "💚"+str(busPath['stationCount'])+"개 정류장을 이동합니다\n"
-	bText += "💜"+busPath['endName']+"정류장에서 하차합니다\n"
+	bText += "💛"+str(busPath['stationCount'])+"개 정류장을 이동합니다\n"
+	bText += "💛"+busPath['endName']+"정류장에서 하차합니다\n"
 	bText += "💛"+"지하철로 이동 끝!\n"
 
 	return bText

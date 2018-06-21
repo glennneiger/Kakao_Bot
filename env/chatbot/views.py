@@ -99,12 +99,12 @@ def incomFalse(intent_name, data):
 
         if(tsType == ''):
             text = pathPrint.resultPrint(start, end)
-            text += "\n\n결과"
+            #text += "\n\n결과"
         elif(tsType != null):
             end_length = len(end)
             end = end[2:end_length-2]
             text = anotherPathPrint.resultPrint(start, end, tsType)
-            text += "\n\n다른 결과"
+            #text += "\n\n다른 결과"
     elif intent_name == "TimeSchedule":
         transportation = str(data['result']['parameters']['transportation'])
         if transportation == "지하철":
