@@ -55,11 +55,10 @@ def search(searchList):
 
     text = st_name
     for i in range(0, bcnt):
-        print("ttttttttt")
-        bus_msg1 = "msg1_c"+str(bcnt)
-        bus_msg2 = "msg2_c"+str(bcnt)
-        bus_adr = "adr_c"+str(bcnt)
-        bus_No = "busNo_c"+str(bcnt)
+        bus_msg1 = "msg1_c"+str(i)
+        bus_msg2 = "msg2_c"+str(i)
+        bus_adr = "adr_c"+str(i)
+        bus_No = "busNo_c"+str(i)
         text += "버스 번호 :" + busList[bus_No] + "\n "+busList[bus_msg1]+"\n" 
 
     ###버스 정보
