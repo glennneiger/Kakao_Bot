@@ -4,94 +4,96 @@ import json
 import xml.etree.ElementTree as ET
 
 def search(searchList):
-	print(searchList)
-	searchST = searchList[0]
-	text = ""
+    print(searchList)
+    searchST = searchList[0]
+    text = ""
 
-	ACCESS = "rxJqZMHh6oQDUSfc7Kh42uCXZuHEhmj7dY7VWber2ryr9L5t2CFRy3z834JMR7RygMzaVby7ZQ3sW%2ByCZZn0Ig%3D%3D"
+    ACCESS = "rxJqZMHh6oQDUSfc7Kh42uCXZuHEhmj7dY7VWber2ryr9L5t2CFRy3z834JMR7RygMzaVby7ZQ3sW%2ByCZZn0Ig%3D%3D"
 
-	my = "f/WM8od4VAXdGg4Q5ZaWSlJ8tIbSpw+nJ4WQ4AFRpsM"
-	encMy = urllib.parse.quote_plus(my)
-	encST = urllib.parse.quote_plus(searchST)
+    my = "f/WM8od4VAXdGg4Q5ZaWSlJ8tIbSpw+nJ4WQ4AFRpsM"
+    encMy = urllib.parse.quote_plus(my)
+    encST = urllib.parse.quote_plus(searchST)
 
-	odUrl = "https://api.odsay.com/v1/api/searchStation?lang=&stationName="+encST+"&apiKey="+encMy
+    odUrl = "https://api.odsay.com/v1/api/searchStation?lang=&stationName="+encST+"&apiKey="+encMy
 
-	request = urllib.request.Request(odUrl)
-	response = urllib.request.urlopen(request)
+    request = urllib.request.Request(odUrl)
+    response = urllib.request.urlopen(request)
 
-	json_rt = response.read().decode('utf-8')
-	data = json.loads(json_rt)
+    json_rt = response.read().decode('utf-8')
+    data = json.loads(json_rt)
 
-	stInfo = data['result']['station'][0]
+    stInfo = data['result']['station'][0]
 
-	st_name = stInfo['stationName']
-	st_ars = str(stInfo['arsID'])
+    st_name = stInfo['stationName']
+    st_ars = str(stInfo['arsID'])
 
-	st_ars = st_ars.replace("-","")
-	encArs = urllib.parse.quote_plus(st_ars)
+    st_ars = st_ars.replace("-","")
+    encArs = urllib.parse.quote_plus(st_ars)
 
-	ACCESS = "rxJqZMHh6oQDUSfc7Kh42uCXZuHEhmj7dY7VWber2ryr9L5t2CFRy3z834JMR7RygMzaVby7ZQ3sW%2ByCZZn0Ig%3D%3D"
+    ACCESS = "rxJqZMHh6oQDUSfc7Kh42uCXZuHEhmj7dY7VWber2ryr9L5t2CFRy3z834JMR7RygMzaVby7ZQ3sW%2ByCZZn0Ig%3D%3D"
 
-	oAPI = "http://ws.bus.go.kr/api/rest/stationinfo/getStationByUid?ServiceKey="+ACCESS+"&arsId="+encArs
+    oAPI = "http://ws.bus.go.kr/api/rest/stationinfo/getStationByUid?ServiceKey="+ACCESS+"&arsId="+encArs
 
-	tree = ET.parse(urllib.request.urlopen(oAPI))
+    tree = ET.parse(urllib.request.urlopen(oAPI))
 
-	root = tree.getroot()
-	mbody = root.find("msgBody")
+    root = tree.getroot()
+    mbody = root.find("msgBody")
 
-	busList = {}
-	bcnt = 0
-	for bus in mbody.iter("itemList"):
-		msg1 = "msg1_c"+str(bcnt)
-		msg2 = "msg2_c"+str(bcnt)
-		adr = "adr_c"+str(bcnt)
-		busNo = "busNo_c"+str(bcnt)
-		busList[msg1] =  bus.find("arrmsg1").text
-		busList[msg2] =  bus.find("arrmsg2").text
-		busList[adr] =  bus.find("adirection").text
-		busList[busNo] =  bus.find("rtNm").text
-		bcnt = bcnt+1
+    busList = {}
+    bcnt = 0
+    for bus in mbody.iter("itemList"):
+        msg1 = "msg1_c"+str(bcnt)
+        msg2 = "msg2_c"+str(bcnt)
+        adr = "adr_c"+str(bcnt)
+        busNo = "busNo_c"+str(bcnt)
+        busList[msg1] =  bus.find("arrmsg1").text
+        busList[msg2] =  bus.find("arrmsg2").text
+        busList[adr] =  bus.find("adirection").text
+        busList[busNo] =  bus.find("rtNm").text
+        bcnt = bcnt+1
 
-	text = ""
+    text = ""
 
-	###버스 정보
-	if len(searchList) != 1:
-		bus_number = searchList[1]
-		bus_station = searchList[0]
-		Bus_Info_URL = "https://api.odsay.com/v1/api/searchBusLane?lang=0&busNo="+bus_number+"&apiKey="+encMy
+    ###버스 정보
+    if len(searchList) != 1:
+        bus_number = searchList[1]
+        bus_station = searchList[0]
+        Bus_Info_URL = "https://api.odsay.com/v1/api/searchBusLane?lang=0&busNo="+bus_number+"&apiKey="+encMy
 
-		bus_info_request = urllib.request.Request(Bus_Info_URL)
-		bus_info_res = urllib.request.urlopen(bus_info_request)
+        bus_info_request = urllib.request.Request(Bus_Info_URL)
+        bus_info_res = urllib.request.urlopen(bus_info_request)
 
-		json_data = json.loads(bus_info_res.read().decode('utf-8'))
+        json_data = json.loads(bus_info_res.read().decode('utf-8'))
 
-		busID = json_data['result']['lane'][0]['busID']
-		direction = "+"
-		Line_URL = "https://api.odsay.com/v1/api/busLaneDetail?lang=0&busID="+str(busID)+"&apiKey="+encMy
+        busID = json_data['result']['lane'][0]['busID']
+        direction = "+"
+        Line_URL = "https://api.odsay.com/v1/api/busLaneDetail?lang=0&busID="+str(busID)+"&apiKey="+encMy
 
-		request = urllib.request.Request(Line_URL)
-		response = urllib.request.urlopen(request)
+        request = urllib.request.Request(Line_URL)
+        response = urllib.request.urlopen(request)
 
-		json_rt = response.read().decode('utf-8')
-		data = json.loads(json_rt)
+        json_rt = response.read().decode('utf-8')
+        data = json.loads(json_rt)
 
-		startStation = data['result']['busStartPoint']
-		endStation = data['result']['busEndPoint']
+        startStation = data['result']['busStartPoint']
+        endStation = data['result']['busEndPoint']
 
-		station_idx_res = {}
-		idx_station_res = {}
-		res = []
+        station_idx_res = {}
+        idx_station_res = {}
+        res = []
 
-		for i in data['result']['station']:
-			idx_station_res[i['idx']] = i['stationName']
-			res.append(i['stationName'])
-		cnt = 0
-		for i in res:
-			if i  == bus_station:
-				current = cnt
-				break;
-			else :
-				cnt+=1
+        for i in data['result']['station']:
+		    idx_station_res[i['idx']] = i['stationName']
+		    res.append(i['stationName'])
+
+        counter = 0
+        current = 0
+        for i in res:
+            if i  == bus_station :
+                current = counter
+                break
+            else :
+                counter += 1
 
 
 		if direction == "+":
