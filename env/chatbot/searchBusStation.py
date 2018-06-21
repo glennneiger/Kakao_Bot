@@ -100,13 +100,13 @@ def search(searchList):
         print(arrival_first)
         if eq(arrival_first,"곧 도착") != True:
             for i in range(0,len(arrival_first)):
-                if eq(arrival_first[i],"분"):
+                if eq(arrival_first[i],"["):
                     arrival_busstation.append(arrival_first[i+6])
 
         print(arrival_second)
         if eq(arrival_second,"곧 도착") != True:
             for i in range(0,len(arrival_second)):
-                if eq(arrival_second[i],"분"):
+                if eq(arrival_second[i],"["):
                     arrival_busstation.append(arrival_second[i+6])
 
         print(arrival_busstation)
