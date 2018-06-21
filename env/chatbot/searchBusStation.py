@@ -55,6 +55,7 @@ def search(searchList):
 
     text = st_name
     for i in range(0, bcnt):
+        print("ttttttttt")
         bus_msg1 = "msg1_c"+str(bcnt)
         bus_msg2 = "msg2_c"+str(bcnt)
         bus_adr = "adr_c"+str(bcnt)
