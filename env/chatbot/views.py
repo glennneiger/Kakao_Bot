@@ -94,6 +94,8 @@ def incomFalse(intent_name, data):
             end = str(data['result']['parameters']['any'][0])
         elif(start=='' and end!=''):
             start = str(data['result']['parameters']['any'][0])
+        print("출발지==>"+start+"\n도착지==>"+end)
+        print("tsType==>"+tsType)
 
         tsType = str(data['result']['parameters']['transportation'])
         print("start==>"+start)
@@ -105,7 +107,8 @@ def incomFalse(intent_name, data):
             #end_length = len(end)
             #end = end[2:end_length-2]
             text = anotherPathPrint.resultPrint(start, end, tsType)
-            #text += "\n\n다른 결과"
+            print("text==>"+text)
+            text += "\n\n다른 결과"
     elif intent_name == "TimeSchedule":
         transportation = str(data['result']['parameters']['transportation'])
         if transportation == "지하철":
