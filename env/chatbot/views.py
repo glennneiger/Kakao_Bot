@@ -94,12 +94,11 @@ def incomFalse(intent_name, data):
             end = str(data['result']['parameters']['any'][0])
         elif(start=='' and end!=''):
             start = str(data['result']['parameters']['any'][0])
-        print("출발지==>"+start+"\n도착지==>"+end)
-        print("tsType==>"+tsType)
-
         tsType = str(data['result']['parameters']['transportation'])
         print("start==>"+start)
         print("end==>"+end)
+        print("tsType==>"+tsType)
+
         if(tsType == ''):
             text = pathPrint.resultPrint(start, end)
             #text += "\n\n결과"
