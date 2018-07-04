@@ -127,8 +127,8 @@ def incomFalse(intent_name, data):
             for e in SNList:
                 if stationName in e:
                     print("리스트에 있음")
-                    print("리스트 길이 : "+length(SNList))
-                    for i in range(0, length(SNList)):
+                    print("리스트 길이 : "+len(SNList))
+                    for i in range(0, len(SNList)):
                         print(i+"번째 리스트 내용 :"+SNList[i])
                         if stationName in SNList[i]:
                             option = SNList[i]
