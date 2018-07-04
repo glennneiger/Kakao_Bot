@@ -129,11 +129,11 @@ def incomFalse(intent_name, data):
                     print("리스트에 있음")
                     print("리스트 길이 : "+str(len(SNList)))
                     for i in range(0, len(SNList)):
-                        print(str(i)+"번째 리스트 내용 :"+SNList[i])
+                        print(str(i)+"번째 리스트 내용 :"+str(SNList[i]))
                         if stationName in SNList[i]:
                             option = SNList[i]
-                            print("option = "+option)
-            print("선택사항 : "+option)
+                            print("option = "+str(option))
+            print("선택사항 : "+str(option))
 
             stationName = "서울역"
             data = schedule.getStationInfo(stationName)
