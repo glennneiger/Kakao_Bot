@@ -124,14 +124,15 @@ def incomFalse(intent_name, data):
             #print("stationName="+stationName+" line_number="+line_number+" direction="+direction)
             print("stationName : "+stationName)
             print("SNList : "+str(SNList))
-            if stationName in SNList:
-                print("리스트에 있음")
-                print("리스트 길이 : "+length(SNList))
-                for i in range(0, length(SNList)):
-                    print(i+"번째 리스트 내용 :"+SNList[i])
-                    if stationName in SNList[i]:
-                        option = SNList[i]
-                        print("option = "+option)
+            for e in SNList:
+                if stationName in e:
+                    print("리스트에 있음")
+                    print("리스트 길이 : "+length(SNList))
+                    for i in range(0, length(SNList)):
+                        print(i+"번째 리스트 내용 :"+SNList[i])
+                        if stationName in SNList[i]:
+                            option = SNList[i]
+                            print("option = "+option)
             print("선택사항 : "+option)
 
             stationName = "서울역"
