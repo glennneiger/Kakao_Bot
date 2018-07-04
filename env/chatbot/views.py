@@ -11,6 +11,8 @@ import re
 from . import pathPrint
 from . import anotherPathPrint
 from . import schedule
+from . import searchBusStation
+from operator import eq
 
 from django.shortcuts import render
 from django.http import HttpResponse
@@ -68,7 +70,7 @@ def message(request):
         text = incomFalse(intent_name, data)
 
         return JsonResponse({
-         'message': {'text': "!!!\n"+text+"\n\n!!!"},
+         'message': {'text': text},
        })
 
     elif incom == "True":
@@ -92,22 +94,21 @@ def incomFalse(intent_name, data):
             end = str(data['result']['parameters']['any'][0])
         elif(start=='' and end!=''):
             start = str(data['result']['parameters']['any'][0])
-        print("출발지==>"+start+"\n도착지==>"+end)
-        print("tsType==>"+tsType)
-
         tsType = str(data['result']['parameters']['transportation'])
+        print("start==>"+start)
+        print("end==>"+end)
+        print("tsType==>"+tsType)
 
         if(tsType == ''):
             text = pathPrint.resultPrint(start, end)
-            text += "\n\n결과"
-        elif(tsType != null):
-            end_length = len(end)
-            end = end[2:end_length-2]
+            #text += "\n\n결과"
+        elif(tsType is not None):
+            #end_length = len(end)
+            #end = end[2:end_length-2]
             text = anotherPathPrint.resultPrint(start, end, tsType)
             print("text==>"+text)
             text += "\n\n다른 결과"
     elif intent_name == "TimeSchedule":
-        text=""
         transportation = str(data['result']['parameters']['transportation'])
         if transportation == "지하철":
             ###비슷한 역이름 처리하기 위해 임시로!!!
@@ -116,42 +117,41 @@ def incomFalse(intent_name, data):
             #stationName = str(data['result']['parameters']['from'])
             line_number = str(data['result']['parameters']['line_number'])
             direction = str(data['result']['parameters']['subway_direction'])
-            #print("호선 명 : "+line_number)
-            ###여기 밑에 2줄도 임시!!
-            #if stationName=='' or stationName=='[]':
-                #stationName = str(data['result']['parameters']['any'])
+            if stationName=='' or stationName=='[]':
+                stationName = str(data['result']['parameters']['any'])
 
             #print("지하철역 명"+stationName)
             #print("stationName="+stationName+" line_number="+line_number+" direction="+direction)
             if stationName in SNList:
+                print("리스트에 있음")
+                print("리스트 길이 : "+length(SNList))
                 for i in range(0, length(SNList)):
+                    print(i+"번째 리스트 내용 :"+SNList[i])
                     if stationName in SNList[i]:
                         option = SNList[i]
+                        print("option = "+option)
             print("선택사항 : "+option)
 
             stationName = "서울역"
             data = schedule.getStationInfo(stationName)
             station_info = data['result']['station']
-            #print("station Info : "+str(station_info))
-            #print("사용자가 입력한 호선 명 : "+line_number)
+            current_stationID = 0
             for idx, info in enumerate(station_info):
-                #print("호선 명"+info['laneName'])
                 if line_number in info['laneName']:
-                    #print("일치, "+info['laneName'])
                     current_stationID = int(data['result']['station'][idx]['stationID'])
                     current_laneName = data['result']['station'][idx]['laneName'] #예:수도권 1호선
-            #print(current_stationID)
-            #print(current_laneName)
-            if direction =="하행" or "외선":
-                stationID = [current_stationID,current_stationID-2, current_stationID-4]
-            elif direction == "상행" or "내선":
+            if eq(direction,"상행") or eq(direction,"내선"):
                 stationID = [current_stationID+4,current_stationID+2, current_stationID]
-            #subwayID = [[1063,"경의중앙선"], [1004, "수도권 4호선"]]
-            #i=0
+            if eq(direction,"하행") or eq(direction,"외선"):
+                stationID = [current_stationID,current_stationID-2, current_stationID-4]
+            text=""
             canUse = True
             StationExistList=[]
             for idx, get_stationID in enumerate(stationID):
+                #print("@@@==>"+str(get_stationID))
                 new_stationName = schedule.getStationName(get_stationID)
+                if new_stationName == "none":
+                    continue
                 num = schedule.getStationResult(current_stationID,get_stationID,new_stationName, idx*2,current_laneName,direction,line_number)
 
                 if num == "error":
@@ -161,52 +161,61 @@ def incomFalse(intent_name, data):
                 elif num == "none":
                     continue
                 else:
-                    #print("num = "+str(num))
-                    #print("i="+str(i))
-                    #예:-3정거장 전에 있으면 -1, -1정거장 전에있으면 1
                     StationExistList.append(num)
-                    #i+=1
             if canUse:
-                #print(StationExistList)
                 StationExistNameList = []
-                if direction == "하행" or "외선":
-                    StationIDList = [current_stationID-6,current_stationID-5,current_stationID-4,current_stationID-3,current_stationID-2, current_stationID-1,current_stationID]
-                elif direction == "상행" or "내선":
+                if eq(direction,"상행") or eq(direction,"내선"):
                     StationIDList = [current_stationID+6,current_stationID+5,current_stationID+4,current_stationID+3,current_stationID+2, current_stationID+1,current_stationID]
+                if eq(direction,"하행") or eq(direction,"외선"):
+                    StationIDList = [current_stationID-6,current_stationID-5,current_stationID-4,current_stationID-3,current_stationID-2, current_stationID-1,current_stationID]
                 StationNameList = []
                 for id in StationIDList:
                     StationNameList.append(schedule.getStationName(id))#뒤로 -5정거장까지 전체 노선 정보
-                #print(StationNameList)
                 for n in StationExistList:
-                    if direction == "하행" or "외선":
-                        StationExistNameList.append(schedule.getStationName(current_stationID-n))
-                    elif direction == "상행" or "내선":
+                    if eq(direction,"상행") or eq(direction,"내선"):
                         StationExistNameList.append(schedule.getStationName(current_stationID-n+6))
-                #print(StationExistNameList)
+                    if eq(direction,"하행") or eq(direction,"외선"):
+                        StationExistNameList.append(schedule.getStationName(current_stationID-n))
+
                 count_end = 0#종점인지 체크하는 변수
+                text +="💌["+stationName+" "+line_number+"정보입니다]💌\n"
                 for total in StationNameList:
                     exist = False
+                    #text+=str(StationExistNameList)
                     for element in StationExistNameList:
                         #print("element="+element)
                         #print("total = "+total)
-                        if element == total:
-                            text+=total+"(별)"+"\n"
+                        if eq(element,total):
+                            if eq(total,StationNameList[6]):
+                                text+=total+"🚋\n"
+                            else:
+                                text+=total+"🚋\n   ↓↓↓   \n"
                             exist = True
                     if exist==False:
-                        if total == "none":
+                        if eq(total,"none"):
                             count_end = count_end+1
                             continue
                         #print(total)
-                        text +=total+"\n"
+                        if eq(total,StationNameList[6]):
+                            text +=total+"\n"
+                        else:
+                            text+=total+"\n   ↓↓↓   \n"
                 if count_end ==6:
                     #print("종점입니다")
-                    text +="종점입니다\n"
+                    text +="종점인데 어딜가시려구요?👀\n"
         elif transportation == "고속버스":
             Exstart = str(data['result']['parameters']['any'][0])
             Exend = str(data['result']['parameters']['any'][1])
             schedule1 = schedule.getExpressInfo(Exstart,Exend)
-            text = "==="+Exstart+"터미널에서 "+Exend+"까지 시간표 정보\n"
+            text = "💌["+Exstart+"터미널에서 "+Exend+"까지 시간표 정보입니다💌\n"
             text+=schedule1
+
+    elif intent_name == "Bus_Info":
+        print("AAAAAAAAA")
+        searchList = data['result']['parameters']['bus_info']
+        print(type(searchList))
+
+        text = searchBusStation.search(searchList)
     elif intent_name == "Default Fallback Intent":
         text = str(data['result']['fulfillment']['messages'][0]['speech'])
 
