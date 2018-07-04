@@ -122,6 +122,8 @@ def incomFalse(intent_name, data):
 
             #print("지하철역 명"+stationName)
             #print("stationName="+stationName+" line_number="+line_number+" direction="+direction)
+            print("stationName : "+stationName)
+            print("SNList : "+SNList)
             if stationName in SNList:
                 print("리스트에 있음")
                 print("리스트 길이 : "+length(SNList))
