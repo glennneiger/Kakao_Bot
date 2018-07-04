@@ -123,9 +123,13 @@ def incomFalse(intent_name, data):
             #print("지하철역 명"+stationName)
             #print("stationName="+stationName+" line_number="+line_number+" direction="+direction)
             if stationName in SNList:
+                print("리스트에 있음")
+                print("리스트 길이 : "+length(SNList))
                 for i in range(0, length(SNList)):
+                    print(i+"번째 리스트 내용 :"+SNList[i])
                     if stationName in SNList[i]:
                         option = SNList[i]
+                        print("option = "+option)
             print("선택사항 : "+option)
 
             stationName = "서울역"
