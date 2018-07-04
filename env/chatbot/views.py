@@ -111,12 +111,24 @@ def incomFalse(intent_name, data):
     elif intent_name == "TimeSchedule":
         transportation = str(data['result']['parameters']['transportation'])
         if transportation == "지하철":
-            stationName = str(data['result']['parameters']['from'])
+            ###비슷한 역이름 처리하기 위해 임시로!!!
+            SNList = [["테스트","테스트1","테스트2","테스트3"], ["반포역", "신반포역", "구반포역"]]
+            stationName = "테스트";
+            #stationName = str(data['result']['parameters']['from'])
             line_number = str(data['result']['parameters']['line_number'])
             direction = str(data['result']['parameters']['subway_direction'])
             if stationName=='' or stationName=='[]':
                 stationName = str(data['result']['parameters']['any'])
 
+            #print("지하철역 명"+stationName)
+            #print("stationName="+stationName+" line_number="+line_number+" direction="+direction)
+            if stationName in SNList:
+                for i in range(0, length(SNList)):
+                    if stationName in SNList[i]:
+                        option = SNList[i]
+            print("선택사항 : "+option)
+
+            stationName = "서울역"
             data = schedule.getStationInfo(stationName)
             station_info = data['result']['station']
             current_stationID = 0
