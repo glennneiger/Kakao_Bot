@@ -35,6 +35,8 @@ subwayID = [[1001, "수도권 1호선"],[1002, "수도권 2호선"],[1003, "수�
 ,[1006, "수도권 6호선"],[1007, "수도권 7호선"],[1008, "수도권 8호선"],[1009, "수도권 9호선"],[1065,"수도권 공항철도"],[1071,"수도권 수인선"],[1075,"수도권 분당선"]
 ,[1075,"수도권 분당선"],[1063,"경의중앙선"],[1067,"수도권 경춘선"],[1077,"수도권 신분당선"],[1077,"수도권 신분당선"]]
 
+#비슷한 역이름 처리
+SNList = [["반포역", "신반포역", "구반포역"], ["논현역", "신논현역"]]
 
 def keyboard(request):
 
@@ -112,18 +114,18 @@ def incomFalse(intent_name, data):
         transportation = str(data['result']['parameters']['transportation'])
         if transportation == "지하철":
             ###비슷한 역이름 처리하기 위해 임시로!!!
-            SNList = [["테스트","테스트1","테스트2","테스트3"], ["반포역", "신반포역", "구반포역"]]
-            stationName = "테스트";
-            #stationName = str(data['result']['parameters']['from'])
+            #SNList = [["테스트","테스트1","테스트2","테스트3"], ["반포역", "신반포역", "구반포역"]]
+            stationName = "반포역";
+            stationName = str(data['result']['parameters']['from'])
             line_number = str(data['result']['parameters']['line_number'])
             direction = str(data['result']['parameters']['subway_direction'])
             if stationName=='' or stationName=='[]':
                 stationName = str(data['result']['parameters']['any'])
 
             #print("지하철역 명"+stationName)
-            #print("stationName="+stationName+" line_number="+line_number+" direction="+direction)
-            print("stationName : "+stationName)
-            print("SNList : "+str(SNList))
+            print("stationName="+stationName+" line_number="+line_number+" direction="+direction)
+            #print("stationName : "+stationName)
+            #print("SNList : "+str(SNList))
             for e in SNList:
                 if stationName in e:
                     print("리스트에 있음")
