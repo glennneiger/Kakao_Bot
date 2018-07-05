@@ -136,8 +136,8 @@ def incomFalse(intent_name, data):
             #print("SNList : "+str(SNList))
             print("입력한 역이름 :"+stationName)
             for e in SNList:
-                print("e = "+str(e))
-                print("stationName="+stationName+" line_number="+line_number+" direction="+direction)
+                #print("e = "+str(e))
+                #print("stationName="+stationName+" line_number="+line_number+" direction="+direction)
                 if stationName in e:
                     #print("리스트에 있음")
                     #print("리스트 길이 : "+str(len(SNList)))
@@ -164,7 +164,7 @@ def incomFalse(intent_name, data):
             canUse = True
             StationExistList=[]
             for idx, get_stationID in enumerate(stationID):
-                print("@@@==>"+str(get_stationID))
+                #print("@@@==>"+str(get_stationID))
                 new_stationName = schedule.getStationName(get_stationID)
                 if new_stationName == "none":
                     continue
