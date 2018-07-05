@@ -81,11 +81,15 @@ def message(request):
             'message': {'text': "!!!\n"+ str(session_id) + "\n"+ res + "\n\n!!!"},
         })
 
-def incomTrue(intent_name,data):
+def incomTrue(intent_name,data,direction):
+
     if eq(intent_name,"Bus_Info"):
         bus_station = str(data['result']['parameters']['bus_station'])
         bus_direction = str(data['result']['parameters']['bus_direction'])
         bus_number = str(data['result']['parameters']['bus_number'])
+
+        if eq(bus_direction,""):
+            print("방향비어있음")
 
         print(bus_station + " " + bus_direction + " " + bus_number + "\n")
 
