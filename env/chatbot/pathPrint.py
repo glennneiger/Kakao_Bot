@@ -4,7 +4,6 @@ import urllib.parse
 
 def subway(swPath):
 	sText = ""
-
 	sText += "💜"+swPath['startName']+"역에서\n"
 	sText += swPath['passStopList']['stations'][1]['stationName']+"방면으로 "
 	sText += swPath['lane'][0]['name']+"을 탑승합니다\n"
@@ -12,13 +11,11 @@ def subway(swPath):
 	sText += "💜"+swPath['endName']+"역에서 하차합니다\n"
 	sText += "💜"+"지하철로 이동 끝!\n"
 
-
 	return sText
 
 
 def bus(busPath):
 	bText = ""
-
 	bText += "💛"+busPath['startName']+"정류장에서\n"
 	bText += busPath['lane'][0]['busNo']+"번 버스를 탑승합니다\n"
 	bText += "💛"+str(busPath['stationCount'])+"개 정류장을 이동합니다\n"
@@ -27,8 +24,7 @@ def bus(busPath):
 
 	return bText
 
-
-def resultPrint(start, end):
+def resultPrint(start, end, tsType):
 
 	geoUrl = "https://maps.googleapis.com/maps/api/geocode/json?&sensor=false&language=ko&address="
 
@@ -52,10 +48,16 @@ def resultPrint(start, end):
 		ex = str(e_json['results'][0]['geometry']['location']['lng'])
 		ey = str(e_json['results'][0]['geometry']['location']['lat'])
 
-		SPT = "&SearchPathType=0"
 
 		my = "f/WM8od4VAXdGg4Q5ZaWSlJ8tIbSpw+nJ4WQ4AFRpsM"
 		encMy = urllib.parse.quote_plus(my)
+
+		if eq(tsType, "지하철"):
+			SPT = "&SearchPathType=1"
+		elif eq(tsType, "버스"):
+			SPT = "&SearchPathType=2"
+		else:
+			SPT = "&SearchPathType=0"
 
 		odUrl = "https://api.odsay.com/v1/api/searchPubTransPath?SX="+sx+"&SY="+sy+"&EX="+ex+"&EY="+ey+SPT+"&apiKey="+encMy
 
