@@ -147,6 +147,7 @@ def incomFalse(intent_name, data):
                             print("option = "+str(option))
             print("선택사항 : "+str(option))
 
+            stationName = "서울역"
             data = schedule.getStationInfo(stationName)
             station_info = data['result']['station']
             current_stationID = 0
