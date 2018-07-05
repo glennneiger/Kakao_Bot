@@ -127,6 +127,8 @@ def incomFalse(intent_name, data):
             line_number = str(data['result']['parameters']['line_number'])
             direction = str(data['result']['parameters']['subway_direction'])
 
+            #if stationName=='' or stationName=='[]':
+                #stationName = str(data['result']['parameters']['any'])
             stationName = "반포역"
             #print("지하철역 명"+stationName)
             print("stationName="+stationName+" line_number="+line_number+" direction="+direction)
@@ -144,11 +146,6 @@ def incomFalse(intent_name, data):
                             option = SNList[i]
                             print("option = "+str(option))
             print("선택사항 : "+str(option))
-
-            stationName = str(data['result']['parameters']['from'])
-
-            if stationName=='' or stationName=='[]':
-                stationName = str(data['result']['parameters']['any'])
 
             data = schedule.getStationInfo(stationName)
             station_info = data['result']['station']
