@@ -76,8 +76,7 @@ def message(request):
        })
 
     elif incom == "True":
-        #incomTrue(intent_name,data)
-        print(data)
+        incomTrue(intent_name,data)
         return JsonResponse({
             'message': {'text': "!!!\n"+ str(session_id) + "\n"+ res + "\n\n!!!"},
         })
