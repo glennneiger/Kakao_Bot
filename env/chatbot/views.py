@@ -87,6 +87,9 @@ def incomTrue(intent_name,data):
         bus_direction = str(data['result']['parameters']['bus_direction'])
         bus_number = str(data['result']['parameters']['bus_number'])
 
+        if eq(bus_direction,""):
+            print("방향비어있음 " + "\n")
+            
         print(bus_station + " " + bus_direction + " " + bus_number + "\n")
 
 
