@@ -123,7 +123,7 @@ def incomFalse(intent_name, data):
             SNList = [["반포역", "신반포역", "구반포역"], ["논현역", "신논현역"]]
             ###비슷한 역이름 처리하기 위해 임시로!!!
             #SNList = [["테스트","테스트1","테스트2","테스트3"], ["반포역", "신반포역", "구반포역"]]
-            stationName = str(data['result']['parameters']['from'])
+            #stationName = str(data['result']['parameters']['from'])
             line_number = str(data['result']['parameters']['line_number'])
             direction = str(data['result']['parameters']['subway_direction'])
             if stationName=='' or stationName=='[]':
@@ -147,7 +147,7 @@ def incomFalse(intent_name, data):
                             print("option = "+str(option))
             print("선택사항 : "+str(option))
 
-            stationName = "서울역"
+            stationName = str(data['result']['parameters']['from'])
             data = schedule.getStationInfo(stationName)
             station_info = data['result']['station']
             current_stationID = 0
