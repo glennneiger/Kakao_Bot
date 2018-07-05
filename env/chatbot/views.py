@@ -61,9 +61,6 @@ def message(request):
 
     data = json.loads(response.read().decode('utf-8'))
 
-
-    #start = str(data['result']['parameters']['from'])
-    #end = str(data['result']['parameters']['to'])
     intent_name = str(data['result']['metadata']['intentName'])
     incom = str(data['result']['actionIncomplete'])
     res = str(data['result']['fulfillment']['speech'])
@@ -76,37 +73,48 @@ def message(request):
        })
 
     elif incom == "True":
-
-
+        incomTrue(intent_name,data)
         return JsonResponse({
-            'message': {'text': "!!!\n"+incom+"\n" +start+"\n"+end+"\n"+ str(session_id) + "\n"+ res + "\n\n!!!"},
+            'message': {'text': "!!!\n"+ str(session_id) + "\n"+ res + "\n\n!!!"},
         })
+
+def incomTrue(intent_name,data):
+    if eq(intent_name,"Bus_Info"):
+        bus_station = str(data['result']['parameters']['bus_station'])
+        bus_direction = str(data['result']['parameters']['bus_direction'])
+        bus_number = str(data['result']['parameters']['bus_number'])
+
+        if eq(bus_direction,""):
+            print("방향비어있음 " + "\n")
+
+        print(bus_station + " " + bus_direction + " " + bus_number + "\n")
+
 
 
 def incomFalse(intent_name, data):
 
-    if(intent_name == "PathFind"):#지하철,버스
+    if(intent_name == "PathFind"):
         start = str(data['result']['parameters']['from'])
         end = str(data['result']['parameters']['to'])
 
-        if(start== '' and end==''):
-            start = str(data['result']['parameters']['any'][0])
-            end = str(data['result']['parameters']['any'][1])
-        elif(start!='' and end==''):
-            end = str(data['result']['parameters']['any'][0])
-        elif(start=='' and end!=''):
-            start = str(data['result']['parameters']['any'][0])
+        if eq(start,'') and eq(end,''):
+            start = str(data['result']['parameters']['fromAny'])
+            end = str(data['result']['parameters']['toAny'])
+        elif not eq(start,'') and eq(end,''):
+            end = str(data['result']['parameters']['toAny'])
+        elif eq(start,'') and not eq(end,''):
+            start = str(data['result']['parameters']['fromAny'])
+
         tsType = str(data['result']['parameters']['transportation'])
         print("start==>"+start)
         print("end==>"+end)
         print("tsType==>"+tsType)
 
-        if(tsType == ''):
-            text = pathPrint.resultPrint(start, end)
-            #text += "\n\n결과"
-        elif(tsType is not None):
-            #end_length = len(end)
-            #end = end[2:end_length-2]
+        if eq(tsType,''):
+            text = pathPrint.resultPrint(start, end, '')
+        elif eq(tsType,"지하철") or eq(tsType,"버스"):
+            text = pathPrint.resultPrint(start, end, tsType)
+        elif eq(tsType,"고속버스") or eq(tsType,"시외버스"):
             text = anotherPathPrint.resultPrint(start, end, tsType)
             print("text==>"+text)
             text += "\n\n다른 결과"
@@ -216,7 +224,6 @@ def incomFalse(intent_name, data):
             schedule1 = schedule.getExpressInfo(Exstart,Exend)
             text = "💌["+Exstart+"터미널에서 "+Exend+"까지 시간표 정보입니다💌\n"
             text+=schedule1
-
     elif intent_name == "Bus_Info":
         print("AAAAAAAAA")
         searchList = data['result']['parameters']['bus_info']
