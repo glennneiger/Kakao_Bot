@@ -79,12 +79,17 @@ def message(request):
         #incomTrue(intent_name,data)
         print(data)
         return JsonResponse({
-            'message': {'text': "!!!\n"+incom+"\n" +start+"\n"+end+"\n"+ str(session_id) + "\n"+ res + "\n\n!!!"},
+            'message': {'text': "!!!\n"+ str(session_id) + "\n"+ res + "\n\n!!!"},
         })
 
 def incomTrue(intent_name,data):
     if eq(intent_name,"Bus_Info"):
-        print("hererehrere")
+        bus_station = str(data['result']['parameters']['bus_station'])
+        bus_direction = str(data['result']['parameters']['bus_direction'])
+        bus_number = str(data['result']['parameters']['bus_number'])
+
+        print(bus_station + " " + bus_direction + " " + bus_number + "\n")
+
 
 
 def incomFalse(intent_name, data):
