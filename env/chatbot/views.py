@@ -162,7 +162,7 @@ def incomFalse(intent_name, data):
             canUse = True
             StationExistList=[]
             for idx, get_stationID in enumerate(stationID):
-                #print("@@@==>"+str(get_stationID))
+                print("@@@==>"+str(get_stationID))
                 new_stationName = schedule.getStationName(get_stationID)
                 if new_stationName == "none":
                     continue
