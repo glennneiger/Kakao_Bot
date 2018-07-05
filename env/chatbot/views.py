@@ -71,7 +71,6 @@ def message(request):
     if incom == "False":
         text = incomFalse(intent_name, data)
 
-        if(intent_name == "")
         return JsonResponse({
          'message': {'text': text},
        })
