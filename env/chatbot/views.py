@@ -84,6 +84,7 @@ def message(request):
 
 def incomTrue(intent_name,data):
     if eq(intent_name,"Bus_Info"):
+        print("hererehrere")
 
 
 def incomFalse(intent_name, data):
