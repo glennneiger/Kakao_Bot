@@ -71,16 +71,20 @@ def message(request):
     if incom == "False":
         text = incomFalse(intent_name, data)
 
+        if(intent_name == "")
         return JsonResponse({
          'message': {'text': text},
        })
 
     elif incom == "True":
-
-
+        #incomTrue(intent_name,data)
+        print(data)
         return JsonResponse({
             'message': {'text': "!!!\n"+incom+"\n" +start+"\n"+end+"\n"+ str(session_id) + "\n"+ res + "\n\n!!!"},
         })
+
+def incomTrue(intent_name,data):
+    if eq(intent_name,"Bus_Info"):
 
 
 def incomFalse(intent_name, data):
