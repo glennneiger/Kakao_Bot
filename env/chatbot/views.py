@@ -137,7 +137,8 @@ def incomFalse(intent_name, data):
             for e in SNList:
                 print("e = "+str(e))
                 print("stationName="+stationName+" line_number="+line_number+" direction="+direction)
-                if stationName in e:
+                #if stationName in e:
+                if str(stationName) in e:
                     print("리스트에 있음")
                     print("리스트 길이 : "+str(len(SNList)))
                     for i in range(0, len(SNList)):
