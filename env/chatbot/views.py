@@ -33,6 +33,8 @@ p_sid = 0
 data = []
 check = False
 
+bus_station_list_action= False
+
 subwayID = [[1001, "수도권 1호선"],[1002, "수도권 2호선"],[1003, "수도권 3호선"],[1004, "수도권 4호선"],[1005, "수도권 5호선"]
 ,[1006, "수도권 6호선"],[1007, "수도권 7호선"],[1008, "수도권 8호선"],[1009, "수도권 9호선"],[1065,"수도권 공항철도"],[1071,"수도권 수인선"],[1075,"수도권 분당선"]
 ,[1075,"수도권 분당선"],[1063,"경의중앙선"],[1067,"수도권 경춘선"],[1077,"수도권 신분당선"],[1077,"수도권 신분당선"]]
@@ -61,7 +63,6 @@ def message(request):
     else:
         print(json.dumps(data, indent=1))
 
-
     ai = apiai.ApiAI(CLIENT_ACCESS_TOKEN)
     dialogflow_request = ai.text_request()
 
@@ -85,7 +86,7 @@ def message(request):
          'message': {'text': text},
        })
 
-    elif incom == "True":
+    elif eq(incom,"True"):
         incomTrue(intent_name,data)
         return JsonResponse({
             'message': {'text': "!!!\n"+ str(session_id) + "\n"+ res + "\n\n!!!"},
@@ -98,9 +99,11 @@ def incomTrue(intent_name,data):
         bus_number = str(data['result']['parameters']['bus_number'])
 
         print("come here")
+        result = BusInfo.get_bus_station(data)
+
 
         if eq(bus_direction,""):
-            BusInfo.get_bus_station(data)
+            print("방향")
 
         print(bus_station + " " + bus_direction + " " + bus_number + "\n")
 
