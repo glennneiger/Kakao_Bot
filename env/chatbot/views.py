@@ -33,6 +33,9 @@ p_sid = 0
 data = []
 check = False
 
+dialogflow_action = 0
+
+station_list = []
 bus_station_list_action = 0
 bus_direction_action = 0
 
@@ -47,7 +50,6 @@ def keyboard(request):
         'type' : 'text',
     })
 
-station_list = []
 
 @csrf_exempt
 def message(request):
@@ -58,27 +60,22 @@ def message(request):
 
     global p_sid
     global data
+
+    global dialogflow_actoin
     global bus_station_list_action
+    global station_list
 
     if p_sid == 0:
         p_sid = session_id
     else:
         print(json.dumps(data, indent=1))
 
+    if dialogflow_action = 0:
+        data = dialogflow()
+
     if bus_station_list_action == 2:
-        print("answer : " + message)
-
-    ai = apiai.ApiAI(CLIENT_ACCESS_TOKEN)
-    dialogflow_request = ai.text_request()
-
-    dialogflow_request.lang = 'ko'
-    dialogflow_request.session_id = session_id
-    dialogflow_request.query = msg_str
-    response = dialogflow_request.getresponse()
-
-    data = json.loads(response.read().decode('utf-8'))
-
-    print(json.dumps(data, indent=1))
+        print("answer : " + message_content)
+        bus_station_list_action = 4
 
     intent_name = str(data['result']['metadata']['intentName'])
     incom = str(data['result']['actionIncomplete'])
@@ -95,29 +92,52 @@ def message(request):
         res = incomTrue(intent_name,data)
 
         if bus_station_list_action == 2:
+            dialogflow = 0;
             return JsonResponse({
             'message': {'text': "!!!\n"+ res + "\n"+ res + "\n\n!!!"},
         })
 
+        if bus_direction_action == 0:
+            dialogflow = 1
         return JsonResponse({
             'message': {'text': "!!!\n"+ str(session_id) + "\n"+ res + "\n\n!!!"},
         })
 
+def dialogflow():
+
+    ai = apiai.ApiAI(CLIENT_ACCESS_TOKEN)
+    dialogflow_request = ai.text_request()
+
+    dialogflow_request.lang = 'ko'
+    dialogflow_request.session_id = session_id
+    dialogflow_request.query = msg_str
+    response = dialogflow_request.getresponse()
+
+    data = json.loads(response.read().decode('utf-8'))
+    return data
+
+
 def incomTrue(intent_name,data):
     global bus_station_list_action
+    global bus_direction_action
+    global dialogflow
+
     if eq(intent_name,"Bus_Info"):
         bus_station = str(data['result']['parameters']['bus_station'])
         bus_direction = str(data['result']['parameters']['bus_direction'])
         bus_number = str(data['result']['parameters']['bus_number'])
 
         print("come here")
+        
         if bus_station_list_action == 0:
-            bus_station_list_action = BusInfo.get_bus_station(data)[1]
-            return BusInfo.get_bus_station(data)[0]
+            res_bus_station = BusInfo.get_bus_station(data)
+            bus_station_list_action = res_bus_station[1]
+            station_list = res_bus_station[2]
+            return res_bus_station[0]
 
-        if eq(bus_direction,""):
-            print("방향")
-
+        if bus_direction_action == 0:
+            dialogflow = 0
+            
         print(bus_station + " " + bus_direction + " " + bus_number + "\n")
 
 
