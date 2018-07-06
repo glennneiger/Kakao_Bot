@@ -32,7 +32,8 @@ def get_bus_station(data):
     else :
         res += "정류장을 선택해 주세요."
         for i in bus_station_list:
-            res += str(i+1) +". " + bus_station_list[i] + "\n"
+            tmp = i+1
+            res += str(tmp) +". " + bus_station_list[i] + "\n"
 
     print(bus_station_list)
     return text
