@@ -83,7 +83,7 @@ def message(request):
         data = dialogflow(msg_str)
 
     if bus_station_list_action == 2:
-        print("user : " + mst_str)
+        print("user : " + msg_str)
         bus_station_list_action = 4
 
     intent_name = str(data['result']['metadata']['intentName'])
