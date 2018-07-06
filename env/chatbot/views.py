@@ -58,6 +58,7 @@ def message(request):
 
     global p_sid
     global data
+    global bus_station_list_action
 
     if p_sid == 0:
         p_sid = session_id
