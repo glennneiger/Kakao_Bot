@@ -89,7 +89,7 @@ def incomTrue(intent_name,data):
 
         if eq(bus_direction,""):
             print("방향비어있음 " + "\n")
-            
+
         print(bus_station + " " + bus_direction + " " + bus_number + "\n")
 
 
@@ -228,7 +228,6 @@ def incomFalse(intent_name, data):
             text+=schedule1
 
     elif intent_name == "Bus_Info":
-        print("AAAAAAAAA")
         searchList = data['result']['parameters']['bus_info']
         print(type(searchList))
 
