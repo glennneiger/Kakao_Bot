@@ -79,13 +79,13 @@ def message(request):
     if p_sid == 0:
         p_sid = session_id
     else:
-        print(json.dumps(data, indent=1))
+        #print(json.dumps(data, indent=1))
 
     if dialogflow_action == 0:
         data = dialogflow(msg_str)
 
     if bus_station_list_action == 2:
-        print("answer : " + message_content)
+        print("user : " + mst_str)
         bus_station_list_action = 4
 
     intent_name = str(data['result']['metadata']['intentName'])
