@@ -4,6 +4,45 @@ import json
 import xml.etree.ElementTree as ET
 from operator import eq
 
+def get_bus_station(data):
+    #오디세이에서 버스 리스트 반환
+    searchST = str(data['result']['parameters']['bus_station'])
+    res = ""
+    ACCESS = "rxJqZMHh6oQDUSfc7Kh42uCXZuHEhmj7dY7VWber2ryr9L5t2CFRy3z834JMR7RygMzaVby7ZQ3sW%2ByCZZn0Ig%3D%3D"
+    my = "f/WM8od4VAXdGg4Q5ZaWSlJ8tIbSpw+nJ4WQ4AFRpsM"
+    encMy = urllib.parse.quote_plus(my)
+    encST = urllib.parse.quote_plus(searchST)
+
+    odUrl = "https://api.odsay.com/v1/api/searchStation?lang=&stationName="+encST+"&apiKey="+encMy
+
+    request = urllib.request.Request(odUrl)
+    response = urllib.request.urlopen(request)
+
+    json_rt = response.read().decode('utf-8')
+    data = json.loads(json_rt)
+
+    bus_station_list = []
+    stInfo = data['result']['station']
+
+    for i in stInfo:
+        bus_station_list.append(stInfo)
+
+    if len(bus_station_list) == 1:
+        return bus_station_list[0]
+    else :
+        res += "정류장을 선택해 주세요."
+        for i in bus_station_list:
+            res += (i+1) +". " + bus_station_list[i] + "\n"
+
+    print(bus_station_list)
+    return text
+
+
+def get_bus_direction(data):
+        bus_station = str(data['result']['parameters']['bus_station'])
+        bus_direction = str(data['result']['parameters']['bus_direction'])
+        bus_number = str(data['result']['parameters']['bus_number'])
+
 def search(data):
     searchST = searchList[0]
     text = ""
