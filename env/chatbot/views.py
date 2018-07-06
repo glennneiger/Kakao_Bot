@@ -117,7 +117,9 @@ def incomFalse(intent_name, data):
         elif eq(tsType,"고속버스") or eq(tsType,"시외버스"):
             text = anotherPathPrint.resultPrint(start, end, tsType)
             print("text==>"+text)
-            text += "\n\n다른 결과"
+
+        text += "\n\n 다른경로를 원하시나용??"
+
     elif intent_name == "TimeSchedule":
         transportation = str(data['result']['parameters']['transportation'])
         if transportation == "지하철":
@@ -225,10 +227,7 @@ def incomFalse(intent_name, data):
             text+=schedule1
     elif intent_name == "Bus_Info":
         print("AAAAAAAAA")
-        searchList = data['result']['parameters']['bus_info']
-        print(type(searchList))
-
-        text = searchBusStation.search(searchList)
+        text = searchBusStation.search(data)
     elif intent_name == "Default Fallback Intent":
         text = str(data['result']['fulfillment']['messages'][0]['speech'])
 
