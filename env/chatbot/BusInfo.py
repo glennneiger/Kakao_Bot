@@ -35,7 +35,7 @@ def get_bus_station(data):
         return bus_station_list[0]
     else :
         for i in stInfo:
-            bus_station_list.append(stInfo[i]['stationName'])
+            bus_station_list.append(i['stationName'])
 
     res += "정류장을 선택해 주세요."
     for i in range(0,len(bus_station_list)):
