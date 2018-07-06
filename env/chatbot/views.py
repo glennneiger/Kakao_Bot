@@ -42,6 +42,8 @@ def keyboard(request):
         'type' : 'text',
     })
 
+station_list = []
+
 @csrf_exempt
 def message(request):
     message = ((request.body).decode('utf-8'))
@@ -83,7 +85,7 @@ def incomTrue(intent_name,data):
         bus_number = str(data['result']['parameters']['bus_number'])
 
         if eq(bus_direction,""):
-            print("방향비어있음 " + "\n")
+            SearchBusStation.get_bus_direction(data)
 
         print(bus_station + " " + bus_direction + " " + bus_number + "\n")
 
