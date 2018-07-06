@@ -80,6 +80,7 @@ def message(request):
         p_sid = session_id
 
     if dialogflow_action == 0:
+        print("Diaglogflow start")
         data = dialogflow(msg_str)
 
     if bus_station_list_action == 2:
@@ -101,13 +102,13 @@ def message(request):
         res = incomTrue(intent_name,data)
 
         if bus_station_list_action == 2:
-            dialogflow_action = 0;
+            dialogflow_action = 1
             return JsonResponse({
             'message': {'text': "!!!\n"+ res + "\n"+ res + "\n\n!!!"},
         })
 
         if bus_direction_action == 0:
-            dialogflow_action = 1
+            dialogflow_action = 0
         return JsonResponse({
             'message': {'text': "!!!\n"+ str(session_id) + "\n"+ res + "\n\n!!!"},
         })
