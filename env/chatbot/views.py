@@ -29,6 +29,8 @@ except ImportError:
 
 CLIENT_ACCESS_TOKEN = '72906773549e43b2b2fe92dcdd24abe7'
 session_id = random.randint(100000,999999)
+p_sid = 0
+data = []
 check = False
 
 subwayID = [[1001, "수도권 1호선"],[1002, "수도권 2호선"],[1003, "수도권 3호선"],[1004, "수도권 4호선"],[1005, "수도권 5호선"]
@@ -48,6 +50,12 @@ def message(request):
 
     msg = json.loads(message)
     msg_str = msg['content']
+
+    if p_sid == 0:
+        p_sid = session_id
+    else:
+        print(json.dumps(data, indent=1))
+
 
     ai = apiai.ApiAI(CLIENT_ACCESS_TOKEN)
     dialogflow_request = ai.text_request()
