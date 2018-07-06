@@ -43,6 +43,17 @@ subwayID = [[1001, "수도권 1호선"],[1002, "수도권 2호선"],[1003, "수�
 ,[1006, "수도권 6호선"],[1007, "수도권 7호선"],[1008, "수도권 8호선"],[1009, "수도권 9호선"],[1065,"수도권 공항철도"],[1071,"수도권 수인선"],[1075,"수도권 분당선"]
 ,[1075,"수도권 분당선"],[1063,"경의중앙선"],[1067,"수도권 경춘선"],[1077,"수도권 신분당선"],[1077,"수도권 신분당선"]]
 
+def dialogflow():
+    ai = apiai.ApiAI(CLIENT_ACCESS_TOKEN)
+    dialogflow_request = ai.text_request()
+
+    dialogflow_request.lang = 'ko'
+    dialogflow_request.session_id = session_id
+    dialogflow_request.query = msg_str
+    response = dialogflow_request.getresponse()
+
+    data = json.loads(response.read().decode('utf-8'))
+    return data
 
 def keyboard(request):
 
@@ -102,19 +113,6 @@ def message(request):
         return JsonResponse({
             'message': {'text': "!!!\n"+ str(session_id) + "\n"+ res + "\n\n!!!"},
         })
-
-def dialogflow():
-
-    ai = apiai.ApiAI(CLIENT_ACCESS_TOKEN)
-    dialogflow_request = ai.text_request()
-
-    dialogflow_request.lang = 'ko'
-    dialogflow_request.session_id = session_id
-    dialogflow_request.query = msg_str
-    response = dialogflow_request.getresponse()
-
-    data = json.loads(response.read().decode('utf-8'))
-    return data
 
 
 def incomTrue(intent_name,data):
