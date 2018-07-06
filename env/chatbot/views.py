@@ -11,7 +11,7 @@ import re
 from . import pathPrint
 from . import anotherPathPrint
 from . import schedule
-from . import searchBusStation
+from . import BusInfo
 from operator import eq
 
 from django.shortcuts import render
@@ -97,8 +97,10 @@ def incomTrue(intent_name,data):
         bus_direction = str(data['result']['parameters']['bus_direction'])
         bus_number = str(data['result']['parameters']['bus_number'])
 
+        print("come here")
+
         if eq(bus_direction,""):
-            SearchBusStation.get_bus_direction(data)
+            BusInfo.get_bus_station(data)
 
         print(bus_station + " " + bus_direction + " " + bus_number + "\n")
 
