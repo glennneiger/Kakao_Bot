@@ -1,6 +1,7 @@
 ﻿import json
 import urllib.request
 import urllib.parse
+from operator import eq
 
 def subway(swPath):
 	sText = ""
