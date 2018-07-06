@@ -177,7 +177,6 @@ def incomFalse(intent_name, data):
             print("text==>"+text)
 
         text += "\n\n 다른경로를 원하시나용??"
-
     elif intent_name == "TimeSchedule":
         transportation = str(data['result']['parameters']['transportation'])
         if transportation == "지하철":
@@ -287,11 +286,9 @@ def incomFalse(intent_name, data):
             schedule1 = schedule.getExpressInfo(Exstart,Exend)
             text = "💌["+Exstart+"터미널에서 "+Exend+"까지 시간표 정보입니다💌\n"
             text+=schedule1
-
     elif intent_name == "Bus_Info":
         print("AAAAAAAAA")
         text = searchBusStation.search(data)
-
     elif intent_name == "Default Fallback Intent":
         text = str(data['result']['fulfillment']['messages'][0]['speech'])
 
