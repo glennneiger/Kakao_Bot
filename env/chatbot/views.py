@@ -59,6 +59,8 @@ def message(request):
 
     data = json.loads(response.read().decode('utf-8'))
 
+    print(json.dumps(data, indent=1))
+
     intent_name = str(data['result']['metadata']['intentName'])
     incom = str(data['result']['actionIncomplete'])
     res = str(data['result']['fulfillment']['speech'])
