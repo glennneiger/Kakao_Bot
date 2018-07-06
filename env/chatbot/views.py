@@ -104,6 +104,7 @@ def message(request):
         })
 
 def incomTrue(intent_name,data):
+    global bus_station_list_action
     if eq(intent_name,"Bus_Info"):
         bus_station = str(data['result']['parameters']['bus_station'])
         bus_direction = str(data['result']['parameters']['bus_direction'])
