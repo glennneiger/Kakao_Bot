@@ -51,6 +51,8 @@ def message(request):
     msg = json.loads(message)
     msg_str = msg['content']
 
+    global p_sid
+
     if p_sid == 0:
         p_sid = session_id
     else:
