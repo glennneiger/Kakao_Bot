@@ -72,7 +72,7 @@ def message(request):
     global p_sid
     global data
 
-    global dialogflow_actoin
+    global dialogflow_action
     global bus_station_list_action
     global station_list
 
