@@ -52,6 +52,7 @@ def message(request):
     msg_str = msg['content']
 
     global p_sid
+    global data
 
     if p_sid == 0:
         p_sid = session_id
