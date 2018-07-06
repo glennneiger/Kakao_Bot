@@ -70,7 +70,7 @@ def message(request):
     else:
         print(json.dumps(data, indent=1))
 
-    if dialogflow_action = 0:
+    if dialogflow_action == 0:
         data = dialogflow()
 
     if bus_station_list_action == 2:
