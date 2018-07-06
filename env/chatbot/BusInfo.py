@@ -24,6 +24,9 @@ def get_bus_station(data):
     bus_station_list = []
     stInfo = data['result']['station']
 
+    print("stInfo")
+    print(stInfo)
+    
     for i in stInfo:
         bus_station_list.append(stInfo)
 
