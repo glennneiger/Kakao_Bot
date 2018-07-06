@@ -89,6 +89,7 @@ def message(request):
             print("^^^^^^^"+str(session_id))
             print("###num : "+str(p_cnt))
         else:
+            print("#######"+str(session_id))
             print("!@#$"+msg_str)
 
 
