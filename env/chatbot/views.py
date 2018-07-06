@@ -30,9 +30,11 @@ except ImportError:
 CLIENT_ACCESS_TOKEN = '72906773549e43b2b2fe92dcdd24abe7'
 session_id = random.randint(100000,999999)
 p_sid = 0
-p_cnt = 0
 data = []
 check = False
+
+re_action = 0
+p_cnt = 0
 
 dialogflow_action = 0
 
@@ -80,9 +82,11 @@ def message(request):
 
     if p_sid == 0:
         p_sid = session_id
+        print("*****"+session_id)
     else:
         if eq(msg_str,"kk"):
             p_cnt = p_cnt+1
+            print("^^^^^^^"+session_id)
             print("###num : "+str(p_cnt))
         else:
             print("!@#$"+msg_str)
