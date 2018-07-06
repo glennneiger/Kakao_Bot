@@ -129,8 +129,10 @@ def incomTrue(intent_name,data):
         
         if bus_station_list_action == 0:
             res_bus_station = BusInfo.get_bus_station(data)
+            print(res_bus_station)
             bus_station_list_action = res_bus_station[1]
-            station_list = res_bus_station[2]
+            for i in res_bus_station[2]:
+                station_list.append(i)
             return res_bus_station[0]
 
         if bus_direction_action == 0:
