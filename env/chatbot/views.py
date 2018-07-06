@@ -78,10 +78,8 @@ def message(request):
 
     if p_sid == 0:
         p_sid = session_id
-    else:
-        #print(json.dumps(data, indent=1))
 
-    if dialogflow_action == 0:
+    if passdialogflow_action == 0:
         data = dialogflow(msg_str)
 
     if bus_station_list_action == 2:
