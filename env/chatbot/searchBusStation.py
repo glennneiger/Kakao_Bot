@@ -4,8 +4,7 @@ import json
 import xml.etree.ElementTree as ET
 from operator import eq
 
-def search(searchList):
-    print(searchList)
+def search(data):
     searchST = searchList[0]
     text = ""
 
@@ -60,7 +59,7 @@ def search(searchList):
         bus_msg2 = "msg2_c"+str(i)
         bus_adr = "adr_c"+str(i)
         bus_No = "busNo_c"+str(i)
-        text += "🚌" + busList[bus_No] + "\n 👉🏿"+busList[bus_msg1]+"\n" 
+        text += "🚌" + busList[bus_No] + "\n 👉🏿"+busList[bus_msg1]+"\n"
 
     ###버스 정보
     if len(searchList) != 1:
@@ -158,30 +157,6 @@ def search(searchList):
 
         text += "\n"
         text+= "👉🏿 " + arrival_first + "\n"
-        text+= "👉🏿 " + arrival_second         
+        text+= "👉🏿 " + arrival_second
 
     return text
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

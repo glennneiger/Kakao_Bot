@@ -35,8 +35,6 @@ subwayID = [[1001, "수도권 1호선"],[1002, "수도권 2호선"],[1003, "수�
 ,[1006, "수도권 6호선"],[1007, "수도권 7호선"],[1008, "수도권 8호선"],[1009, "수도권 9호선"],[1065,"수도권 공항철도"],[1071,"수도권 수인선"],[1075,"수도권 분당선"]
 ,[1075,"수도권 분당선"],[1063,"경의중앙선"],[1067,"수도권 경춘선"],[1077,"수도권 신분당선"],[1077,"수도권 신분당선"]]
 
-#비슷한 역이름 처리
-SNList = [["반포역", "신반포역", "구반포역"], ["논현역", "신논현역"]]
 
 def keyboard(request):
 
@@ -61,9 +59,6 @@ def message(request):
 
     data = json.loads(response.read().decode('utf-8'))
 
-
-    #start = str(data['result']['parameters']['from'])
-    #end = str(data['result']['parameters']['to'])
     intent_name = str(data['result']['metadata']['intentName'])
     incom = str(data['result']['actionIncomplete'])
     res = str(data['result']['fulfillment']['speech'])
@@ -96,57 +91,63 @@ def incomTrue(intent_name,data):
 
 def incomFalse(intent_name, data):
 
-    if(intent_name == "PathFind"):#지하철,버스
+    if(intent_name == "PathFind"):
         start = str(data['result']['parameters']['from'])
         end = str(data['result']['parameters']['to'])
 
-        if(start== '' and end==''):
-            start = str(data['result']['parameters']['any'][0])
-            end = str(data['result']['parameters']['any'][1])
-        elif(start!='' and end==''):
-            end = str(data['result']['parameters']['any'][0])
-        elif(start=='' and end!=''):
-            start = str(data['result']['parameters']['any'][0])
+        if eq(start,'') and eq(end,''):
+            start = str(data['result']['parameters']['fromAny'])
+            end = str(data['result']['parameters']['toAny'])
+        elif not eq(start,'') and eq(end,''):
+            end = str(data['result']['parameters']['toAny'])
+        elif eq(start,'') and not eq(end,''):
+            start = str(data['result']['parameters']['fromAny'])
+
         tsType = str(data['result']['parameters']['transportation'])
         print("start==>"+start)
         print("end==>"+end)
         print("tsType==>"+tsType)
 
-        if(tsType == ''):
-            text = pathPrint.resultPrint(start, end)
-            #text += "\n\n결과"
-        elif(tsType is not None):
-            #end_length = len(end)
-            #end = end[2:end_length-2]
+        if eq(tsType,''):
+            text = pathPrint.resultPrint(start, end, '')
+        elif eq(tsType,"지하철") or eq(tsType,"버스"):
+            text = pathPrint.resultPrint(start, end, tsType)
+        elif eq(tsType,"고속버스") or eq(tsType,"시외버스"):
             text = anotherPathPrint.resultPrint(start, end, tsType)
             print("text==>"+text)
-            text += "\n\n다른 결과"
+
+        text += "\n\n 다른경로를 원하시나용??"
+
     elif intent_name == "TimeSchedule":
         transportation = str(data['result']['parameters']['transportation'])
         if transportation == "지하철":
+            #비슷한 역이름 처리
+            SNList = [["반포역", "신반포역", "구반포역"], ["논현역", "신논현역"]]
             ###비슷한 역이름 처리하기 위해 임시로!!!
             #SNList = [["테스트","테스트1","테스트2","테스트3"], ["반포역", "신반포역", "구반포역"]]
-            stationName = "반포역";
-            stationName = str(data['result']['parameters']['from'])
+            #stationName = str(data['result']['parameters']['from'])
             line_number = str(data['result']['parameters']['line_number'])
             direction = str(data['result']['parameters']['subway_direction'])
-            if stationName=='' or stationName=='[]':
-                stationName = str(data['result']['parameters']['any'])
 
+            #if stationName=='' or stationName=='[]':
+                #stationName = str(data['result']['parameters']['any'])
+            stationName = "반포역"
             #print("지하철역 명"+stationName)
-            print("stationName="+stationName+" line_number="+line_number+" direction="+direction)
+            #print("stationName="+stationName+" line_number="+line_number+" direction="+direction)
             #print("stationName : "+stationName)
-            print("SNList : "+str(SNList))
+            #print("SNList : "+str(SNList))
+            print("입력한 역이름 :"+stationName)
             for e in SNList:
-                print("e = "+str(e))
+                #print("e = "+str(e))
+                #print("stationName="+stationName+" line_number="+line_number+" direction="+direction)
                 if stationName in e:
-                    print("리스트에 있음")
-                    print("리스트 길이 : "+str(len(SNList)))
+                    #print("리스트에 있음")
+                    #print("리스트 길이 : "+str(len(SNList)))
                     for i in range(0, len(SNList)):
-                        print(str(i)+"번째 리스트 내용 :"+str(SNList[i]))
+                        #print(str(i)+"번째 리스트 내용 :"+str(SNList[i]))
                         if stationName in SNList[i]:
                             option = SNList[i]
-                            print("option = "+str(option))
+                            #print("option = "+str(option))
             print("선택사항 : "+str(option))
 
             stationName = "서울역"
@@ -226,12 +227,16 @@ def incomFalse(intent_name, data):
             schedule1 = schedule.getExpressInfo(Exstart,Exend)
             text = "💌["+Exstart+"터미널에서 "+Exend+"까지 시간표 정보입니다💌\n"
             text+=schedule1
-
     elif intent_name == "Bus_Info":
+<<<<<<< HEAD
         searchList = data['result']['parameters']['bus_info']
         print(type(searchList))
 
         text = searchBusStation.search(searchList)
+=======
+        print("AAAAAAAAA")
+        text = searchBusStation.search(data)
+>>>>>>> 7f886e07a57c5accc73f3f3c808967c4717f4f5f
     elif intent_name == "Default Fallback Intent":
         text = str(data['result']['fulfillment']['messages'][0]['speech'])
 
