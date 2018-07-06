@@ -30,6 +30,7 @@ except ImportError:
 CLIENT_ACCESS_TOKEN = '72906773549e43b2b2fe92dcdd24abe7'
 session_id = random.randint(100000,999999)
 p_sid = 0
+p_cnt = 0
 data = []
 check = False
 
@@ -78,6 +79,13 @@ def message(request):
 
     if p_sid == 0:
         p_sid = session_id
+    else:
+        if eq(msg_str,"kk"):
+            num = num+1
+            print("###num : "+str(num))
+        else:
+            print("!@#$"+msg_str)
+
 
     if dialogflow_action == 0:
         print("Diaglogflow start")
@@ -125,7 +133,7 @@ def incomTrue(intent_name,data):
         bus_number = str(data['result']['parameters']['bus_number'])
 
         print("come here")
-        
+
         if bus_station_list_action == 0:
             res_bus_station = BusInfo.get_bus_station(data)
             print(res_bus_station)
@@ -136,7 +144,7 @@ def incomTrue(intent_name,data):
 
         if bus_direction_action == 0:
             dialogflow_action = 0
-            
+
         print(bus_station + " " + bus_direction + " " + bus_number + "\n")
 
 
