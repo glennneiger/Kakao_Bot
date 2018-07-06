@@ -82,11 +82,11 @@ def message(request):
 
     if p_sid == 0:
         p_sid = session_id
-        print("*****"+session_id)
+        print("*****"+str(session_id))
     else:
         if eq(msg_str,"kk"):
             p_cnt = p_cnt+1
-            print("^^^^^^^"+session_id)
+            print("^^^^^^^"+str(session_id))
             print("###num : "+str(p_cnt))
         else:
             print("!@#$"+msg_str)
