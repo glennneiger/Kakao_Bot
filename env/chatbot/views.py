@@ -107,19 +107,18 @@ def message(request):
        })
 
     elif eq(incom,"True"):
-        res = incomTrue(intent_name,data)
+        result = incomTrue(intent_name,data)
 
         if bus_station_list_action == 2:
             dialogflow_action = 1
             return JsonResponse({
-            'message': {'text': "!!!\n"+ res + "\n"+ res + "\n\n!!!"},
-        })
+            'message': {'text': "!!!\n"+ result + "\n\n!!!"},
+            })
 
         if bus_direction_action == 0:
-            dialogflow_action = 0
-        return JsonResponse({
-            'message': {'text': "!!!\n"+ str(session_id) + "\n"+ res + "\n\n!!!"},
-        })
+            return JsonResponse({
+                'message': {'text': "!!!\n"+ str(session_id) + "\n"+ res + "\n\n!!!"},
+            })
 
 
 def incomTrue(intent_name,data):
@@ -135,8 +134,8 @@ def incomTrue(intent_name,data):
         print("come here")
 
         if bus_station_list_action == 0:
+            dialogflow_action = 1
             res_bus_station = BusInfo.get_bus_station(data)
-            print(res_bus_station)
             bus_station_list_action = res_bus_station[1]
             for i in res_bus_station[2]:
                 station_list.append(i)
@@ -287,9 +286,11 @@ def incomFalse(intent_name, data):
             schedule1 = schedule.getExpressInfo(Exstart,Exend)
             text = "💌["+Exstart+"터미널에서 "+Exend+"까지 시간표 정보입니다💌\n"
             text+=schedule1
+
     elif intent_name == "Bus_Info":
         print("AAAAAAAAA")
         text = searchBusStation.search(data)
+        
     elif intent_name == "Default Fallback Intent":
         text = str(data['result']['fulfillment']['messages'][0]['speech'])
 
