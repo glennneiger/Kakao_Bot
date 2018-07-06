@@ -99,12 +99,12 @@ def message(request):
        })
 
     elif eq(incom,"True"):
-        res = incomTrue(intent_name,data)
+        result = incomTrue(intent_name,data)
 
         if bus_station_list_action == 2:
             dialogflow_action = 1
             return JsonResponse({
-            'message': {'text': "!!!\n"+ res + "\n\n!!!"},
+            'message': {'text': "!!!\n"+ result + "\n\n!!!"},
             })
 
         if bus_direction_action == 0:
