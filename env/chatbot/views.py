@@ -103,13 +103,13 @@ def message(request):
         res = incomTrue(intent_name,data)
 
         if bus_station_list_action == 2:
-            dialogflow = 0;
+            dialogflow_action = 0;
             return JsonResponse({
             'message': {'text': "!!!\n"+ res + "\n"+ res + "\n\n!!!"},
         })
 
         if bus_direction_action == 0:
-            dialogflow = 1
+            dialogflow_action = 1
         return JsonResponse({
             'message': {'text': "!!!\n"+ str(session_id) + "\n"+ res + "\n\n!!!"},
         })
@@ -118,7 +118,7 @@ def message(request):
 def incomTrue(intent_name,data):
     global bus_station_list_action
     global bus_direction_action
-    global dialogflow
+    global dialogflow_action
 
     if eq(intent_name,"Bus_Info"):
         bus_station = str(data['result']['parameters']['bus_station'])
@@ -134,7 +134,7 @@ def incomTrue(intent_name,data):
             return res_bus_station[0]
 
         if bus_direction_action == 0:
-            dialogflow = 0
+            dialogflow_action = 0
             
         print(bus_station + " " + bus_direction + " " + bus_number + "\n")
 
