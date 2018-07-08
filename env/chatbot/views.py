@@ -186,34 +186,19 @@ def incomFalse(intent_name, data):
         transportation = str(data['result']['parameters']['transportation'])
         if transportation == "지하철":
             #비슷한 역이름 처리
-            SNList = [["반포역", "신반포역", "구반포역"], ["논현역", "신논현역"]]
             ###비슷한 역이름 처리하기 위해 임시로!!!
             #SNList = [["테스트","테스트1","테스트2","테스트3"], ["반포역", "신반포역", "구반포역"]]
-            #stationName = str(data['result']['parameters']['from'])
+            stationName = str(data['result']['parameters']['from'])
             line_number = str(data['result']['parameters']['line_number'])
             direction = str(data['result']['parameters']['subway_direction'])
-
+            option = schedule.get_option(stationName)
             #if stationName=='' or stationName=='[]':
                 #stationName = str(data['result']['parameters']['any'])
-            stationName = "반포역"
+            #stationName = "반포역"
             #print("지하철역 명"+stationName)
             #print("stationName="+stationName+" line_number="+line_number+" direction="+direction)
             #print("stationName : "+stationName)
             #print("SNList : "+str(SNList))
-            print("입력한 역이름 :"+stationName)
-            for e in SNList:
-                #print("e = "+str(e))
-                #print("stationName="+stationName+" line_number="+line_number+" direction="+direction)
-                if stationName in e:
-                    #print("리스트에 있음")
-                    #print("리스트 길이 : "+str(len(SNList)))
-                    for i in range(0, len(SNList)):
-                        #print(str(i)+"번째 리스트 내용 :"+str(SNList[i]))
-                        if stationName in SNList[i]:
-                            option = SNList[i]
-                            #print("option = "+str(option))
-            print("선택사항 : "+str(option))
-
             stationName = "서울역"
             data = schedule.getStationInfo(stationName)
             station_info = data['result']['station']

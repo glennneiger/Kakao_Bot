@@ -162,3 +162,22 @@ def getExpressInfo(my_Exstart, my_Exend):
 
     schedule = data['result']['station'][0]['schedule']
     return schedule
+
+def get_option(stationName):
+
+    SNList = [["반포역", "신반포역", "구반포역"], ["논현역", "신논현역"]]
+
+    print("입력한 역이름 :"+stationName)
+    for e in SNList:
+        #print("e = "+str(e))
+        #print("stationName="+stationName+" line_number="+line_number+" direction="+direction)
+        if stationName in e:
+            #print("리스트에 있음")
+            #print("리스트 길이 : "+str(len(SNList)))
+            for i in range(0, len(SNList)):
+                #print(str(i)+"번째 리스트 내용 :"+str(SNList[i]))
+                if stationName in SNList[i]:
+                    option = SNList[i]
+                    #print("option = "+str(option))
+    print("선택사항 : "+str(option))
+    return option
