@@ -84,7 +84,7 @@ def message(request):
     global bus_station_list_action
     global station_list
 
-    if diff_path_action = 1:
+    if diff_path_action == 1:
         cur_time = time.time()
         if cur_time <= limit_time:
             p_cnt = p_cnt + 1
@@ -92,7 +92,7 @@ def message(request):
             p_cnt =0
             diff_path_action = 0:
 
-    if diff_path_action = 0:
+    if diff_path_action == 0:
         if dialogflow_action == 0:
             print("Diaglogflow start")
             data = dialogflow(msg_str)
