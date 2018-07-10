@@ -14,7 +14,7 @@ def get_bus_station(data):
     encMy = urllib.parse.quote_plus(my)
     encST = urllib.parse.quote_plus(searchST)
 
-    odUrl = "https://api.odsay.com/v1/api/searchStation?lang=&stationName="+encST+"&apiKey="+encMy
+    odUrl = "https://api.odsay.com/v1/api/searchStation?lang=&stationName="+encST+"&CID=1000&stationClass=1&apiKey="+encMy
 
     request = urllib.request.Request(odUrl)
     response = urllib.request.urlopen(request)
