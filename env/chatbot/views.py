@@ -89,6 +89,7 @@ def message(request):
 
     print("diff_path_action=>")
     print(diff_path_action)
+    print(limit_time)
 
     if diff_path_action == 1:
         cur_time = time.time()
@@ -205,6 +206,8 @@ def incomFalse(intent_name, data):
 
         diff_path_action = 1
         limit_time = time.time() + 20
+        print(diff_path_action)
+        print(limit_time)
 
         # if not eq(text[0],"더"):
         #     print("^^^diff_path_action 1로 지정")
