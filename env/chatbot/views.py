@@ -84,6 +84,15 @@ def message(request):
     global bus_station_list_action
     global station_list
 
+    if dialogflow_action == 0:
+        print("Diaglogflow start")
+        data_tmp = dialogflow(msg_str)
+        if eq(data_tmp['result']['metadata']['intentName'],"Default Fallback Intent"):
+            diff_path_action = 1
+        else:
+            diff_path_action = 0
+            data = data_tmp
+
     if diff_path_action == 1:
         cur_time = time.time()
         if cur_time <= limit_time:
@@ -93,10 +102,6 @@ def message(request):
             diff_path_action = 0
 
     if diff_path_action == 0:
-        if dialogflow_action == 0:
-            print("Diaglogflow start")
-            data = dialogflow(msg_str)
-
         if bus_station_list_action == 2:
             print("user : " + msg_str)
             bus_station_list_action = 4
@@ -184,9 +189,9 @@ def incomFalse(intent_name, data):
             text = anotherPathPrint.resultPrint(start, end, tsType)
             print("text==>"+text)
 
-        text += "\n\n 다른경로를 원하시나용?? 원하시면 20초내로 응답해주세요!"
+        text += "\n\n다른경로를 원하시나용?\n 원하시면 10초내로 응답해주세요!"
         diff_path_action = 1
-        limit_time = time.time() + 20
+        limit_time = time.time() + 10
     elif eq(intent_name,"TimeSchedule"):
         transportation = str(data['result']['parameters']['transportation'])
         if transportation == "지하철":
