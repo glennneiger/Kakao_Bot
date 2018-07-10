@@ -84,15 +84,6 @@ def message(request):
     global bus_station_list_action
     global station_list
 
-    if dialogflow_action == 0:
-        print("Diaglogflow start")
-        data_tmp = dialogflow(msg_str)
-        if eq(data_tmp['result']['metadata']['intentName'],"Default Fallback Intent"):
-            diff_path_action = 1
-        else:
-            diff_path_action = 0
-            data = data_tmp
-
     if diff_path_action == 1:
         cur_time = time.time()
         if cur_time <= limit_time:
@@ -102,6 +93,10 @@ def message(request):
             diff_path_action = 0
 
     if diff_path_action == 0:
+        if dialogflow_action == 0:
+            print("Diaglogflow start")
+            data = dialogflow(msg_str)
+
         if bus_station_list_action == 2:
             print("user : " + msg_str)
             bus_station_list_action = 4
