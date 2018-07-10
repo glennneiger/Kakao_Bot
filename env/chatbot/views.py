@@ -8,11 +8,13 @@ import random
 import urllib.request
 import urllib.parse
 import re
+import time
+from operator import eq
+
 from . import pathPrint
 from . import anotherPathPrint
 from . import schedule
 from . import BusInfo
-from operator import eq
 
 from django.shortcuts import render
 from django.http import HttpResponse
@@ -29,12 +31,12 @@ except ImportError:
 
 CLIENT_ACCESS_TOKEN = '72906773549e43b2b2fe92dcdd24abe7'
 session_id = random.randint(100000,999999)
-p_sid = 0
 data = []
 check = False
 
-re_action = 0
 p_cnt = 0
+diff_path_action = 0
+limit_time = 0
 
 dialogflow_action = 0
 
@@ -72,34 +74,32 @@ def message(request):
     msg = json.loads(message)
     msg_str = msg['content']
 
-    global p_sid
     global data
+
     global p_cnt
+    global diff_path_action
+    global limit_time
 
     global dialogflow_action
     global bus_station_list_action
     global station_list
 
-    if p_sid == 0:
-        p_sid = session_id
-        print("*****"+str(session_id))
-    else:
-        if eq(msg_str,"kk"):
-            p_cnt = p_cnt+1
-            print("^^^^^^^"+str(session_id))
-            print("###num : "+str(p_cnt))
+    if diff_path_action = 1:
+        cur_time = time.time()
+        if cur_time <= limit_time:
+            p_cnt = p_cnt + 1
         else:
-            print("#######"+str(session_id))
-            print("!@#$"+msg_str)
+            p_cnt =0
+            diff_path_action = 0:
 
+    if diff_path_action = 0:
+        if dialogflow_action == 0:
+            print("Diaglogflow start")
+            data = dialogflow(msg_str)
 
-    if dialogflow_action == 0:
-        print("Diaglogflow start")
-        data = dialogflow(msg_str)
-
-    if bus_station_list_action == 2:
-        print("user : " + msg_str)
-        bus_station_list_action = 4
+        if bus_station_list_action == 2:
+            print("user : " + msg_str)
+            bus_station_list_action = 4
 
     intent_name = str(data['result']['metadata']['intentName'])
     incom = str(data['result']['actionIncomplete'])
@@ -155,8 +155,11 @@ def incomTrue(intent_name,data):
 
 
 def incomFalse(intent_name, data):
+    global p_cnt
+    global diff_path_action
+    global limit_time
 
-    if(intent_name == "PathFind"):
+    if eq(intent_name,"PathFind"):
         start = str(data['result']['parameters']['from'])
         end = str(data['result']['parameters']['to'])
 
@@ -174,15 +177,18 @@ def incomFalse(intent_name, data):
         print("tsType==>"+tsType)
 
         if eq(tsType,''):
-            text = pathPrint.resultPrint(start, end, '')
+            text = pathPrint.resultPrint(start, end, '', p_cnt)
         elif eq(tsType,"지하철") or eq(tsType,"버스"):
-            text = pathPrint.resultPrint(start, end, tsType)
+            text = pathPrint.resultPrint(start, end, tsType, p_cnt)
         elif eq(tsType,"고속버스") or eq(tsType,"시외버스"):
             text = anotherPathPrint.resultPrint(start, end, tsType)
             print("text==>"+text)
 
-        text += "\n\n 다른경로를 원하시나용??"
-    elif intent_name == "TimeSchedule":
+        text += "\n\n 다른경로를 원하시나용?? 원하시면 20초내로 응답해주세요!"
+        diff_path_action = 1
+        limit_time = time.time() + 20
+
+    elif eq(intent_name,"TimeSchedule"):
         transportation = str(data['result']['parameters']['transportation'])
         if transportation == "지하철":
             #비슷한 역이름 처리
@@ -276,10 +282,10 @@ def incomFalse(intent_name, data):
             schedule1 = schedule.getExpressInfo(Exstart,Exend)
             text = "💌["+Exstart+"터미널에서 "+Exend+"까지 시간표 정보입니다💌\n"
             text+=schedule1
-    elif intent_name == "Bus_Info":
+    elif eq(intent_name,"Bus_Info"):
         print("AAAAAAAAA")
         text = searchBusStation.search(data)
-    elif intent_name == "Default Fallback Intent":
+    elif eq(intent_name,"Default Fallback Intent"):
         text = str(data['result']['fulfillment']['messages'][0]['speech'])
 
     return text

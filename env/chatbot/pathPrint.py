@@ -25,7 +25,7 @@ def bus(busPath):
 
 	return bText
 
-def resultPrint(start, end, tsType):
+def resultPrint(start, end, tsType, pNum):
 
 	geoUrl = "https://maps.googleapis.com/maps/api/geocode/json?&sensor=false&language=ko&address="
 
@@ -42,7 +42,7 @@ def resultPrint(start, end, tsType):
 	e_json = json.loads(e_response.read().decode('utf-8'))
 
 	s_status = str(s_json['status'])
-	if s_status == "OK" :
+	if eq(s_status,"OK") :
 		#(x, 경도, longtitude) , (y, 위도, latitude)
 		sx = str(s_json['results'][0]['geometry']['location']['lng'])
 		sy = str(s_json['results'][0]['geometry']['location']['lat'])
@@ -68,8 +68,8 @@ def resultPrint(start, end, tsType):
 		json_rt = response.read().decode('utf-8')
 		data = json.loads(json_rt)
 
-		pType = data['result']['path'][0]['pathType']
-		subPath = data['result']['path'][0]['subPath']
+		pType = data['result']['path'][pNum]['pathType']
+		subPath = data['result']['path'][pNum]['subPath']
 
 		count = len(subPath)
 
@@ -96,15 +96,15 @@ def resultPrint(start, end, tsType):
 					txt += "\n[버스로 이동 🚌🚌]\n"
 					txt += bus(subPath[i])
 
-	elif s_status == "ZERO_RESULTS" :
+	elif eq(s_status,"ZERO_RESULTS"):
 		txt = "존재하지 않는 주소입니다"
-	elif s_status == "OVER_QUERY_LIMIT" :
+	elif eq(s_status,"OVER_QUERY_LIMIT") :
 		txt = "할당량 초과"
-	elif s_status == "REQUEST_DENIED":
+	elif eq(s_status,"REQUEST_DENIED"):
 		txt = "요청거부"
-	elif s_status == "INVALID_REQUEST":
+	elif eq(s_status,"INVALID_REQUEST"):
 		txt = "출발지 정보 누락"
-	elif s_status =="UNKNOWN_ERROR":
+	elif eq(s_status,"UNKNOWN_ERROR"):
 		txt = "서버오류"
 
 	return txt
