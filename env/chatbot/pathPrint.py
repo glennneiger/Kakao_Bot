@@ -73,7 +73,7 @@ def resultPrint(start, end, tsType, pNum):
 
 		if pNum < path_len:
 			pType = path_data[pNum]['pathType']
-			subPath = path_data['result']['path'][pNum]['subPath']
+			subPath = path_data[pNum]['subPath']
 
 			count = len(subPath)
 
