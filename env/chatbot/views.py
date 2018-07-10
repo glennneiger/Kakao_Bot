@@ -84,10 +84,18 @@ def message(request):
     global bus_station_list_action
     global station_list
 
+    text = ""
+    incom = "False"
+
     if diff_path_action == 1:
         cur_time = time.time()
-        if cur_time <= limit_time:
-            p_cnt = p_cnt + 1
+        if eq(msg_str,"Y") or eq(msg_str,"y") or eq(msg_str,"ㅇ") or eq(msg_str,"응") or eq(msg_str,"어"):
+            if cur_time <= limit_time:
+                p_cnt = p_cnt + 1
+            else:
+                p_cnt = 0
+                diff_path_action = 3
+                text = "시간이 지났어요!!다시 경로를 찾아주세요"
         else:
             p_cnt = 0
             diff_path_action = 0
@@ -101,12 +109,15 @@ def message(request):
             print("user : " + msg_str)
             bus_station_list_action = 4
 
-    intent_name = str(data['result']['metadata']['intentName'])
-    incom = str(data['result']['actionIncomplete'])
-    res = str(data['result']['fulfillment']['speech'])
+    if diff_path_action != 3:
+        intent_name = str(data['result']['metadata']['intentName'])
+        incom = str(data['result']['actionIncomplete'])
+        res = str(data['result']['fulfillment']['speech'])
 
-    if incom == "False":
-        text = incomFalse(intent_name, data)
+    if eq(incom,"False"):
+        if diff_path_action != 3:
+            text = incomFalse(intent_name, data)
+            diff_path_action = 0
 
         return JsonResponse({
          'message': {'text': text},
