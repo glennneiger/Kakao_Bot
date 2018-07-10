@@ -85,7 +85,7 @@ def message(request):
     global station_list
 
     text = ""
-    incom = "False"
+    incom = ""
 
     print("diff_path_action=>")
     print(diff_path_action)
@@ -102,6 +102,7 @@ def message(request):
                 p_cnt = 0
                 diff_path_action = 3
                 text = "시간이 지났어요!!다시 경로를 찾아주세요"
+                incom = "False"
         else:
             print("###긍정메시지 no")
             p_cnt = 0
@@ -203,7 +204,7 @@ def incomFalse(intent_name, data):
             print("text==>"+text)
 
         diff_path_action = 1
-        limit_time = time.time() + 10
+        limit_time = time.time() + 20
 
         # if not eq(text[0],"더"):
         #     print("^^^diff_path_action 1로 지정")
