@@ -87,25 +87,18 @@ def message(request):
     text = ""
     incom = ""
 
-    print("diff_path_action=>")
-    print(diff_path_action)
-    print(limit_time)
-
     if diff_path_action == 1:
         cur_time = time.time()
         print("diff_path_action 은 1")
         if eq(msg_str,"Y") or eq(msg_str,"y") or eq(msg_str,"ㅇ") or eq(msg_str,"응") or eq(msg_str,"어"):
-            print("###다른경로 리턴")
             if cur_time <= limit_time:
                 p_cnt = p_cnt + 1
             else:
-                print("###긍정메시지 but timeout")
                 p_cnt = 0
                 diff_path_action = 3
-                text = "시간이 지났어요!!다시 경로를 찾아주세요"
+                text = "시간이 지났어요!!\n다시 경로를 찾아주세요"
                 incom = "False"
         else:
-            print("###긍정메시지 no")
             p_cnt = 0
             diff_path_action = 0
 
@@ -205,13 +198,7 @@ def incomFalse(intent_name, data):
             text = anotherPathPrint.resultPrint(start, end, tsType)
             print("text==>"+text)
 
-        # diff_path_action = 1
-        # limit_time = time.time() + 20
-        # print(diff_path_action)
-        # print(limit_time)
-
         if not eq(text[0],"더"):
-            print("^^^diff_path_action 1로 지정")
             diff_path_action = 1
             limit_time = time.time() + 10
 
