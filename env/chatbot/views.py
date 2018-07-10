@@ -89,8 +89,8 @@ def message(request):
         if cur_time <= limit_time:
             p_cnt = p_cnt + 1
         else:
-            p_cnt =0
-            diff_path_action = 0:
+            p_cnt = 0
+            diff_path_action = 0
 
     if diff_path_action == 0:
         if dialogflow_action == 0:
@@ -187,7 +187,6 @@ def incomFalse(intent_name, data):
         text += "\n\n 다른경로를 원하시나용?? 원하시면 20초내로 응답해주세요!"
         diff_path_action = 1
         limit_time = time.time() + 20
-
     elif eq(intent_name,"TimeSchedule"):
         transportation = str(data['result']['parameters']['transportation'])
         if transportation == "지하철":
