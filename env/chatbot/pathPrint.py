@@ -68,33 +68,39 @@ def resultPrint(start, end, tsType, pNum):
 		json_rt = response.read().decode('utf-8')
 		data = json.loads(json_rt)
 
-		pType = data['result']['path'][pNum]['pathType']
-		subPath = data['result']['path'][pNum]['subPath']
+		path_data = data['result']['path']
+		path_len = len(path_data)
 
-		count = len(subPath)
+		if pNum < path_len:
+			pType = path_data[pNum]['pathType']
+			subPath = path_data['result']['path'][pNum]['subPath']
 
-		if pType == 1:
-			txt = "[지하철로 이동 🚋🚋]\n"
-			for i in range(0, count):
-				tType = subPath[i]['trafficType']
-				if tType == 1:
-					txt += subway(subPath[i])
-		elif pType == 2:
-			txt = "[버스로 이동 🚌🚌]\n"
-			for i in range(0, count):
-				tType = subPath[i]['trafficType']
-				if tType == 2:
-					txt += bus(subPath[i])
+			count = len(subPath)
+
+			if pType == 1:
+				txt = "[지하철로 이동 🚋🚋]\n"
+				for i in range(0, count):
+					tType = subPath[i]['trafficType']
+					if tType == 1:
+						txt += subway(subPath[i])
+			elif pType == 2:
+				txt = "[버스로 이동 🚌🚌]\n"
+				for i in range(0, count):
+					tType = subPath[i]['trafficType']
+					if tType == 2:
+						txt += bus(subPath[i])
+			else:
+				txt = "💌[지하철+버스로 이동하세요]💌\n"
+				for i in range(0, count):
+					tType = subPath[i]['trafficType']
+					if tType == 1 :
+						txt += "\n[지하철로 이동 🚋🚋]\n"
+						txt += subway(subPath[i])
+					elif tType == 2:
+						txt += "\n[버스로 이동 🚌🚌]\n"
+						txt += bus(subPath[i])
 		else:
-			txt = "💌[지하철+버스로 이동하세요]💌\n"
-			for i in range(0, count):
-				tType = subPath[i]['trafficType']
-				if tType == 1 :
-					txt += "\n[지하철로 이동 🚋🚋]\n"
-					txt += subway(subPath[i])
-				elif tType == 2:
-					txt += "\n[버스로 이동 🚌🚌]\n"
-					txt += bus(subPath[i])
+			txt = "더 이상이 경로가 없어요!! "
 
 	elif eq(s_status,"ZERO_RESULTS"):
 		txt = "존재하지 않는 주소입니다"
