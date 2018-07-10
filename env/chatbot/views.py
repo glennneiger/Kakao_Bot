@@ -202,10 +202,13 @@ def incomFalse(intent_name, data):
             text = anotherPathPrint.resultPrint(start, end, tsType)
             print("text==>"+text)
 
-        if not eq(text[0],"더"):
-            print("^^^diff_path_action 1로 지정")
-            diff_path_action = 1
-            limit_time = time.time() + 10
+        diff_path_action = 1
+        limit_time = time.time() + 10
+
+        # if not eq(text[0],"더"):
+        #     print("^^^diff_path_action 1로 지정")
+        #     diff_path_action = 1
+        #     limit_time = time.time() + 10
     elif eq(intent_name,"TimeSchedule"):
         transportation = str(data['result']['parameters']['transportation'])
         if transportation == "지하철":
