@@ -94,12 +94,12 @@ def message(request):
             if cur_time <= limit_time:
                 p_cnt = p_cnt + 1
             else:
-                print("긍정메시지 but timeout")
+                print("###긍정메시지 but timeout")
                 p_cnt = 0
                 diff_path_action = 3
                 text = "시간이 지났어요!!다시 경로를 찾아주세요"
         else:
-            print("긍정메시지 no")
+            print("###긍정메시지 no")
             p_cnt = 0
             diff_path_action = 0
 
@@ -199,6 +199,7 @@ def incomFalse(intent_name, data):
             print("text==>"+text)
 
         if not eq(text[0],"더"):
+            print("^^^diff_path_acion 1로 지정")
             diff_path_action = 1
             limit_time = time.time() + 10
     elif eq(intent_name,"TimeSchedule"):
