@@ -100,7 +100,7 @@ def resultPrint(start, end, tsType, pNum):
 						txt += "\n[버스로 이동 🚌🚌]\n"
 						txt += bus(subPath[i])
 
-			txt +=  "\n\n다른경로를 원하시나용?\n 원하시면 10초내로 응답해주세요!"
+			txt +=  "\n\n다른경로를 원하시나용?\n원하시면 10초내로 응답해주세요!"
 		else:
 			txt = "더 이상 경로가 없어요!!\n"
 
