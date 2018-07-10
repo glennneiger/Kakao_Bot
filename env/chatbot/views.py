@@ -44,8 +44,6 @@ station_list = []
 bus_station_list_action = 0
 bus_direction_action = 0
 
-cnt = 0
-
 subwayID = [[1001, "수도권 1호선"],[1002, "수도권 2호선"],[1003, "수도권 3호선"],[1004, "수도권 4호선"],[1005, "수도권 5호선"]
 ,[1006, "수도권 6호선"],[1007, "수도권 7호선"],[1008, "수도권 8호선"],[1009, "수도권 9호선"],[1065,"수도권 공항철도"],[1071,"수도권 수인선"],[1075,"수도권 분당선"]
 ,[1075,"수도권 분당선"],[1063,"경의중앙선"],[1067,"수도권 경춘선"],[1077,"수도권 신분당선"],[1077,"수도권 신분당선"]]
@@ -86,12 +84,6 @@ def message(request):
     global bus_station_list_action
     global station_list
 
-    global cnt
-
-    cnt += 1
-    print("$$$$$$$$")
-    print(cnt)
-
     text = ""
     incom = ""
 
@@ -102,16 +94,16 @@ def message(request):
     if diff_path_action == 1:
         cur_time = time.time()
         print("diff_path_action 은 1")
-        # if eq(msg_str,"Y") or eq(msg_str,"y") or eq(msg_str,"ㅇ") or eq(msg_str,"응") or eq(msg_str,"어"):
-        #     print("###다른경로 리턴")
-        if cur_time <= limit_time:
-            p_cnt = p_cnt + 1
-        # else:
-        #     print("###긍정메시지 but timeout")
-        #     p_cnt = 0
-        #     diff_path_action = 3
-        #     text = "시간이 지났어요!!다시 경로를 찾아주세요"
-        #     incom = "False"
+        if eq(msg_str,"Y") or eq(msg_str,"y") or eq(msg_str,"ㅇ") or eq(msg_str,"응") or eq(msg_str,"어"):
+            print("###다른경로 리턴")
+            if cur_time <= limit_time:
+                p_cnt = p_cnt + 1
+            else:
+                print("###긍정메시지 but timeout")
+                p_cnt = 0
+                diff_path_action = 3
+                text = "시간이 지났어요!!다시 경로를 찾아주세요"
+                incom = "False"
         else:
             print("###긍정메시지 no")
             p_cnt = 0
@@ -134,7 +126,6 @@ def message(request):
     if eq(incom,"False"):
         if diff_path_action != 3:
             text = incomFalse(intent_name, data)
-            diff_path_action = 0
 
         return JsonResponse({
          'message': {'text': text},
@@ -212,15 +203,16 @@ def incomFalse(intent_name, data):
             text = anotherPathPrint.resultPrint(start, end, tsType)
             print("text==>"+text)
 
-        diff_path_action = 1
-        limit_time = time.time() + 20
-        print(diff_path_action)
-        print(limit_time)
+        # diff_path_action = 1
+        # limit_time = time.time() + 20
+        # print(diff_path_action)
+        # print(limit_time)
 
-        # if not eq(text[0],"더"):
-        #     print("^^^diff_path_action 1로 지정")
-        #     diff_path_action = 1
-        #     limit_time = time.time() + 10
+        if not eq(text[0],"더"):
+            print("^^^diff_path_action 1로 지정")
+            diff_path_action = 1
+            limit_time = time.time() + 10
+            
     elif eq(intent_name,"TimeSchedule"):
         transportation = str(data['result']['parameters']['transportation'])
         if transportation == "지하철":
