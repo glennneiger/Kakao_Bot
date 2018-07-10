@@ -87,8 +87,8 @@ def message(request):
     text = ""
     incom = "False"
 
-    print("diff_path_acion=>")
-    print(diff_path_acion)
+    print("diff_path_action=>")
+    print(diff_path_action)
 
     if diff_path_action == 1:
         cur_time = time.time()
@@ -203,7 +203,7 @@ def incomFalse(intent_name, data):
             print("text==>"+text)
 
         if not eq(text[0],"더"):
-            print("^^^diff_path_acion 1로 지정")
+            print("^^^diff_path_action 1로 지정")
             diff_path_action = 1
             limit_time = time.time() + 10
     elif eq(intent_name,"TimeSchedule"):
