@@ -126,6 +126,8 @@ def message(request):
     if eq(incom,"False"):
         if diff_path_action != 3:
             text = incomFalse(intent_name, data)
+        else:
+            diff_path_action = 0
 
         return JsonResponse({
          'message': {'text': text},
@@ -212,7 +214,7 @@ def incomFalse(intent_name, data):
             print("^^^diff_path_action 1로 지정")
             diff_path_action = 1
             limit_time = time.time() + 10
-            
+
     elif eq(intent_name,"TimeSchedule"):
         transportation = str(data['result']['parameters']['transportation'])
         if transportation == "지하철":
