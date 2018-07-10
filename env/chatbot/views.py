@@ -87,6 +87,9 @@ def message(request):
     text = ""
     incom = "False"
 
+    print("diff_path_acion=>")
+    print(diff_path_acion)
+
     if diff_path_action == 1:
         cur_time = time.time()
         print("diff_path_action 은 1")
