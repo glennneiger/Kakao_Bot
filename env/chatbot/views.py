@@ -94,8 +94,8 @@ def message(request):
     if diff_path_action == 1:
         cur_time = time.time()
         print("diff_path_action 은 1")
-        if eq(msg_str,"Y") or eq(msg_str,"y") or eq(msg_str,"ㅇ") or eq(msg_str,"응") or eq(msg_str,"어"):
-            print("###다른경로 리턴")
+        # if eq(msg_str,"Y") or eq(msg_str,"y") or eq(msg_str,"ㅇ") or eq(msg_str,"응") or eq(msg_str,"어"):
+        #     print("###다른경로 리턴")
             if cur_time <= limit_time:
                 p_cnt = p_cnt + 1
             else:
