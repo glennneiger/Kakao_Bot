@@ -68,7 +68,7 @@ def getNormalPath(sx, sy, ex, ey):
 
 	return txt
 
-def resultPrint(start, end, tsType):
+def get_result(start, end, tsType):
 
 	geoUrl = "https://maps.googleapis.com/maps/api/geocode/json?&sensor=false&language=ko&address="
 	sUrl = geoUrl+urllib.parse.quote_plus(start)

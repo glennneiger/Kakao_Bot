@@ -45,7 +45,7 @@ def get_bus_direction(data):
         bus_direction = str(data['result']['parameters']['bus_direction'])
         bus_number = str(data['result']['parameters']['bus_number'])
 
-def search(data):
+def get_result(data):
     searchST = searchList[0]
     text = ""
 
