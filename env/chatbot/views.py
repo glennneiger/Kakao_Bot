@@ -96,14 +96,14 @@ def message(request):
         print("diff_path_action 은 1")
         # if eq(msg_str,"Y") or eq(msg_str,"y") or eq(msg_str,"ㅇ") or eq(msg_str,"응") or eq(msg_str,"어"):
         #     print("###다른경로 리턴")
-            if cur_time <= limit_time:
-                p_cnt = p_cnt + 1
-            else:
-                print("###긍정메시지 but timeout")
-                p_cnt = 0
-                diff_path_action = 3
-                text = "시간이 지났어요!!다시 경로를 찾아주세요"
-                incom = "False"
+        if cur_time <= limit_time:
+            p_cnt = p_cnt + 1
+        else:
+            print("###긍정메시지 but timeout")
+            p_cnt = 0
+            diff_path_action = 3
+            text = "시간이 지났어요!!다시 경로를 찾아주세요"
+            incom = "False"
         else:
             print("###긍정메시지 no")
             p_cnt = 0
