@@ -99,8 +99,10 @@ def resultPrint(start, end, tsType, pNum):
 					elif tType == 2:
 						txt += "\n[버스로 이동 🚌🚌]\n"
 						txt += bus(subPath[i])
+
+			txt +=  "\n\n다른경로를 원하시나용?\n 원하시면 10초내로 응답해주세요!"
 		else:
-			txt = "더 이상이 경로가 없어요!! "
+			txt = "더 이상 경로가 없어요!!\n"
 
 	elif eq(s_status,"ZERO_RESULTS"):
 		txt = "존재하지 않는 주소입니다"
