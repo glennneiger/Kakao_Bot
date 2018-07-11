@@ -186,43 +186,47 @@ def get_bus_station_information(data):
 #                    arrival_busstation.append(arrival_second[i+1])
 #                    if(int(arrival_busstation[i+2]))
 
-        print(arrival_busstation)
-        counter = 0
         current = 0
-        for i in res:
+        for i in bus_number_list_res:
             if i  == bus_station :
-                current = counter
                 break
             else :
-                counter += 1
+                current += 1
 
         print("current : " + res[current])
 
-        path_res = []
-        for i in range(0,len(arrival_busstation)):
-            path_res.append(res[current+int(arrival_busstation[i])])
-
-        for i in range(0,len(path_res)):
-            print("path_res " + path_res[i])
-
-        text += "💌["+bus_number+"번 버스에 대한 정보]💌\n"
-        if direction == "+":
+        if eq(direction,"+") :
             for i in range(5,-1,-1):
-                checked = False
-                for j in range(0,len(path_res)):
-                    if eq(path_res[j],res[current+i]) :
-                        text += "💛"+res[current+i]+" 🚌\n"
-                        print(res[current+i] + "***")
-                        checked = True
-                        break
-                if checked == False:
-                    text += "💛"+res[current+i]+"\n"
-                    print(res[current+i])
-                if i != 0 :
-                    text += "       ↓↓↓   \n"
+                print[current+i]
 
-        text += "\n"
-        text+= "👉🏿 " + arrival_first + "\n"
-        text+= "👉🏿 " + arrival_second
+
+
+
+
+#        for i in range(0,len(arrival_busstation)):
+#            path_res.append(res[current+int(arrival_busstation[i])])
+
+        # for i in range(0,len(path_res)):
+        #     print("path_res " + path_res[i])
+
+        # text += "💌["+bus_number+"번 버스에 대한 정보]💌\n"
+        # if direction == "+":
+        #     for i in range(5,-1,-1):
+        #         checked = False
+        #         for j in range(0,len(path_res)):
+        #             if eq(path_res[j],res[current+i]) :
+        #                 text += "💛"+res[current+i]+" 🚌\n"
+        #                 print(res[current+i] + "***")
+        #                 checked = True
+        #                 break
+        #         if checked == False:
+        #             text += "💛"+res[current+i]+"\n"
+        #             print(res[current+i])
+        #         if i != 0 :
+        #             text += "       ↓↓↓   \n"
+
+        # text += "\n"
+        # text+= "👉🏿 " + arrival_first + "\n"
+        # text+= "👉🏿 " + arrival_second
 
     return text
