@@ -85,6 +85,8 @@ def get_bus_station_information(data):
 
 
     ACCESS = "rxJqZMHh6oQDUSfc7Kh42uCXZuHEhmj7dY7VWber2ryr9L5t2CFRy3z834JMR7RygMzaVby7ZQ3sW%2ByCZZn0Ig%3D%3D"
+    my = "f/WM8od4VAXdGg4Q5ZaWSlJ8tIbSpw+nJ4WQ4AFRpsM"
+    encMy = urllib.parse.quote_plus(my)
 
     oAPI = "http://ws.bus.go.kr/api/rest/stationinfo/getStationByUid?ServiceKey="+ACCESS+"&arsId="+encArs
     tree = ET.parse(urllib.request.urlopen(oAPI))
@@ -120,6 +122,9 @@ def get_bus_station_information(data):
     
     if eq(bus_number,"") == False:
         text = ""
+
+        my = "f/WM8od4VAXdGg4Q5ZaWSlJ8tIbSpw+nJ4WQ4AFRpsM"
+        encMy = urllib.parse.quote_plus(my)
 
         Bus_Info_URL = "https://api.odsay.com/v1/api/searchBusLane?lang=0&busNo="+bus_number+"&apiKey="+encMy+"&CID=1000"
         bus_info_request = urllib.request.Request(Bus_Info_URL)
