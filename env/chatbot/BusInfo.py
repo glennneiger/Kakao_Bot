@@ -4,8 +4,12 @@ import json
 import xml.etree.ElementTree as ET
 from operator import eq
 
+bus_station_id = {}
+
 def get_bus_station(data):
     #오디세이에서 버스 리스트 반환
+    global bus_station_id
+
     action = 1
     searchST = str(data['result']['parameters']['bus_station'])
     res = ""
@@ -25,7 +29,6 @@ def get_bus_station(data):
     bus_station_list = []
     stInfo = data['result']['station']
 
-    bus_station_id = {}
     for i in stInfo:
         if i['stationName']in bus_station_id:
             bus_station_id[i['stationName']].append(i['stationID'])
@@ -47,7 +50,7 @@ def get_bus_station(data):
             res += str(i+1) +". " + bus_station_list[i] + "\n"
 
 
-    print("busstationid " + bus_station_id)
+    print("busstationid " + bus_station_id('숭실대입구역'))
 
     return [res,action,bus_station_list]
 
