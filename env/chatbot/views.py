@@ -45,6 +45,7 @@ dialogflow_action = 0
 station_list = []
 bus_station_list_action = 0
 bus_direction_action = 0
+selected_bus_station = ""
 
 def dialogflow(msg_str):
     ai = apiai.ApiAI(CLIENT_ACCESS_TOKEN)
@@ -104,9 +105,11 @@ def message(request):
         if dialogflow_action == 0:
             print("Diaglogflow start")
             data = dialogflow(msg_str)
-
+        ###정확한 버스 정류장 선택하기
         if bus_station_list_action == 2:
             print("user : " + msg_str)
+            selected_bus_station = station_list[int(msg_str)-1]
+            print("bus_station : " + selected_bus_station)
             bus_station_list_action = 4
 
     if diff_path_action != 3:
