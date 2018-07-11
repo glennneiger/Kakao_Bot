@@ -50,7 +50,8 @@ def get_bus_station(data):
             res += str(i+1) +". " + bus_station_list[i] + "\n"
 
 
-    print("busstationid " + bus_station_id['숭실대입구역'])
+    for i in len(bus_station_list['숭실대입구역']):
+        print(i)
 
     return [res,action,bus_station_list]
 
