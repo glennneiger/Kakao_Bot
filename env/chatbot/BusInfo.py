@@ -118,7 +118,8 @@ def get_bus_station_information(data):
         text += "🚌" + busList[bus_No] + "\n 👉🏿"+busList[bus_msg1]+"\n"
 
     ###버스 정보
-    if len(searchList) != 1:
+    tmp = 0
+    if tmp == 1:
         text = ""
         bus_number = searchList[1]
         bus_station = st_name
