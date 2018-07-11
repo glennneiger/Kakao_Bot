@@ -18,6 +18,7 @@ from . import SubwayInfo
 from . import BusInfo
 from . import ExpressInfo
 
+
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
@@ -137,7 +138,6 @@ def message(request):
             })
 
         if bus_direction_action == 0:
-            get_bus_direction(selected_bus_station)
             return JsonResponse({
                 'message': {'text': "!!!\n"+ str(session_id) + "\n"+ res + "\n\n!!!"},
             })
@@ -147,6 +147,7 @@ def incomTrue(intent_name,data):
     global bus_station_list_action
     global bus_direction_action
     global dialogflow_action
+    global selected_bus_station
 
     if eq(intent_name,"Bus_Info"):
         bus_station = str(data['result']['parameters']['bus_station'])
@@ -164,6 +165,7 @@ def incomTrue(intent_name,data):
             return res_bus_station[0]
 
         if bus_direction_action == 0:
+            BusInfo.get_bus_direction(selected_bus_station)
             dialogflow_action = 0
 
         print(bus_station + " " + bus_direction + " " + bus_number + "\n")
