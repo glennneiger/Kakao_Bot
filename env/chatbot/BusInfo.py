@@ -77,31 +77,15 @@ def get_bus_direction(stationName):
 
 
 
-def get_result(data):
-    bus_station = searchList[0]
-    text = ""
+def get_bus_station_information(data):
+    bus_station = str(data['result']['parameters']['bus_station'])
+    bus_direction = str(data['result']['parameters']['bus_direction'])
 
-    ACCESS = "rxJqZMHh6oQDUSfc7Kh42uCXZuHEhmj7dY7VWber2ryr9L5t2CFRy3z834JMR7RygMzaVby7ZQ3sW%2ByCZZn0Ig%3D%3D"
+    print("getInfo " + bus_station + bus_direction)
 
-    my = "f/WM8od4VAXdGg4Q5ZaWSlJ8tIbSpw+nJ4WQ4AFRpsM"
-    encMy = urllib.parse.quote_plus(my)
-    encST = urllib.parse.quote_plus(searchST)
-
-    odUrl = "https://api.odsay.com/v1/api/searchStation?lang=&stationName="+encST+"&apiKey="+encMy
-
-    request = urllib.request.Request(odUrl)
-    response = urllib.request.urlopen(request)
-
-    json_rt = response.read().decode('utf-8')
-    data = json.loads(json_rt)
-
-    stInfo = data['result']['station'][0]
-
-    st_name = stInfo['stationName']
-    st_ars = str(stInfo['arsID'])
-
-    st_ars = st_ars.replace("-","")
+    st_ars = bus_direction.replace("-","")
     encArs = urllib.parse.quote_plus(st_ars)
+
 
     ACCESS = "rxJqZMHh6oQDUSfc7Kh42uCXZuHEhmj7dY7VWber2ryr9L5t2CFRy3z834JMR7RygMzaVby7ZQ3sW%2ByCZZn0Ig%3D%3D"
 
