@@ -159,7 +159,7 @@ def incomTrue(intent_name,data):
     global dialogflow_action
     global selected_bus_station
     global bus_direction_ars
-
+    
     if eq(intent_name,"Bus_Info"):
         bus_station = str(data['result']['parameters']['bus_station'])
         bus_direction = str(data['result']['parameters']['bus_direction'])
