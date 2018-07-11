@@ -144,7 +144,7 @@ def message(request):
             'message': {'text': "!!!\n"+ result + "\n\n!!!"},
             })
 
-        if bus_direction_action == 0:
+        if bus_direction_action == 1:
             return JsonResponse({
                 'message': {'text': "!!!\n"+ str(session_id) + "\n"+ result + "\n\n!!!"},
             })
