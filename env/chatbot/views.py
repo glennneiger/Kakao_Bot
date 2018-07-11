@@ -44,6 +44,7 @@ limit_time = 0
 dialogflow_action = 0
 
 station_list = []
+bus_direction_ars = []
 bus_station_list_action = 0
 bus_direction_action = 0
 selected_bus_station = ""
@@ -111,7 +112,6 @@ def message(request):
         if bus_station_list_action == 2:
             print("user : " + msg_str)
             selected_bus_station = station_list[int(msg_str)-1]
-            print("bus_station : global 변수 설정 완료 " + selected_bus_station)
             bus_station_list_action = 4
 
     if diff_path_action != 3:
@@ -149,6 +149,7 @@ def incomTrue(intent_name,data):
     global bus_direction_action
     global dialogflow_action
     global selected_bus_station
+    global bus_direction_ars
 
     if eq(intent_name,"Bus_Info"):
         bus_station = str(data['result']['parameters']['bus_station'])
@@ -166,9 +167,12 @@ def incomTrue(intent_name,data):
             return res_bus_station[0]
 
         if bus_direction_action == 0:
-            print("send " + selected_bus_station)
-            BusInfo.get_bus_direction(selected_bus_station)
             dialogflow_action = 0
+            res_bus_direction = BusInfo.get_bus_direction(selected_bus_station)
+            for i in res_bus_direction[0]:
+                bus_drection_ars.append(i)
+            return res_bus_direction[1]
+            
 
         print(bus_station + " " + bus_direction + " " + bus_number + "\n")
 
