@@ -170,11 +170,8 @@ def incomTrue(intent_name,data):
             dialogflow_action = 0
             res_bus_direction = BusInfo.get_bus_direction(selected_bus_station)
             for i in res_bus_direction[0]:
-                bus_drection_ars.append(i)
+                bus_direction_ars.append(i)
             return res_bus_direction[1]
-            
-
-        print(bus_station + " " + bus_direction + " " + bus_number + "\n")
 
 
 
