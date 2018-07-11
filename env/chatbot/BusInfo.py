@@ -61,6 +61,8 @@ def get_bus_direction(stationName):
     global bus_station_id
     st_name = stationName
 
+    print(bus_station_id.keys())
+
     ACCESS = "rxJqZMHh6oQDUSfc7Kh42uCXZuHEhmj7dY7VWber2ryr9L5t2CFRy3z834JMR7RygMzaVby7ZQ3sW%2ByCZZn0Ig%3D%3D"
     my = "f/WM8od4VAXdGg4Q5ZaWSlJ8tIbSpw+nJ4WQ4AFRpsM"
 
