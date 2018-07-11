@@ -69,7 +69,7 @@ def get_bus_direction(stationName):
         tree = ET.parse(urllib.request.urlopen(oAPI))
         root = tree.getroot()
         mbody = root.find("msgBody")
-        print(mbody.iter("itemList")[0])
+        print(mbody)
 
 
 
