@@ -317,7 +317,7 @@ def incomFalse(intent_name, data):
         data['result']['parameters']['bus_station'] = selected_bus_station
         data['result']['parameters']['bus_direction'] = selected_bus_direction
         print(data)
-        text = BusInfo.get_result(data)
+        text = BusInfo.get_bus_station_information(data)
     elif eq(intent_name,"Express_Info"):
         Exstart = str(data['result']['parameters']['any'][0])
         Exend = str(data['result']['parameters']['any'][1])
