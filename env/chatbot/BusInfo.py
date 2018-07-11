@@ -133,7 +133,6 @@ def get_bus_station_information(data):
         json_data = json.loads(bus_info_res.read().decode('utf-8'))
 
         busID = json_data['result']['lane'][0]['busID']
-        direction = "+"
         Line_URL = "https://api.odsay.com/v1/api/busLaneDetail?lang=0&busID="+str(busID)+"&apiKey="+encMy
 
         request = urllib.request.Request(Line_URL)
@@ -145,17 +144,16 @@ def get_bus_station_information(data):
         startStation = data['result']['busStartPoint']
         endStation = data['result']['busEndPoint']
 
-        print("******")
         print(startStation)
         print(endStation)
 
         station_idx_res = {}
         idx_station_res = {}
-        res = []
+        bus_number_list_res = []
 
         for i in data['result']['station']:
             idx_station_res[i['idx']] = i['stationName']
-            res.append(i['stationName'])
+            bus_number_list_res.append(i['stationName'])
 
         arrival_busstation = []
         kk = ""
@@ -164,19 +162,22 @@ def get_bus_station_information(data):
             if(busList[bus_key] == bus_number):
                 arrival_first = busList["msg1_c"+str(i)]
                 arrival_second = busList["msg2_c"+str(i)]
-                print(busList["adr_c"+str(i)])
-                print(busList["busNtext_c"+str(i)])
+                if eq(startStation,busList["adr_c"+str(i)]) :
+                    direction = "-"
+                elif eq(endStation,busList["adr_c"+str(i)]) :
+                    direction = "+"
+
+        print("@@@@@@")
+        print(bus_number_list_res)
 
 
-        print(arrival_first)
-
-        if eq(arrival_first,"곧 도착") != True:
-            for i in range(0,len(arrival_first)):
-                if eq(arrival_first[i],"["):
-                    arrival_busstation.append(arrival_first[i+1])
-        else :
-            print("00000")
-            arrival_busstation.append("0")
+#        if eq(arrival_first,"곧 도착") != True:
+#            for i in range(0,len(arrival_first)):
+#                if eq(arrival_first[i],"["):
+#                    arrival_busstation.append(arrival_first[i+1])
+#        else :
+#            print("00000")
+#            arrival_busstation.append("0")
 
 #        print(arrival_second)
 #        if eq(arrival_second,"곧 도착") != True:
