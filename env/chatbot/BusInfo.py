@@ -35,18 +35,20 @@ def get_bus_station(data):
         action = 2
         res += "정류장을 선택해 주세요." + "\n"
         for i in range(0,len(bus_station_list)):
+            if i not in bus_station_list:
             res += str(i+1) +". " + bus_station_list[i] + "\n"
 
     return [res,action,bus_station_list]
 
 
 def get_bus_direction(data):
+
         bus_station = str(data['result']['parameters']['bus_station'])
         bus_direction = str(data['result']['parameters']['bus_direction'])
         bus_number = str(data['result']['parameters']['bus_number'])
 
 def get_result(data):
-    searchST = searchList[0]
+    bus_station = searchList[0]
     text = ""
 
     ACCESS = "rxJqZMHh6oQDUSfc7Kh42uCXZuHEhmj7dY7VWber2ryr9L5t2CFRy3z834JMR7RygMzaVby7ZQ3sW%2ByCZZn0Ig%3D%3D"
