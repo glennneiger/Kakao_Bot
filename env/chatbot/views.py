@@ -48,6 +48,7 @@ bus_direction_ars = []
 bus_station_list_action = 0
 bus_direction_action = 0
 selected_bus_station = ""
+selected_bus_direction = 0
 
 def dialogflow(msg_str):
     ai = apiai.ApiAI(CLIENT_ACCESS_TOKEN)
@@ -85,6 +86,7 @@ def message(request):
     global bus_station_list_action
     global station_list
     global selected_bus_station
+    global selected_bus_direction
 
     text = ""
     incom = ""
@@ -108,6 +110,10 @@ def message(request):
         if dialogflow_action == 0:
             print("Diaglogflow start")
             data = dialogflow(msg_str)
+            if bus_direction_action == 1:
+                bus_direction = str(data['result']['parameters']['bus_direction'])
+                print("user direction : " + bus_direction)
+
         ###정확한 버스 정류장 선택하기
         if bus_station_list_action == 2:
             print("user : " + msg_str)
@@ -171,6 +177,7 @@ def incomTrue(intent_name,data):
             res_bus_direction = BusInfo.get_bus_direction(selected_bus_station)
             for i in res_bus_direction[0]:
                 bus_direction_ars.append(i)
+            bus_direction_action = 1
             return res_bus_direction[1]
 
 
