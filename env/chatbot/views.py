@@ -110,7 +110,7 @@ def message(request):
         if bus_station_list_action == 2:
             print("user : " + msg_str)
             selected_bus_station = station_list[int(msg_str)-1]
-            print("bus_station : " + selected_bus_station)
+            print("bus_station : global 변수 설정 완료 " + selected_bus_station)
             bus_station_list_action = 4
 
     if diff_path_action != 3:
@@ -155,7 +155,7 @@ def incomTrue(intent_name,data):
         bus_number = str(data['result']['parameters']['bus_number'])
 
         print("come here")
-
+        print("global bus station" + selected_bus_station)
         if bus_station_list_action == 0:
             dialogflow_action = 1
             res_bus_station = BusInfo.get_bus_station(data)
