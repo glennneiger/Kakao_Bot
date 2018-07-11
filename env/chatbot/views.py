@@ -188,6 +188,8 @@ def incomFalse(intent_name, data):
     global p_cnt
     global diff_path_action
     global limit_time
+    global selected_bus_direction
+    global selected_bus_station
 
     if eq(intent_name,"PathFind"):
         start = str(data['result']['parameters']['from'])
@@ -312,6 +314,8 @@ def incomFalse(intent_name, data):
         #             text +="종점인데 어딜가시려구요?👀\n"
     elif eq(intent_name,"Bus_Info"):
         print("AAAAAAAAA")
+        data['result']['parameters']['bus_station'] = selected_bus_station
+        data['result']['parameters']['bus_direction'] = selected_bus_direction
         print(data)
         text = BusInfo.get_result(data)
     elif eq(intent_name,"Express_Info"):
