@@ -51,7 +51,7 @@ def get_bus_station(data):
 
 
     for i in range(0,len(bus_station_id['숭실대입구역'])):
-        print(i)
+        print(bus_station_id['숭실대입구역'][i])
 
     return [res,action,bus_station_list]
 
