@@ -87,6 +87,7 @@ def message(request):
     global station_list
     global selected_bus_station
     global selected_bus_direction
+    global bus_direction_action
 
     text = ""
     incom = ""
