@@ -164,6 +164,8 @@ def get_bus_station_information(data):
             if(busList[bus_key] == bus_number):
                 arrival_first = busList["msg1_c"+str(i)]
                 arrival_second = busList["msg2_c"+str(i)]
+                print(busList["adr_c"+str(i)])
+                print(busList["busNtext_c"+str(i)])
 
 
         print(arrival_first)
