@@ -56,6 +56,7 @@ def get_bus_direction(stationName):
     print("dyrldyrl")
     global bus_ars_id
     print("stationName : " + stationName)
+    res = ""
   
     ACCESS = "rxJqZMHh6oQDUSfc7Kh42uCXZuHEhmj7dY7VWber2ryr9L5t2CFRy3z834JMR7RygMzaVby7ZQ3sW%2ByCZZn0Ig%3D%3D"
     my = "f/WM8od4VAXdGg4Q5ZaWSlJ8tIbSpw+nJ4WQ4AFRpsM"
@@ -69,7 +70,9 @@ def get_bus_direction(stationName):
         tree = ET.parse(urllib.request.urlopen(oAPI))
         root = tree.getroot()
         mbody = root.find("msgBody").find("itemList")[20].text
-        print(mbody)
+        res += str(i+1) + ". " + mbody + "방향("+arsId+")"
+
+    return [bus_ars_id,res]
 
 
 
