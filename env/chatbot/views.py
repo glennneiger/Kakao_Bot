@@ -312,6 +312,7 @@ def incomFalse(intent_name, data):
         #             text +="종점인데 어딜가시려구요?👀\n"
     elif eq(intent_name,"Bus_Info"):
         print("AAAAAAAAA")
+        print(data)
         text = BusInfo.get_result(data)
     elif eq(intent_name,"Express_Info"):
         Exstart = str(data['result']['parameters']['any'][0])
