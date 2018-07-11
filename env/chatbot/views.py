@@ -83,6 +83,7 @@ def message(request):
     global dialogflow_action
     global bus_station_list_action
     global station_list
+    global selected_bus_station
 
     text = ""
     incom = ""
