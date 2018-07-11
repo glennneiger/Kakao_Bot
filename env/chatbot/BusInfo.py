@@ -109,7 +109,7 @@ def get_bus_station_information(data):
         bcnt = bcnt+1
 
     print("bcnt " + str(bcnt))
-    text = "💌[ "+st_name+" ]💌\n"
+    text = "💌[ "+bus_station+" ]💌\n"
     for i in range(0, bcnt):
         bus_msg1 = "msg1_c"+str(i)
         bus_msg2 = "msg2_c"+str(i)
