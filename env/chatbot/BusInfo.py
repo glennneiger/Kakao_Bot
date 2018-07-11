@@ -4,11 +4,11 @@ import json
 import xml.etree.ElementTree as ET
 from operator import eq
 
-bus_station_id = {}
+bus_ars_id = {}
 
 def get_bus_station(data):
     #오디세이에서 버스 리스트 반환
-    global bus_station_id
+    global bus_ars_id
 
     action = 1
     searchST = str(data['result']['parameters']['bus_station'])
@@ -30,10 +30,10 @@ def get_bus_station(data):
     stInfo = data['result']['station']
 
     for i in stInfo:
-        if i['stationName']in bus_station_id:
-            bus_station_id[i['stationName']].append(i['stationID'])
+        if i['stationName']in bus_ars_id:
+            bus_ars_id[i['stationName']].append(i['arsID'])
         else :
-            bus_station_id[i['stationName']] = [i['stationID']]
+            bus_ars_id[i['stationName']] = [i['arsID']]
 
 
         if i['stationName'] not in bus_station_list:
@@ -49,35 +49,21 @@ def get_bus_station(data):
         for i in range(0,len(bus_station_list)):
             res += str(i+1) +". " + bus_station_list[i] + "\n"
 
-
-    for i in range(0,len(bus_station_id['숭실대입구역'])):
-        print(bus_station_id['숭실대입구역'][i])
-
     return [res,action,bus_station_list]
 
 
 def get_bus_direction(stationName):
     print("dyrldyrl")
-    global bus_station_id
+    global bus_ars_id
     print("stationName : " + stationName)
-    st_name = stationName
-
+  
     ACCESS = "rxJqZMHh6oQDUSfc7Kh42uCXZuHEhmj7dY7VWber2ryr9L5t2CFRy3z834JMR7RygMzaVby7ZQ3sW%2ByCZZn0Ig%3D%3D"
     my = "f/WM8od4VAXdGg4Q5ZaWSlJ8tIbSpw+nJ4WQ4AFRpsM"
 
     encMy = urllib.parse.quote_plus(my)
 
-    for i in range(0,len(bus_station_id[stationName])):
-        odUrl = "https://api.odsay.com/v1/api/busStationInfo?lang=0&stationID="+str(bus_station_id[stationName][i])+"&apiKey="+encMy
-        request = urllib.request.Request(odUrl)
-        response = urllib.request.urlopen(request)
-
-        json_rt = response.read().decode('utf-8')
-        data = json.loads(json_rt)
-        print(data)
-
-
-
+    for i in range(0,len(bus_ars_id[stationName])):
+        print(bus_ars_id[stationName][i])
 
 
 
@@ -112,7 +98,6 @@ def get_result(data):
     ACCESS = "rxJqZMHh6oQDUSfc7Kh42uCXZuHEhmj7dY7VWber2ryr9L5t2CFRy3z834JMR7RygMzaVby7ZQ3sW%2ByCZZn0Ig%3D%3D"
 
     oAPI = "http://ws.bus.go.kr/api/rest/stationinfo/getStationByUid?ServiceKey="+ACCESS+"&arsId="+encArs
-
     tree = ET.parse(urllib.request.urlopen(oAPI))
 
     root = tree.getroot()
