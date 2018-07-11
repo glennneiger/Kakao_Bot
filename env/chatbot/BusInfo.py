@@ -193,11 +193,11 @@ def get_bus_station_information(data):
             else :
                 current += 1
 
-        print("current : " + res[current])
+        print("current : " + bus_number_list_res[current])
 
         if eq(direction,"+") :
             for i in range(5,-1,-1):
-                print[current+i]
+                print(bus_number_list_res[current+i])
 
 
 
