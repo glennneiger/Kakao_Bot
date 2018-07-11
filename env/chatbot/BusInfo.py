@@ -73,9 +73,7 @@ def get_bus_direction(stationName):
         res += str(i+1) + ". " + mbody + "방향("+bus_ars_id[stationName][i]+")" + "\n"
 
     print(res)
-
-
-    return [bus_ars_id,res]
+    return [bus_ars_id[stationName],res]
 
 
 
