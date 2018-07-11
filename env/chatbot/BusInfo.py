@@ -99,7 +99,7 @@ def get_bus_station_information(data):
         msg2 = "msg2_c"+str(bcnt)
         adr = "adr_c"+str(bcnt)
         busNo = "busNo_c"+str(bcnt)
-        budNxt = "busNtext_c" + str(bcnt)
+        busNxt = "busNtext_c" + str(bcnt)
         busList[msg1] =  bus.find("arrmsg1").text
         busList[msg2] =  bus.find("arrmsg2").text
         busList[adr] =  bus.find("adirection").text
