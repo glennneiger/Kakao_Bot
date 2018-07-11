@@ -193,8 +193,7 @@ def incomFalse(intent_name, data):
     global bus_direction_action
     global bus_station_list_action
     global bus_direction_ars
-    global bus_station
-
+    global station_list
     global selected_bus_direction
     global selected_bus_station
 
