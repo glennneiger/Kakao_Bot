@@ -26,7 +26,8 @@ def get_bus_station(data):
     stInfo = data['result']['station']
 
     for i in stInfo:
-        bus_station_list.append(i['stationName'])
+        if i['stationName'] not in bus_station_list:
+            bus_station_list.append(i['stationName'])
 
     if len(bus_station_list) == 1:
         action = 1
@@ -35,8 +36,7 @@ def get_bus_station(data):
         action = 2
         res += "정류장을 선택해 주세요." + "\n"
         for i in range(0,len(bus_station_list)):
-            if i not in bus_station_list:
-                res += str(i+1) +". " + bus_station_list[i] + "\n"
+            res += str(i+1) +". " + bus_station_list[i] + "\n"
 
     return [res,action,bus_station_list]
 
