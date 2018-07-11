@@ -321,6 +321,7 @@ def incomFalse(intent_name, data):
         text = BusInfo.get_bus_station_information(data)
 
         #초기화
+        diff_path_action = 0
         dialogflow_action = 0
         station_list = []
         bus_direction_ars = []
