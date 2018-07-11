@@ -76,8 +76,9 @@ def get_bus_direction(stationName):
 def get_bus_station_information(data):
     bus_station = str(data['result']['parameters']['bus_station'])
     bus_direction = str(data['result']['parameters']['bus_direction'])
+    bus_number = str(data['result']['parameters']['bus_number'])
 
-    print("getInfo " + bus_station + bus_direction)
+    print("getInfo " + bus_station + " "+bus_direction + " "+bus_number)
 
     st_ars = bus_direction.replace("-","")
     encArs = urllib.parse.quote_plus(st_ars)
@@ -98,10 +99,12 @@ def get_bus_station_information(data):
         msg2 = "msg2_c"+str(bcnt)
         adr = "adr_c"+str(bcnt)
         busNo = "busNo_c"+str(bcnt)
+        budNxt = "busNtext_c" + str(bcnt)
         busList[msg1] =  bus.find("arrmsg1").text
         busList[msg2] =  bus.find("arrmsg2").text
         busList[adr] =  bus.find("adirection").text
         busList[busNo] =  bus.find("rtNm").text
+        busList[busNxt] = bus.find("nxtStn").text
         bcnt = bcnt+1
 
     print("bcnt " + str(bcnt))
@@ -114,13 +117,11 @@ def get_bus_station_information(data):
         text += "🚌" + busList[bus_No] + "\n 👉🏿"+busList[bus_msg1]+"\n"
 
     ###버스 정보
-    tmp = 0
-    if tmp == 1:
+    
+    if eq(bus_number,"") == False:
         text = ""
-        bus_number = searchList[1]
-        bus_station = st_name
-        Bus_Info_URL = "https://api.odsay.com/v1/api/searchBusLane?lang=0&busNo="+bus_number+"&apiKey="+encMy+"&CID=1000"
 
+        Bus_Info_URL = "https://api.odsay.com/v1/api/searchBusLane?lang=0&busNo="+bus_number+"&apiKey="+encMy+"&CID=1000"
         bus_info_request = urllib.request.Request(Bus_Info_URL)
         bus_info_res = urllib.request.urlopen(bus_info_request)
 
@@ -138,6 +139,10 @@ def get_bus_station_information(data):
 
         startStation = data['result']['busStartPoint']
         endStation = data['result']['busEndPoint']
+
+        print("******")
+        print(startStation)
+        print(endStation)
 
         station_idx_res = {}
         idx_station_res = {}
