@@ -122,6 +122,7 @@ def get_bus_station_information(data):
     
     if eq(bus_number,"") == False:
         text = ""
+        direction = ""
 
         my = "f/WM8od4VAXdGg4Q5ZaWSlJ8tIbSpw+nJ4WQ4AFRpsM"
         encMy = urllib.parse.quote_plus(my)
@@ -166,7 +167,9 @@ def get_bus_station_information(data):
                     direction = "-"
                 elif eq(endStation,busList["adr_c"+str(i)]) :
                     direction = "+"
+                break
 
+        print("direction : "+ direction)
         print("@@@@@@")
         print(bus_number_list_res)
 
