@@ -59,6 +59,7 @@ def get_bus_station(data):
 def get_bus_direction(stationName):
     print("dyrldyrl")
     global bus_station_id
+    print("stationName : " + stationName)
     st_name = stationName
 
     print(bus_station_id.keys())
@@ -68,8 +69,8 @@ def get_bus_direction(stationName):
 
     encMy = urllib.parse.quote_plus(my)
 
-    for i in range(0,len(bus_station_id[st_name])):
-        print(bus_station_id[st_name][i])
+    for i in range(0,len(bus_station_id[stationName])):
+        print(bus_station_id[stationName][i])
 
 
 
