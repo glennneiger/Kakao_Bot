@@ -68,7 +68,7 @@ def get_bus_direction(stationName):
     encMy = urllib.parse.quote_plus(my)
 
     for i in range(0,len(bus_station_id[stationName])):
-        odUrl = "https://api.odsay.com/v1/api/searchStation?lang=&stationName="+str(bus_station_id[stationName][i])+"&CID=1000&stationClass=1&apiKey="+encMy
+        odUrl = "https://api.odsay.com/v1/api/busStationInfo?lang=0&stationID="+str(bus_station_id[stationName][i])+"&apiKey="+encMy
         request = urllib.request.Request(odUrl)
         response = urllib.request.urlopen(request)
 
