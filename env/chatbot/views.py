@@ -137,6 +137,7 @@ def message(request):
             })
 
         if bus_direction_action == 0:
+            get_bus_direction(selected_bus_station)
             return JsonResponse({
                 'message': {'text': "!!!\n"+ str(session_id) + "\n"+ res + "\n\n!!!"},
             })
