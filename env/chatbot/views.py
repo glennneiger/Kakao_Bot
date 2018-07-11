@@ -112,7 +112,8 @@ def message(request):
             data = dialogflow(msg_str)
             if bus_direction_action == 1:
                 bus_direction = str(data['result']['parameters']['bus_direction'])
-                print("user direction : " + bus_direction)
+                selected_bus_direction = bus_direction_ars[int(bus_direction)-1]
+                print("user direction : " + selected_bus_direction)
 
         ###정확한 버스 정류장 선택하기
         if bus_station_list_action == 2:
