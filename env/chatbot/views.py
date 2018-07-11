@@ -190,6 +190,8 @@ def incomFalse(intent_name, data):
     global diff_path_action
     global limit_time
     global dialogflow_action
+    global bus_direction_action
+    global bus_station_list_action
     global selected_bus_direction
     global selected_bus_station
 
