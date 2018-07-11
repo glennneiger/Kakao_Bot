@@ -111,6 +111,7 @@ def message(request):
             print("Diaglogflow start")
             data = dialogflow(msg_str)
             if bus_direction_action == 1:
+                print(bus_direction_ars)
                 bus_direction = str(data['result']['parameters']['bus_direction'])
                 selected_bus_direction = bus_direction_ars[int(bus_direction)-1]
                 print("user direction : " + selected_bus_direction)
