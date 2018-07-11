@@ -188,6 +188,7 @@ def incomFalse(intent_name, data):
     global p_cnt
     global diff_path_action
     global limit_time
+    global dialogflow_action
     global selected_bus_direction
     global selected_bus_station
 
@@ -318,10 +319,16 @@ def incomFalse(intent_name, data):
         data['result']['parameters']['bus_direction'] = selected_bus_direction
         print(data)
         text = BusInfo.get_bus_station_information(data)
+
+        #초기화
         dialogflow_action = 0
+        station_list = []
+        bus_direction_ars = []
         bus_station_list_action = 0
         bus_direction_action = 0
-        
+        selected_bus_station = ""
+        selected_bus_direction = 0
+
     elif eq(intent_name,"Express_Info"):
         Exstart = str(data['result']['parameters']['any'][0])
         Exend = str(data['result']['parameters']['any'][1])
