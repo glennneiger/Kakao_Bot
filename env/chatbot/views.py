@@ -165,6 +165,7 @@ def incomTrue(intent_name,data):
             return res_bus_station[0]
 
         if bus_direction_action == 0:
+            print("send " + selected_bus_station)
             BusInfo.get_bus_direction(selected_bus_station)
             dialogflow_action = 0
 
