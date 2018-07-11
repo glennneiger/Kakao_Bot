@@ -68,7 +68,7 @@ def get_bus_direction(stationName):
         oAPI = "http://ws.bus.go.kr/api/rest/stationinfo/getStationByUid?ServiceKey="+ACCESS+"&arsId="+encArs
         tree = ET.parse(urllib.request.urlopen(oAPI))
         root = tree.getroot()
-        mbody = root.find("msgBody")
+        mbody = root.find("msgBody")[0]
         print(mbody)
 
 
