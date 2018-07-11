@@ -27,8 +27,7 @@ def get_bus_station(data):
 
     bus_station_id = {}
     for i in stInfo:
-        
-        if bus_station_id[i['stationName']] in bus_station_id:
+        if i['stationName']in bus_station_id:
             bus_station_id[i['stationName']].append(i['stationID'])
         else :
             bus_station_id[i['stationName']] = [i['stationID']]
