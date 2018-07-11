@@ -56,11 +56,24 @@ def get_bus_station(data):
     return [res,action,bus_station_list]
 
 
-def get_bus_direction(data):
+def get_bus_direction(stationName):
+    print("dyrldyrl")
+    global bus_station_id
+    st_name = stationName
 
-        bus_station = str(data['result']['parameters']['bus_station'])
-        bus_direction = str(data['result']['parameters']['bus_direction'])
-        bus_number = str(data['result']['parameters']['bus_number'])
+    ACCESS = "rxJqZMHh6oQDUSfc7Kh42uCXZuHEhmj7dY7VWber2ryr9L5t2CFRy3z834JMR7RygMzaVby7ZQ3sW%2ByCZZn0Ig%3D%3D"
+    my = "f/WM8od4VAXdGg4Q5ZaWSlJ8tIbSpw+nJ4WQ4AFRpsM"
+
+    encMy = urllib.parse.quote_plus(my)
+
+    for i in range(0,len(bus_station_id[st_name])):
+        print(bus_station_id[st_name][i])
+
+
+
+
+
+
 
 def get_result(data):
     bus_station = searchList[0]
