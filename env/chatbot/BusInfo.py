@@ -62,15 +62,20 @@ def get_bus_direction(stationName):
     print("stationName : " + stationName)
     st_name = stationName
 
-    print(bus_station_id.keys())
-
     ACCESS = "rxJqZMHh6oQDUSfc7Kh42uCXZuHEhmj7dY7VWber2ryr9L5t2CFRy3z834JMR7RygMzaVby7ZQ3sW%2ByCZZn0Ig%3D%3D"
     my = "f/WM8od4VAXdGg4Q5ZaWSlJ8tIbSpw+nJ4WQ4AFRpsM"
 
     encMy = urllib.parse.quote_plus(my)
 
     for i in range(0,len(bus_station_id[stationName])):
-        print(bus_station_id[stationName][i])
+        odUrl = "https://api.odsay.com/v1/api/searchStation?lang=&stationName="+bus_station_id[stationName][i]+"&CID=1000&stationClass=1&apiKey="+encMy
+        request = urllib.request.Request(odUrl)
+        response = urllib.request.urlopen(request)
+
+        json_rt = response.read().decode('utf-8')
+        data = json.loads(json_rt)
+        print(data)
+
 
 
 
