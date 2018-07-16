@@ -38,7 +38,7 @@ def get_bus_station(data):
 
         if i['stationName'] not in bus_station_list:
             bus_station_list.append(i['stationName'])
-            
+
 
     action = 2
     res += "정류장을 선택해 주세요." + "\n"
@@ -52,7 +52,7 @@ def get_bus_direction(stationName):
     global bus_ars_id
     print("stationName : " + stationName)
     res = ""
-  
+
     ACCESS = "rxJqZMHh6oQDUSfc7Kh42uCXZuHEhmj7dY7VWber2ryr9L5t2CFRy3z834JMR7RygMzaVby7ZQ3sW%2ByCZZn0Ig%3D%3D"
     my = "f/WM8od4VAXdGg4Q5ZaWSlJ8tIbSpw+nJ4WQ4AFRpsM"
 
@@ -119,8 +119,8 @@ def get_bus_station_information(data):
         text += "🚌" + busList[bus_No] + "\n 👉🏿"+busList[bus_msg1]+"\n"
 
     ###버스 정보
-    
-    if eq(bus_number,"") == False:
+
+    if eq(bus_number,""):
         text = ""
         direction = ""
 
