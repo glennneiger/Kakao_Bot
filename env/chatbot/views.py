@@ -221,6 +221,7 @@ def incomTrue(intent_name,data):
         elif eq(sb_res[0],"어"):
             #방향 입력
             print("AAAAAAAAAA")
+            print(data)
             return "BBBB"
 
 
