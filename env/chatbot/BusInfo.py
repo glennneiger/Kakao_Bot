@@ -58,6 +58,8 @@ def get_bus_direction(stationName):
 
     encMy = urllib.parse.quote_plus(my)
 
+    bus_ars_id = {}
+
     for i in range(0,len(bus_ars_id[stationName])):
         st_ars = bus_ars_id[stationName][i].replace("-","")
         encArs = urllib.parse.quote_plus(st_ars)
@@ -74,6 +76,7 @@ def get_bus_direction(stationName):
 
 
 def get_bus_station_information(data):
+    text = ""
     bus_station = str(data['result']['parameters']['bus_station'])
     bus_direction = str(data['result']['parameters']['bus_direction'])
     bus_number = str(data['result']['parameters']['bus_number'])
