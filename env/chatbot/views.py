@@ -213,7 +213,7 @@ def incomTrue(intent_name,data):
         if eq(sb_res[0],"호"):
             #호선 입력
             dialogflow_action = 1
-            res_sub_line = SubwayInfo.get_subway_line(data['result']['parameters']['subwway_station'])
+            res_sub_line = SubwayInfo.get_subway_line(data['result']['parameters']['subway_station'])
             sub_line_action = res_sub_line[1]
             for i in res_sub_line[2]:
                 sub_line_list.append(i)
