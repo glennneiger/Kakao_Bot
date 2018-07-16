@@ -29,6 +29,8 @@ def get_bus_station(data):
     bus_station_list = []
     stInfo = data['result']['station']
 
+    bus_ars_id = {}
+
     for i in stInfo:
         if i['stationName']in bus_ars_id:
             bus_ars_id[i['stationName']].append(i['arsID'])
@@ -58,7 +60,6 @@ def get_bus_direction(stationName):
 
     encMy = urllib.parse.quote_plus(my)
 
-    bus_ars_id = {}
 
     for i in range(0,len(bus_ars_id[stationName])):
         st_ars = bus_ars_id[stationName][i].replace("-","")
