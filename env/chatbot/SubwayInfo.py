@@ -180,6 +180,35 @@ def getStationResult(cID, stationID, stationName, idx, current_laneName,directio
     except urllib.error.HTTPError:
         return "error"
 
+def get_subway_line(subway_station):
+    ##지하철 호선 리스트
+    my = "f/WM8od4VAXdGg4Q5ZaWSlJ8tIbSpw+nJ4WQ4AFRpsM"
+    encMy = urllib.parse.quote_plus(my)
+    encST = urllib.parse.quote_plus(subway_station)
+
+    odUrl = "https://api.odsay.com/v1/api/searchStation?lang=&stationName="+encST+"&CID=1000&stationClass=2&apiKey="+encMy
+
+    request = urllib.request.Request(odUrl)
+    response = urllib.request.urlopen(request)
+
+    json_rt = response.read().decode('utf-8')
+    data = json.loads(json_rt)
+
+    sub_line_list = []
+    stInfo = data['result']['station']
+
+    for i in stInfo:
+        if i['laneName'] not in sub_line_list:
+            bus_station_list.append(i['laneName'])
+
+    action = 1
+    res += "호선을 선택해 주세요." + "\n"
+    for i in range(0,len(sub_line_list)):
+        res += str(i+1) +". " + sub_line_list[i] + "\n"
+
+    return [res,action,sub_line_list]
+
+
 def get_option(stationName):
 
     SNList = [["반포역", "신반포역", "구반포역"], ["논현역", "신논현역"]]
