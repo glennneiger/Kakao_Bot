@@ -128,6 +128,7 @@ def message(request):
                 print("user direction : " + selected_bus_direction)
 
 
+
         ###정확한 버스 정류장 선택하기
         if bus_station_list_action == 2:
             print("user : " + msg_str)
@@ -137,7 +138,7 @@ def message(request):
         if sub_line_action == 1:
             selected_sub_line = sub_line_list[int(msg_str)-1]
             sub_line_action = 4
-
+            data = dialogflow(selected_sub_line)
 
 
     if diff_path_action != 3:
@@ -212,7 +213,6 @@ def incomTrue(intent_name,data):
         sb_res = str(data['result']['fulfillment']['speech'])
         if eq(sb_res[0],"호"):
             #호선 입력
-            dialogflow_action = 1
             res_sub_line = SubwayInfo.get_subway_line(data['result']['parameters']['subway_station'])
             sub_line_action = res_sub_line[1]
             for i in res_sub_line[2]:
@@ -220,7 +220,8 @@ def incomTrue(intent_name,data):
             return res_sub_line[0]
         elif eq(sb_res[0],"어"):
             #방향 입력
-            dialogflow_action = 1
+            print("AAAAAAAAAA")
+            return "BBBB"
 
 
 
