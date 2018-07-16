@@ -199,7 +199,7 @@ def get_subway_line(subway_station):
 
     for i in stInfo:
         if i['laneName'] not in sub_line_list:
-            bus_station_list.append(i['laneName'])
+            sub_line_list.append(i['laneName'])
 
     action = 1
     res += "호선을 선택해 주세요." + "\n"
