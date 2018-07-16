@@ -202,9 +202,9 @@ def get_subway_line(subway_station):
             sub_line_list.append(i['laneName'])
 
     action = 1
-    res += "호선을 선택해 주세요." + "\n"
+    re = "호선을 선택해 주세요." + "\n"
     for i in range(0,len(sub_line_list)):
-        res += str(i+1) +". " + sub_line_list[i] + "\n"
+        re += str(i+1) +". " + sub_line_list[i] + "\n"
 
     return [res,action,sub_line_list]
 
