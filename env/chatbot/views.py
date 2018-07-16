@@ -295,7 +295,9 @@ def incomFalse(intent_name, data):
         Exstart = str(data['result']['parameters']['any'][0])
         Exend = str(data['result']['parameters']['any'][1])
         text = ExpressInfo.get_result(Exstart,Exend)
-    elif eq(intent_name,"Default Fallback Intent"):
-        text = str(data['result']['fulfillment']['messages'][0]['speech'])
+    # elif eq(intent_name,"Default Fallback Intent"):
+    #     text = str(data['result']['fulfillment']['messages'][0]['speech'])
+    else:
+        text = str(data['result']['fulfillment']['speech'])
 
     return text
