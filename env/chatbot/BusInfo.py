@@ -120,7 +120,7 @@ def get_bus_station_information(data):
 
     ###버스 정보
 
-    if eq(bus_number,""):
+    if not eq(bus_number,""):
         text = ""
         direction = ""
 
