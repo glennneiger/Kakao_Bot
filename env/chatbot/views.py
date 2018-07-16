@@ -137,7 +137,7 @@ def message(request):
         if sub_line_action == 1:
             selected_sub_line = sub_line_list[int(msg_str)-1]
             sub_line_action = 4
-            data = dialogflow(selected_sub_line)
+
 
 
     if diff_path_action != 3:
