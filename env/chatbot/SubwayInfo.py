@@ -206,7 +206,7 @@ def get_subway_line(subway_station):
     for i in range(0,len(sub_line_list)):
         re += str(i+1) +". " + sub_line_list[i] + "\n"
 
-    return [res,action,sub_line_list]
+    return [re,action,sub_line_list]
 
 
 def get_option(stationName):
