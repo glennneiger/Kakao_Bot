@@ -55,25 +55,6 @@ sub_line_action = 0
 sub_direction_action = 0
 selected_sub_line = 0
 
-#####
-class setting:
-    gA = 0
-
-    def __init__(self):
-        self.AA = 10
-
-    def set_gA(self,num):
-        setting.gA = num
-
-    def set_AA(self,num):
-        self.AA = num
-
-    def get_gA(self):
-        return setting.gA
-
-    def get_AA(self):
-        return self.AA
-######
 
 def dialogflow(msg_str):
     ai = apiai.ApiAI(CLIENT_ACCESS_TOKEN)
@@ -119,33 +100,6 @@ def message(request):
     global sub_direction_action
     global selected_sub_line
 
-    #####
-    use1 = setting()
-    use2 = setting()
-
-    print("use1")
-    print("global =>")
-    print(use1.get_gA())
-    use1.set_gA(888)
-    print(use1.get_gA())
-
-    print("local =>")
-    print(use1.get_AA())
-    use1.set_AA(253)
-    print(use1.get_AA())
-
-    print("use2")
-    print("global =>")
-    print(use2.get_gA())
-    use2.set_gA(123)
-    print(use2.get_gA())
-
-    print("local =>")
-    print(use2.get_AA())
-    use2.set_AA(666)
-    print(use2.get_AA())
-    
-    #####
 
     text = ""
     incom = ""
