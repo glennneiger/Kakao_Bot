@@ -120,18 +120,31 @@ def message(request):
     global selected_sub_line
 
     #####
-    use = setting()
+    use1 = setting()
+    use2 = setting()
 
+    print("use1")
     print("global =>")
-    print(use.get_gA())
-    print(use.set_gA(888))
-    print(use.get_gA())
+    print(use1.get_gA())
+    use1.set_gA(888)
+    print(use1.get_gA())
 
     print("local =>")
-    print(use.get_AA())
-    print(use.set_AA(253))
-    print(use.get_AA())
+    print(use1.get_AA())
+    use1.set_AA(253)
+    print(use1.get_AA())
 
+    print("use2")
+    print("global =>")
+    print(use2.get_gA())
+    use2.set_gA(123)
+    print(use2.get_gA())
+
+    print("local =>")
+    print(use2.get_AA())
+    use2.set_AA(666)
+    print(use2.get_AA())
+    
     #####
 
     text = ""
