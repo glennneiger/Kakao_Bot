@@ -163,10 +163,12 @@ def get_bus_station_information(data):
             if(busList[bus_key] == bus_number):
                 arrival_first = busList["msg1_c"+str(i)]
                 arrival_second = busList["msg2_c"+str(i)]
+
                 if eq(startStation,busList["adr_c"+str(i)]) :
                     direction = "-"
                 elif eq(endStation,busList["adr_c"+str(i)]) :
                     direction = "+"
+                    
                 break
 
         print("direction : "+ direction)
