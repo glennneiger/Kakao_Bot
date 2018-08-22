@@ -26,6 +26,7 @@ def get_bus_station(data):
     json_rt = response.read().decode('utf-8')
     data = json.loads(json_rt)
 
+    print(data)
     bus_station_list = []
     stInfo = data['result']['station']
 
