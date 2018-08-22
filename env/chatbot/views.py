@@ -115,9 +115,7 @@ def message(request):
 
     #dialogflow 실행하지않을 때
     if dialogflow_action == 1 :
-
-
-
+        print("ssss")
 
     #bus_action
     print( str(data['result']['metadata']['intentName']) )
