@@ -11,6 +11,7 @@ def get_bus_station(json_Data):
     global bus_ars_id
 
     searchST = str(json_Data['result']['parameters']['bus_station'])
+    print("searchST " + searchST)
     res = ""
     ACCESS = "rxJqZMHh6oQDUSfc7Kh42uCXZuHEhmj7dY7VWber2ryr9L5t2CFRy3z834JMR7RygMzaVby7ZQ3sW%2ByCZZn0Ig%3D%3D"
     my = "f/WM8od4VAXdGg4Q5ZaWSlJ8tIbSpw+nJ4WQ4AFRpsM"
