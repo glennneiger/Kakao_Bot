@@ -128,7 +128,7 @@ def message(request):
     #bus_action
     if eq(str(data['result']['metadata']['intentName']),"Bus_station_and_number"):
         if bus_action == 0 :
-            get_bus_station(data)
+            BusInfo.get_bus_station(data)
 
 
 
