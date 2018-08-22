@@ -87,10 +87,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'chatbotDB',
-        'USER': 'user',
+        'USER': 'chatbotDB',
         'PASSWORD': '1111',
         'HOST': 'localhost',
-        'PORT': '80',
+        'PORT': '3306',
     }
 }
 
