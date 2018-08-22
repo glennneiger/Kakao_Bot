@@ -38,7 +38,7 @@ def get_bus_station(json_Data):
         res += str(i+1) +". " + list(bus_station_dic.keys())[i] + "\n"
 
     print("res------- \n" + res)
-    return [res,action,bus_station_list]
+    return [1,res,list(bus_station_dic.keys())]
 
 
 def get_bus_direction(stationName):
