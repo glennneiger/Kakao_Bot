@@ -109,6 +109,8 @@ def message(request):
     ##new global variable
     global dialogflow_action
     global bus_action
+    global bus_station_result
+    global bus_selected
 
 
     text = ""
@@ -118,20 +120,31 @@ def message(request):
     if dialogflow_action == 0 :
         print("dialogflow")
         data = dialogflow(msg_str)
-        print(data)
+
+        #bus_action
+        if eq(str(data['result']['metadata']['intentName']),"Bus_station_and_number"):
+            if bus_action == 0 :
+                bus_return = BusInfo.get_bus_station(data)
+                if bus_return[0] == 1 :
+                    bus_action = 2
+                elif bus_return[0] == 2 :
+                    text = bus_return[1]
+                    bus_station_result = bus_return[2]
+                    dialogflow_action = 1
+                    return JsonResponse({
+                        'message': {'text': "!!!\n"+text+"\n\n!!!"},
+                    })
+
 
 
     #dialogflow 실행하지않을 때
     if dialogflow_action == 1 :
-        print("ssss")
+        if eq(str(data['result']['metadata']['intentName']),"Bus_station_and_number"):
+            if bus_action == 1 :
+                bus_selected = bus_station_result[int(msg_str)+1]
+                print(bus_selected)
 
-    #bus_action
-    if eq(str(data['result']['metadata']['intentName']),"Bus_station_and_number"):
-        if bus_action == 0 :
-            BusInfo.get_bus_station(data)
-
-
-
+    
     return JsonResponse({
             'message': {'text': "!!!\n"+text+"\n\n!!!"},
         })
