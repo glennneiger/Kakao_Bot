@@ -120,7 +120,7 @@ def message(request):
 
 
     #bus_action
-    print(str(data['result']['metadata']['intentName']))
+    print( str(data['result']['metadata']['intentName']) )
     if eq(str(data['result']['metadata']['intentName']),"Bus_Info"):
         print("bus")
 
