@@ -6,12 +6,11 @@ from operator import eq
 
 bus_ars_id = {}
 
-def get_bus_station(data):
+def get_bus_station(json_Data):
     #오디세이에서 버스 리스트 반환
     global bus_ars_id
 
-    action = 1
-    searchST = str(data['result']['parameters']['bus_station'])
+    searchST = str(json_Data['result']['parameters']['bus_station'])
     res = ""
     ACCESS = "rxJqZMHh6oQDUSfc7Kh42uCXZuHEhmj7dY7VWber2ryr9L5t2CFRy3z834JMR7RygMzaVby7ZQ3sW%2ByCZZn0Ig%3D%3D"
     my = "f/WM8od4VAXdGg4Q5ZaWSlJ8tIbSpw+nJ4WQ4AFRpsM"
