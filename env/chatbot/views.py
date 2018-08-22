@@ -41,7 +41,7 @@ p_cnt = 0
 diff_path_action = 0
 limit_time = 0
 
-dialogflow_action = 0
+
 
 station_list = []
 bus_direction_ars = []
@@ -54,6 +54,10 @@ sub_line_list = []
 sub_line_action = 0
 sub_direction_action = 0
 selected_sub_line = 0
+
+###new variable
+dialogflow_action = 0
+bus_action = 0
 
 
 def dialogflow(msg_str):
@@ -90,7 +94,7 @@ def message(request):
     global diff_path_action
     global limit_time
 
-    global dialogflow_action
+    
     global bus_station_list_action
     global station_list
     global selected_bus_station
@@ -101,6 +105,10 @@ def message(request):
     global sub_line_action
     global sub_direction_action
     global selected_sub_line
+
+    ##new global variable
+    global dialogflow_action
+    global bus_action
 
 
     text = ""
@@ -118,9 +126,10 @@ def message(request):
         print("ssss")
 
     #bus_action
-    print( str(data['result']['metadata']['intentName']) )
-    if eq(str(data['result']['metadata']['intentName']),"Bus_Info"):
-        print("bus")
+    if eq(str(data['result']['metadata']['intentName']),"Bus_station_and_number"):
+        if bus_action == 0 :
+            get_bus_station(data)
+
 
 
     return JsonResponse({
