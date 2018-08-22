@@ -120,8 +120,8 @@ def message(request):
 
 
     #bus_action
-    if eq(str(data['result']['metadata']['intentName']),"Bus_Info"):
-        print("bus")
+    # if eq(str(data['result']['metadata']['intentName']),"Bus_Info"):
+    #     print("bus")
 
     # if diff_path_action == 1:
     #     cur_time = time.time()
