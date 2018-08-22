@@ -41,6 +41,8 @@ p_cnt = 0
 diff_path_action = 0
 limit_time = 0
 
+test = 0
+
 dialogflow_action = 0
 
 station_list = []
