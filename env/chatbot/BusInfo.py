@@ -26,29 +26,18 @@ def get_bus_station(json_Data):
     json_rt = response.read().decode('utf-8')
     station_data = json.loads(json_rt)
 
-    print("station : " + str(station_data))
-
-    bus_station_list = []
-    stInfo = data['result']['station']
-
-    bus_ars_id = {}
-
-    for i in stInfo:
-        if i['stationName']in bus_ars_id:
-            bus_ars_id[i['stationName']].append(i['arsID'])
+    bus_station_dic = {}
+    for i in range(0,len(st['result']['station'])):
+        if st['result']['station'][i]['stationName'] not in bus_station_dic:
+            bus_station_dic[st['result']['station'][i]['stationName']] = [str(st['result']['station'][i]['arsID']).replace("-","")]
         else :
-            bus_ars_id[i['stationName']] = [i['arsID']]
+            bus_station_dic[st['result']['station'][i]['stationName']].append(str(st['result']['station'][i]['arsID']).replace("-",""))
 
-
-        if i['stationName'] not in bus_station_list:
-            bus_station_list.append(i['stationName'])
-
-
-    action = 2
     res += "정류장을 선택해 주세요." + "\n"
-    for i in range(0,len(bus_station_list)):
-        res += str(i+1) +". " + bus_station_list[i] + "\n"
+    for i in range(0,len(bus_station_dic.keys())):
+        res += str(i+1) +". " + list(bus_station_dic.keys())[i] + "\n"
 
+    print("res------- \n" + res)
     return [res,action,bus_station_list]
 
 
