@@ -324,4 +324,4 @@ def message(request):
 #     else:
 #         text = str(data['result']['fulfillment']['speech'])
 
-#     return text
+     return text
