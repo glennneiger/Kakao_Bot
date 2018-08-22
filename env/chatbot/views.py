@@ -120,8 +120,14 @@ def message(request):
 
 
     #bus_action
-    # if eq(str(data['result']['metadata']['intentName']),"Bus_Info"):
-    #     print("bus")
+    print(str(data['result']['metadata']['intentName']))
+     if eq(str(data['result']['metadata']['intentName']),"Bus_Info"):
+         print("bus")
+
+
+    return JsonResponse({
+            'message': {'text': "!!!\n"+text+"\n\n!!!"},
+        })
 
     # if diff_path_action == 1:
     #     cur_time = time.time()
@@ -324,4 +330,4 @@ def message(request):
 #     else:
 #         text = str(data['result']['fulfillment']['speech'])
 
-     return text
+#     return text
