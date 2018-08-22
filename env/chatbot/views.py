@@ -125,12 +125,17 @@ def message(request):
         if eq(str(data['result']['metadata']['intentName']),"Bus_station_and_number"):
             if bus_action == 0 :
                 bus_return = BusInfo.get_bus_station(data)
+
                 if bus_return[0] == 1 :
                     bus_action = 2
+
                 elif bus_return[0] == 2 :
+                    
+                    bus_action = 1
                     text = bus_return[1]
                     bus_station_result = bus_return[2]
                     dialogflow_action = 1
+
                     return JsonResponse({
                         'message': {'text': "!!!\n"+text+"\n\n!!!"},
                     })
