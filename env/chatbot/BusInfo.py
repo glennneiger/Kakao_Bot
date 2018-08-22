@@ -24,7 +24,7 @@ def get_bus_station(json_Data):
     response = urllib.request.urlopen(request)
 
     json_rt = response.read().decode('utf-8')
-    station_data = json.loads(json_rt)
+    st = json.loads(json_rt)
 
     bus_station_dic = {}
     for i in range(0,len(st['result']['station'])):
