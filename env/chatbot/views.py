@@ -120,34 +120,44 @@ def message(request):
     if dialogflow_action == 0 :
         print("dialogflow")
         data = dialogflow(msg_str)
-
-        #bus_action
-        if eq(str(data['result']['metadata']['intentName']),"Bus_station_and_number"):
-            if bus_action == 0 :
-                bus_return = BusInfo.get_bus_station(data)
-
-                if bus_return[0] == 1 :
-                    bus_action = 2
-
-                elif bus_return[0] == 2 :
-                    
-                    bus_action = 1
-                    text = bus_return[1]
-                    bus_station_result = bus_return[2]
-                    dialogflow_action = 1
-
-                    return JsonResponse({
-                        'message': {'text': "!!!\n"+text+"\n\n!!!"},
-                    })
-
-
+        
+        if str(data['result']['actionIncomplete']) == True :
+            res = str(data['result']['fulfillment']['speech'])
+            return JsonResponse({
+                'message': {'text': "!!!\n"+text+"\n\n!!!"},
+            })
 
     #dialogflow 실행하지않을 때
     if dialogflow_action == 1 :
+
         if eq(str(data['result']['metadata']['intentName']),"Bus_station_and_number"):
             if bus_action == 1 :
-                bus_selected = bus_station_result[int(msg_str)+1]
+                bus_selected = bus_station_result[int(msg_str)-1]
                 print(bus_selected)
+                bus_action = 2
+
+        #bus_action
+    if eq(str(data['result']['metadata']['intentName']),"Bus_station_and_number"):
+        if bus_action == 0 :
+            bus_return = BusInfo.get_bus_station(data)
+
+            if bus_return[0] == 1 :
+                bus_selected = bus_return[2][0]
+                bus_action = 2
+
+            elif bus_return[0] == 2 :
+
+                bus_action = 1
+                text = bus_return[1]
+                bus_station_result = bus_return[2]
+                dialogflow_action = 1
+
+                return JsonResponse({
+                    'message': {'text': "!!!\n"+text+"\n\n!!!"},
+                })
+
+        if bus_action == 2 :
+            print(bus_selected +  " " + data['result']['parameters']['bus_number'])
 
     
     return JsonResponse({
