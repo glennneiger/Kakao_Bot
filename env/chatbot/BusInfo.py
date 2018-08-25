@@ -75,47 +75,49 @@ def get_bus_station_information(busData):
     bus_number = busData[1]
     bus_arsid = busData[2]
 
-    print("ihihihihihi")
-
     print("getInfo " + bus_station + " "+ bus_number + " " + str(bus_arsid[bus_station]))
 
     st_ars = bus_direction.replace("-","")
     encArs = urllib.parse.quote_plus(st_ars)
 
-
     ACCESS = "rxJqZMHh6oQDUSfc7Kh42uCXZuHEhmj7dY7VWber2ryr9L5t2CFRy3z834JMR7RygMzaVby7ZQ3sW%2ByCZZn0Ig%3D%3D"
     my = "f/WM8od4VAXdGg4Q5ZaWSlJ8tIbSpw+nJ4WQ4AFRpsM"
     encMy = urllib.parse.quote_plus(my)
 
-    oAPI = "http://ws.bus.go.kr/api/rest/stationinfo/getStationByUid?ServiceKey="+ACCESS+"&arsId="+encArs
-    tree = ET.parse(urllib.request.urlopen(oAPI))
 
-    root = tree.getroot()
-    mbody = root.find("msgBody")
+    for i in range(0,len(bus_arsid[bus_station])) :
+        encArs = urllib.parse.quote_plus(bus_arsid[bus_station][i])
+        oAPI = "http://ws.bus.go.kr/api/rest/stationinfo/getStationByUid?ServiceKey="+ACCESS+"&arsId="+encArs
+        tree = ET.parse(urllib.request.urlopen(oAPI))
 
-    busList = {}
-    bcnt = 0
-    for bus in mbody.iter("itemList"):
-        msg1 = "msg1_c"+str(bcnt)
-        msg2 = "msg2_c"+str(bcnt)
-        adr = "adr_c"+str(bcnt)
-        busNo = "busNo_c"+str(bcnt)
-        busNxt = "busNtext_c" + str(bcnt)
-        busList[msg1] =  bus.find("arrmsg1").text
-        busList[msg2] =  bus.find("arrmsg2").text
-        busList[adr] =  bus.find("adirection").text
-        busList[busNo] =  bus.find("rtNm").text
-        busList[busNxt] = bus.find("nxtStn").text
-        bcnt = bcnt+1
+        root = tree.getroot()
+        mbody = root.find("msgBody")
 
-    print("bcnt " + str(bcnt))
-    text = "💌[ "+bus_station+" ]💌\n"
-    for i in range(0, bcnt):
-        bus_msg1 = "msg1_c"+str(i)
-        bus_msg2 = "msg2_c"+str(i)
-        bus_adr = "adr_c"+str(i)
-        bus_No = "busNo_c"+str(i)
-        text += "🚌" + busList[bus_No] + "\n 👉🏿"+busList[bus_msg1]+"\n"
+        busList = {}
+        bcnt = 0
+        for bus in mbody.iter("itemList"):
+            msg1 = "msg1_c"+str(bcnt)
+            msg2 = "msg2_c"+str(bcnt)
+            adr = "adr_c"+str(bcnt)
+            busNo = "busNo_c"+str(bcnt)
+            busNxt = "busNtext_c" + str(bcnt)
+            busList[msg1] =  bus.find("arrmsg1").text
+            busList[msg2] =  bus.find("arrmsg2").text
+            busList[adr] =  bus.find("adirection").text
+            busList[busNo] =  bus.find("rtNm").text
+            busList[busNxt] = bus.find("nxtStn").text
+            bcnt = bcnt+1
+
+        print("bcnt " + str(bcnt))
+        text = "💌[ "+bus_station+"("+bus_arsid[bus_station][i]+") "+"]💌\n"
+        for i in range(0, bcnt):
+            bus_msg1 = "msg1_c"+str(i)
+            bus_msg2 = "msg2_c"+str(i)
+            bus_adr = "adr_c"+str(i)
+            bus_No = "busNo_c"+str(i)
+            text += "🚌" + busList[bus_No] + "\n 👉🏿"+busList[bus_msg1]+"\n"
+
+    print(text)
 
     ###버스 정보
 
