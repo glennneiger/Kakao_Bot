@@ -34,10 +34,10 @@ def get_bus_station(json_Data):
             bus_station_dic[st['result']['station'][i]['stationName']].append(str(st['result']['station'][i]['arsID']).replace("-",""))
 
     if len(bus_station_dic.keys()) == 1 :
-        return [1,res,list(bus_station_dic.keys())]
+        return [1,res,list(bus_station_dic.keys()),bus_station_dic]
 
     else :     
-        res += "정류장을 선택해 주세요." + "\n"
+        res += "🤔 정류장을 선택해 주세요. 🤗" + "\n"
         for i in range(0,len(bus_station_dic.keys())):
             res += str(i+1) +". " + list(bus_station_dic.keys())[i] + "\n"
         return [2,res,list(bus_station_dic.keys()),bus_station_dic]
@@ -111,11 +111,10 @@ def get_bus_station_information(busData):
             bus_adr = "adr_c"+str(i)
             bus_No = "busNo_c"+str(i)
             text += "🚌 " + busList[bus_No] + " 👉🏿 "+busList[bus_msg1]+"\n"
-        text+= ""
+        text += "\n"
 
     return text
 
-    print(text)
 
     ###버스 정보
 
