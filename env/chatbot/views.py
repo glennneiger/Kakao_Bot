@@ -131,7 +131,7 @@ def message(request):
     #dialogflow 실행하지않을 때
     if dialogflow_action == 1 :
 
-        if eq(str(data['result']['metadata']['intentName']),"Bus_station_and_number"):
+        if eq(str(data['result']['metadata']['intentName']),"Bus_station"):
             if bus_action == 1 :
                 bus_selected = bus_station_result[int(msg_str)-1]
                 print(bus_selected)
@@ -139,7 +139,7 @@ def message(request):
                 dialogflow_action = 0
 
         #bus_action
-    if eq(str(data['result']['metadata']['intentName']),"Bus_station_and_number"):
+    if eq(str(data['result']['metadata']['intentName']),"Bus_station"):
         if bus_action == 0 :
             bus_return = BusInfo.get_bus_station(data)
 
@@ -161,9 +161,7 @@ def message(request):
                 })
 
         if bus_action == 2 :
-            print("버스번호넘기면댐")
             BusInfo.get_bus_station_information([bus_selected,data['result']['parameters']['bus_number'],bus_arsid])
-            print("dhdldhdldhdldld")
     
     return JsonResponse({
             'message': {'text': "!!!\n"+text+"\n\n!!!"},
