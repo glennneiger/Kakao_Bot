@@ -75,6 +75,8 @@ def get_bus_station_information(busData):
     bus_number = busData[1]
     bus_arsid = busData[2]
 
+    print("ihihihihihi")
+
     print("getInfo " + bus_station + " "+ bus_number + " " + str(bus_arsid[bus_station]))
 
     st_ars = bus_direction.replace("-","")
