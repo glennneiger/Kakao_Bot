@@ -161,7 +161,11 @@ def message(request):
                 })
 
         if bus_action == 2 :
-            BusInfo.get_bus_station_information([bus_selected,bus_arsid])
+            res = BusInfo.get_bus_station_information([bus_selected,bus_arsid])
+            return JsonResponse({
+            'message': {'text': res},
+            })
+
     
     return JsonResponse({
             'message': {'text': "!!!\n"+text+"\n\n!!!"},
