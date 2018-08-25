@@ -75,7 +75,7 @@ def get_bus_station_information(busData):
     bus_number = busData[1]
     bus_arsid = busData[2]
 
-    print("getInfo " + bus_station " "+ bus_number + " " + str(bus_arsid[bus_station]))
+    print("getInfo " + bus_station + " "+ bus_number + " " + str(bus_arsid[bus_station]))
 
     st_ars = bus_direction.replace("-","")
     encArs = urllib.parse.quote_plus(st_ars)
