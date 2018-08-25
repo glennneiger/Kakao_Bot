@@ -104,7 +104,7 @@ def get_bus_station_information(busData):
             busList[busNxt] = bus.find("nxtStn").text
             bcnt = bcnt+1
 
-        text = "💌[ "+bus_station+"("+bus_arsid[bus_station][i]+") "+"]💌\n"
+        text += "💌[ "+bus_station+"("+bus_arsid[bus_station][i]+") "+"]💌\n"
         for i in range(0, bcnt):
             bus_msg1 = "msg1_c"+str(i)
             bus_msg2 = "msg2_c"+str(i)
