@@ -110,7 +110,9 @@ def get_bus_station_information(busData):
             bus_msg2 = "msg2_c"+str(i)
             bus_adr = "adr_c"+str(i)
             bus_No = "busNo_c"+str(i)
-            text += "🚌" + busList[bus_No] + "\n 👉🏿"+busList[bus_msg1]+"\n"
+            text += "🚌" + busList[bus_No] + " 👉🏿"+busList[bus_msg1]+"\n"
+
+    return text
 
     print(text)
 
