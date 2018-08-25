@@ -104,7 +104,6 @@ def get_bus_station_information(busData):
             busList[busNxt] = bus.find("nxtStn").text
             bcnt = bcnt+1
 
-        print("bcnt " + str(bcnt))
         text = "💌[ "+bus_station+"("+bus_arsid[bus_station][i]+") "+"]💌\n"
         for i in range(0, bcnt):
             bus_msg1 = "msg1_c"+str(i)
@@ -117,60 +116,60 @@ def get_bus_station_information(busData):
 
     ###버스 정보
 
-    if not eq(bus_number,""):
-        text = ""
-        direction = ""
+    # if not eq(bus_number,""):
+    #     text = ""
+    #     direction = ""
 
-        my = "f/WM8od4VAXdGg4Q5ZaWSlJ8tIbSpw+nJ4WQ4AFRpsM"
-        encMy = urllib.parse.quote_plus(my)
+    #     my = "f/WM8od4VAXdGg4Q5ZaWSlJ8tIbSpw+nJ4WQ4AFRpsM"
+    #     encMy = urllib.parse.quote_plus(my)
 
-        Bus_Info_URL = "https://api.odsay.com/v1/api/searchBusLane?lang=0&busNo="+bus_number+"&apiKey="+encMy+"&CID=1000"
-        bus_info_request = urllib.request.Request(Bus_Info_URL)
-        bus_info_res = urllib.request.urlopen(bus_info_request)
+    #     Bus_Info_URL = "https://api.odsay.com/v1/api/searchBusLane?lang=0&busNo="+bus_number+"&apiKey="+encMy+"&CID=1000"
+    #     bus_info_request = urllib.request.Request(Bus_Info_URL)
+    #     bus_info_res = urllib.request.urlopen(bus_info_request)
 
-        json_data = json.loads(bus_info_res.read().decode('utf-8'))
+    #     json_data = json.loads(bus_info_res.read().decode('utf-8'))
 
-        busID = json_data['result']['lane'][0]['busID']
-        Line_URL = "https://api.odsay.com/v1/api/busLaneDetail?lang=0&busID="+str(busID)+"&apiKey="+encMy
+    #     busID = json_data['result']['lane'][0]['busID']
+    #     Line_URL = "https://api.odsay.com/v1/api/busLaneDetail?lang=0&busID="+str(busID)+"&apiKey="+encMy
 
-        request = urllib.request.Request(Line_URL)
-        response = urllib.request.urlopen(request)
+    #     request = urllib.request.Request(Line_URL)
+    #     response = urllib.request.urlopen(request)
 
-        json_rt = response.read().decode('utf-8')
-        data = json.loads(json_rt)
+    #     json_rt = response.read().decode('utf-8')
+    #     data = json.loads(json_rt)
 
-        startStation = data['result']['busStartPoint']
-        endStation = data['result']['busEndPoint']
+    #     startStation = data['result']['busStartPoint']
+    #     endStation = data['result']['busEndPoint']
 
-        print(startStation)
-        print(endStation)
+    #     print(startStation)
+    #     print(endStation)
 
-        station_idx_res = {}
-        idx_station_res = {}
-        bus_number_list_res = []
+    #     station_idx_res = {}
+    #     idx_station_res = {}
+    #     bus_number_list_res = []
 
-        for i in data['result']['station']:
-            idx_station_res[i['idx']] = i['stationName']
-            bus_number_list_res.append(i['stationName'])
+    #     for i in data['result']['station']:
+    #         idx_station_res[i['idx']] = i['stationName']
+    #         bus_number_list_res.append(i['stationName'])
 
-        arrival_busstation = []
-        kk = ""
-        for i in range(0, bcnt):
-            bus_key = "busNo_c"+str(i)
-            if(busList[bus_key] == bus_number):
-                arrival_first = busList["msg1_c"+str(i)]
-                arrival_second = busList["msg2_c"+str(i)]
+    #     arrival_busstation = []
+    #     kk = ""
+    #     for i in range(0, bcnt):
+    #         bus_key = "busNo_c"+str(i)
+    #         if(busList[bus_key] == bus_number):
+    #             arrival_first = busList["msg1_c"+str(i)]
+    #             arrival_second = busList["msg2_c"+str(i)]
 
-                if eq(startStation,busList["adr_c"+str(i)]) :
-                    direction = "-"
-                elif eq(endStation,busList["adr_c"+str(i)]) :
-                    direction = "+"
+    #             if eq(startStation,busList["adr_c"+str(i)]) :
+    #                 direction = "-"
+    #             elif eq(endStation,busList["adr_c"+str(i)]) :
+    #                 direction = "+"
                     
-                break
+    #             break
 
-        print("direction : "+ direction)
-        print("@@@@@@")
-        print(bus_number_list_res)
+    #     print("direction : "+ direction)
+    #     print("@@@@@@")
+    #     print(bus_number_list_res)
 
 
 #        if eq(arrival_first,"곧 도착") != True:
@@ -188,18 +187,18 @@ def get_bus_station_information(busData):
 #                    arrival_busstation.append(arrival_second[i+1])
 #                    if(int(arrival_busstation[i+2]))
 
-        current = 0
-        for i in bus_number_list_res:
-            if i  == bus_station :
-                break
-            else :
-                current += 1
+        # current = 0
+        # for i in bus_number_list_res:
+        #     if i  == bus_station :
+        #         break
+        #     else :
+        #         current += 1
 
-        print("current : " + bus_number_list_res[current])
+        # print("current : " + bus_number_list_res[current])
 
-        if eq(direction,"+") :
-            for i in range(5,-1,-1):
-                print(bus_number_list_res[current+i])
+        # if eq(direction,"+") :
+        #     for i in range(5,-1,-1):
+        #         print(bus_number_list_res[current+i])
 
 
 
