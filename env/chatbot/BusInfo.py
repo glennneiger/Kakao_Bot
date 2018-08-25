@@ -72,10 +72,9 @@ def get_bus_direction(stationName):
 def get_bus_station_information(busData):
     text = ""
     bus_station = busData[0]
-    bus_number = busData[1]
-    bus_arsid = busData[2]
+    bus_arsid = busData[1]
 
-    print("getInfo " + bus_station + " "+ bus_number + " " + str(bus_arsid[bus_station]))
+    print("getInfo " + bus_station + " " + str(bus_arsid[bus_station]))
 
     ACCESS = "rxJqZMHh6oQDUSfc7Kh42uCXZuHEhmj7dY7VWber2ryr9L5t2CFRy3z834JMR7RygMzaVby7ZQ3sW%2ByCZZn0Ig%3D%3D"
     my = "f/WM8od4VAXdGg4Q5ZaWSlJ8tIbSpw+nJ4WQ4AFRpsM"
@@ -83,6 +82,7 @@ def get_bus_station_information(busData):
 
     for i in range(0,len(bus_arsid[bus_station])) :
         encArs = urllib.parse.quote_plus(bus_arsid[bus_station][i])
+        print("encArs\n")
         oAPI = "http://ws.bus.go.kr/api/rest/stationinfo/getStationByUid?ServiceKey="+ACCESS+"&arsId="+encArs
         tree = ET.parse(urllib.request.urlopen(oAPI))
 
