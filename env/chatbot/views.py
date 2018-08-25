@@ -135,6 +135,7 @@ def message(request):
                 bus_selected = bus_station_result[int(msg_str)-1]
                 print(bus_selected)
                 bus_action = 2
+                dialogflow_action = 0
 
         #bus_action
     if eq(str(data['result']['metadata']['intentName']),"Bus_station_and_number"):
@@ -157,6 +158,7 @@ def message(request):
                 })
 
         if bus_action == 2 :
+            print("버스번호넘기면댐")
             print(bus_selected +  " " + data['result']['parameters']['bus_number'])
 
     
