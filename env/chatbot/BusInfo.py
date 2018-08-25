@@ -77,13 +77,9 @@ def get_bus_station_information(busData):
 
     print("getInfo " + bus_station + " "+ bus_number + " " + str(bus_arsid[bus_station]))
 
-    st_ars = bus_direction.replace("-","")
-    encArs = urllib.parse.quote_plus(st_ars)
-
     ACCESS = "rxJqZMHh6oQDUSfc7Kh42uCXZuHEhmj7dY7VWber2ryr9L5t2CFRy3z834JMR7RygMzaVby7ZQ3sW%2ByCZZn0Ig%3D%3D"
     my = "f/WM8od4VAXdGg4Q5ZaWSlJ8tIbSpw+nJ4WQ4AFRpsM"
     encMy = urllib.parse.quote_plus(my)
-
 
     for i in range(0,len(bus_arsid[bus_station])) :
         encArs = urllib.parse.quote_plus(bus_arsid[bus_station][i])
