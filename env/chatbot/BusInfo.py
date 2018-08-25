@@ -40,7 +40,7 @@ def get_bus_station(json_Data):
         res += "정류장을 선택해 주세요." + "\n"
         for i in range(0,len(bus_station_dic.keys())):
             res += str(i+1) +". " + list(bus_station_dic.keys())[i] + "\n"
-        return [2,res,list(bus_station_dic.keys())]
+        return [2,res,list(bus_station_dic.keys()),bus_station_dic]
 
 
 def get_bus_direction(stationName):
@@ -69,13 +69,13 @@ def get_bus_direction(stationName):
 
 
 
-def get_bus_station_information(data):
+def get_bus_station_information(busData):
     text = ""
-    bus_station = str(data['result']['parameters']['bus_station'])
-    bus_direction = str(data['result']['parameters']['bus_direction'])
-    bus_number = str(data['result']['parameters']['bus_number'])
+    bus_station = busData[0]
+    bus_number = busData[1]
+    bus_arsid = busData[2]
 
-    print("getInfo " + bus_station + " "+bus_direction + " "+bus_number)
+    print("getInfo " + bus_station " "+ bus_number + " " + str(bus_arsid[bus_station]))
 
     st_ars = bus_direction.replace("-","")
     encArs = urllib.parse.quote_plus(st_ars)
