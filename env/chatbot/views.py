@@ -111,6 +111,7 @@ def message(request):
     global bus_action
     global bus_station_result
     global bus_selected
+    global bus_arsid
 
 
     text = ""
@@ -144,12 +145,14 @@ def message(request):
 
             if bus_return[0] == 1 :
                 bus_selected = bus_return[2][0]
+                bus_arsid = bus_return[3]
                 bus_action = 2
 
             elif bus_return[0] == 2 :
 
                 bus_action = 1
                 text = bus_return[1]
+                bus_arsid = bus_return[3]
                 bus_station_result = bus_return[2]
                 dialogflow_action = 1
 
@@ -159,8 +162,8 @@ def message(request):
 
         if bus_action == 2 :
             print("버스번호넘기면댐")
-            print(bus_selected +  " " + data['result']['parameters']['bus_number'])
-
+            BusInfo.get_bus_station_information([bus_selected,data['result']['parameters']['bus_number'],bus_arsid])
+            print("dhdldhdldhdldld")
     
     return JsonResponse({
             'message': {'text': "!!!\n"+text+"\n\n!!!"},
