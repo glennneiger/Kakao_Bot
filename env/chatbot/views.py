@@ -157,7 +157,7 @@ def message(request):
                 dialogflow_action = 1
 
                 return JsonResponse({
-                    'message': {'text': "!!!\n"+text+"\n\n!!!"},
+                    'message': {'text': +text },
                 })
 
         if bus_action == 2 :
